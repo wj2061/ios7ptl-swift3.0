@@ -36,7 +36,7 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
         if photosArray != nil{
             let qos = Int(QOS_CLASS_USER_INITIATED.rawValue)
             dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
-                for var obj in photosArray!{
+                for  obj in photosArray!{
                     let path = self.photoDirectory() + "/" + obj
                     if let image  = UIImage(contentsOfFile: path){
                         let size = image.size
@@ -71,30 +71,23 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
             if let pc = controller.presentationController{
                 pc.delegate=self
             }
-            
-            
         }
     }
     
     //MARK: -AdaptivePresentationControllerDelegate
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        print("aa")
         return UIModalPresentationStyle.None
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        print("bb")
         return UIModalPresentationStyle.None
     }
     
-    
-
     // MARK: UICollectionViewDataSource
 
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  self.photoList?.count ?? 0
@@ -154,33 +147,13 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
         return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellReuseIdentifier.Supplementaryr, forIndexPath: indexPath)
     }
     
-    
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
     override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-
-    
-    // Uncomment this method to specify if the specified item should be selected
     override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
-        return false
-    }
-
-    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
-    
-    }
-    */
 
 }
