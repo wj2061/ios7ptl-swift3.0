@@ -12,6 +12,10 @@
 		07DF7E991BB7C99200563084 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07DF7E971BB7C99200563084 /* Main.storyboard */; };
 		07DF7E9B1BB7C99200563084 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07DF7E9A1BB7C99200563084 /* Assets.xcassets */; };
 		07DF7E9E1BB7C99200563084 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07DF7E9C1BB7C99200563084 /* LaunchScreen.storyboard */; };
+		07DF7ECC1BB82D5500563084 /* Photos in Resources */ = {isa = PBXBuildFile; fileRef = 07DF7ECB1BB82D5500563084 /* Photos */; settings = {ASSET_TAGS = (); }; };
+		07DF7ECE1BB82F5800563084 /* MKCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DF7ECD1BB82F5800563084 /* MKCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		07DF7ED01BB82F8600563084 /* MKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DF7ECF1BB82F8600563084 /* MKViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		07DF7ED21BB83A6C00563084 /* MkCoverFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DF7ED11BB83A6C00563084 /* MkCoverFlowLayout.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +26,10 @@
 		07DF7E9A1BB7C99200563084 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07DF7E9D1BB7C99200563084 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07DF7E9F1BB7C99200563084 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07DF7ECB1BB82D5500563084 /* Photos */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Photos; path = CoverFlowDemo/Photos; sourceTree = "<group>"; };
+		07DF7ECD1BB82F5800563084 /* MKCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCollectionViewCell.swift; sourceTree = "<group>"; };
+		07DF7ECF1BB82F8600563084 /* MKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKViewController.swift; sourceTree = "<group>"; };
+		07DF7ED11BB83A6C00563084 /* MkCoverFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MkCoverFlowLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +46,7 @@
 		07DF7E871BB7C99200563084 = {
 			isa = PBXGroup;
 			children = (
+				07DF7ECB1BB82D5500563084 /* Photos */,
 				07DF7E921BB7C99200563084 /* CoverFlowDemo */,
 				07DF7E911BB7C99200563084 /* Products */,
 			);
@@ -54,9 +63,12 @@
 		07DF7E921BB7C99200563084 /* CoverFlowDemo */ = {
 			isa = PBXGroup;
 			children = (
+				07DF7ECD1BB82F5800563084 /* MKCollectionViewCell.swift */,
 				07DF7E931BB7C99200563084 /* AppDelegate.swift */,
 				07DF7E951BB7C99200563084 /* ViewController.swift */,
 				07DF7E971BB7C99200563084 /* Main.storyboard */,
+				07DF7ECF1BB82F8600563084 /* MKViewController.swift */,
+				07DF7ED11BB83A6C00563084 /* MkCoverFlowLayout.swift */,
 				07DF7E9A1BB7C99200563084 /* Assets.xcassets */,
 				07DF7E9C1BB7C99200563084 /* LaunchScreen.storyboard */,
 				07DF7E9F1BB7C99200563084 /* Info.plist */,
@@ -124,6 +136,7 @@
 				07DF7E9E1BB7C99200563084 /* LaunchScreen.storyboard in Resources */,
 				07DF7E9B1BB7C99200563084 /* Assets.xcassets in Resources */,
 				07DF7E991BB7C99200563084 /* Main.storyboard in Resources */,
+				07DF7ECC1BB82D5500563084 /* Photos in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,8 +147,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07DF7ED01BB82F8600563084 /* MKViewController.swift in Sources */,
 				07DF7E961BB7C99200563084 /* ViewController.swift in Sources */,
+				07DF7ECE1BB82F5800563084 /* MKCollectionViewCell.swift in Sources */,
 				07DF7E941BB7C99200563084 /* AppDelegate.swift in Sources */,
+				07DF7ED21BB83A6C00563084 /* MkCoverFlowLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +299,7 @@
 				07DF7EA41BB7C99200563084 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
