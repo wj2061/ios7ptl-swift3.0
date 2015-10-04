@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="BlurryText" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statics:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8W7-9b-wmh">
+                                <rect key="frame" x="194" y="289" width="58" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nvu-UZ-w1o">
+                                <rect key="frame" x="260" y="289" width="81" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Some Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-ST-2O9">
+                                <rect key="frame" x="260" y="323" width="81" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1JZ-uf-9Dt">
+                                <rect key="frame" x="261" y="383" width="78" height="30"/>
+                                <animations/>
+                                <state key="normal" title="Toggle Blur"/>
+                                <connections>
+                                    <action selector="toggleBlur" destination="BYZ-38-t0r" eventType="touchUpInside" id="xHy-7w-MTu"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Roggles:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hoy-gi-9Oi">
+                                <rect key="frame" x="185" y="323" width="67" height="21"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="KXf-ST-2O9" firstAttribute="top" secondItem="8W7-9b-wmh" secondAttribute="bottom" constant="13" id="71G-of-OXH"/>
+                            <constraint firstItem="KXf-ST-2O9" firstAttribute="leading" secondItem="Nvu-UZ-w1o" secondAttribute="leading" id="9rn-PL-Qcv"/>
+                            <constraint firstItem="Nvu-UZ-w1o" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GGl-OS-YYm"/>
+                            <constraint firstItem="hoy-gi-9Oi" firstAttribute="trailing" secondItem="8W7-9b-wmh" secondAttribute="trailing" id="K3F-m4-lwG"/>
+                            <constraint firstItem="8W7-9b-wmh" firstAttribute="baseline" secondItem="Nvu-UZ-w1o" secondAttribute="baseline" id="YPh-qC-5vg"/>
+                            <constraint firstItem="hoy-gi-9Oi" firstAttribute="leading" secondItem="8W7-9b-wmh" secondAttribute="leading" id="aDH-T9-Ar8"/>
+                            <constraint firstItem="Nvu-UZ-w1o" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="aT5-zG-AXf"/>
+                            <constraint firstItem="Nvu-UZ-w1o" firstAttribute="baseline" secondItem="8W7-9b-wmh" secondAttribute="baseline" id="jbA-KX-W5C"/>
+                            <constraint firstItem="hoy-gi-9Oi" firstAttribute="bottom" secondItem="KXf-ST-2O9" secondAttribute="bottom" id="m1v-I1-3m2"/>
+                            <constraint firstItem="1JZ-uf-9Dt" firstAttribute="centerX" secondItem="KXf-ST-2O9" secondAttribute="centerX" id="uma-id-mLb"/>
+                            <constraint firstItem="Nvu-UZ-w1o" firstAttribute="leading" secondItem="8W7-9b-wmh" secondAttribute="trailing" constant="8" symbolic="YES" id="vcB-tC-EnT"/>
+                            <constraint firstItem="1JZ-uf-9Dt" firstAttribute="top" secondItem="KXf-ST-2O9" secondAttribute="bottom" constant="39" id="wYE-YA-3mh"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="aDH-T9-Ar8"/>
+                                <exclude reference="jbA-KX-W5C"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="KXf-ST-2O9" id="UeL-x1-3Af"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="430" y="384"/>
+        </scene>
+    </scenes>
+</document>
