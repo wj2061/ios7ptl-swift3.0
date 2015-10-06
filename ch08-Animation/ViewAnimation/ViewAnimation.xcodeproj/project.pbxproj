@@ -8,20 +8,22 @@
 
 /* Begin PBXBuildFile section */
 		07C04F961BC41336007FA743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C04F951BC41336007FA743 /* AppDelegate.swift */; };
-		07C04F981BC41336007FA743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C04F971BC41336007FA743 /* ViewController.swift */; };
 		07C04F9B1BC41336007FA743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07C04F991BC41336007FA743 /* Main.storyboard */; };
 		07C04F9D1BC41336007FA743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07C04F9C1BC41336007FA743 /* Assets.xcassets */; };
 		07C04FA01BC41336007FA743 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07C04F9E1BC41336007FA743 /* LaunchScreen.storyboard */; };
+		07C04FA81BC413E6007FA743 /* ViewAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C04FA71BC413E6007FA743 /* ViewAnimationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		07C04FAA1BC41437007FA743 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07C04FA91BC41437007FA743 /* CircleView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		07C04F921BC41336007FA743 /* ViewAnimation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViewAnimation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		07C04F951BC41336007FA743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		07C04F971BC41336007FA743 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		07C04F9A1BC41336007FA743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		07C04F9C1BC41336007FA743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		07C04F9F1BC41336007FA743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		07C04FA11BC41336007FA743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07C04FA71BC413E6007FA743 /* ViewAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewAnimationViewController.swift; sourceTree = "<group>"; };
+		07C04FA91BC41437007FA743 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +56,9 @@
 		07C04F941BC41336007FA743 /* ViewAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				07C04FA91BC41437007FA743 /* CircleView.swift */,
 				07C04F951BC41336007FA743 /* AppDelegate.swift */,
-				07C04F971BC41336007FA743 /* ViewController.swift */,
+				07C04FA71BC413E6007FA743 /* ViewAnimationViewController.swift */,
 				07C04F991BC41336007FA743 /* Main.storyboard */,
 				07C04F9C1BC41336007FA743 /* Assets.xcassets */,
 				07C04F9E1BC41336007FA743 /* LaunchScreen.storyboard */,
@@ -134,8 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07C04F981BC41336007FA743 /* ViewController.swift in Sources */,
+				07C04FAA1BC41437007FA743 /* CircleView.swift in Sources */,
 				07C04F961BC41336007FA743 /* AppDelegate.swift in Sources */,
+				07C04FA81BC413E6007FA743 /* ViewAnimationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
