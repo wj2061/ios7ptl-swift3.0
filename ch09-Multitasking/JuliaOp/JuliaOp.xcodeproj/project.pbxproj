@@ -1,0 +1,305 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07629DC61BCD875000878193 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DC51BCD875000878193 /* AppDelegate.swift */; };
+		07629DCB1BCD875000878193 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07629DC91BCD875000878193 /* Main.storyboard */; };
+		07629DCD1BCD875000878193 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07629DCC1BCD875000878193 /* Assets.xcassets */; };
+		07629DD01BCD875000878193 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07629DCE1BCD875000878193 /* LaunchScreen.storyboard */; };
+		07629DD81BCEF13E00878193 /* JuliaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD71BCEF13E00878193 /* JuliaCell.swift */; settings = {ASSET_TAGS = (); }; };
+		07629DDA1BCEF46000878193 /* JuliaOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD91BCEF46000878193 /* JuliaOperation.swift */; settings = {ASSET_TAGS = (); }; };
+		07629DDC1BCEF92400878193 /* complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDB1BCEF92400878193 /* complex.swift */; settings = {ASSET_TAGS = (); }; };
+		07629DDE1BCF1C3100878193 /* JuliaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDD1BCF1C3100878193 /* JuliaCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		07629DC21BCD875000878193 /* JuliaOp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JuliaOp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07629DC51BCD875000878193 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		07629DCA1BCD875000878193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07629DCC1BCD875000878193 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07629DCF1BCD875000878193 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07629DD11BCD875000878193 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07629DD71BCEF13E00878193 /* JuliaCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JuliaCell.swift; sourceTree = "<group>"; };
+		07629DD91BCEF46000878193 /* JuliaOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JuliaOperation.swift; sourceTree = "<group>"; };
+		07629DDB1BCEF92400878193 /* complex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = complex.swift; sourceTree = "<group>"; };
+		07629DDD1BCF1C3100878193 /* JuliaCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JuliaCollectionViewController.swift; path = ../JuliaCollectionViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07629DBF1BCD875000878193 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07629DB91BCD875000878193 = {
+			isa = PBXGroup;
+			children = (
+				07629DC41BCD875000878193 /* JuliaOp */,
+				07629DC31BCD875000878193 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07629DC31BCD875000878193 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07629DC21BCD875000878193 /* JuliaOp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07629DC41BCD875000878193 /* JuliaOp */ = {
+			isa = PBXGroup;
+			children = (
+				07629DDD1BCF1C3100878193 /* JuliaCollectionViewController.swift */,
+				07629DDB1BCEF92400878193 /* complex.swift */,
+				07629DC51BCD875000878193 /* AppDelegate.swift */,
+				07629DC91BCD875000878193 /* Main.storyboard */,
+				07629DD91BCEF46000878193 /* JuliaOperation.swift */,
+				07629DD71BCEF13E00878193 /* JuliaCell.swift */,
+				07629DCC1BCD875000878193 /* Assets.xcassets */,
+				07629DCE1BCD875000878193 /* LaunchScreen.storyboard */,
+				07629DD11BCD875000878193 /* Info.plist */,
+			);
+			path = JuliaOp;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07629DC11BCD875000878193 /* JuliaOp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07629DD41BCD875000878193 /* Build configuration list for PBXNativeTarget "JuliaOp" */;
+			buildPhases = (
+				07629DBE1BCD875000878193 /* Sources */,
+				07629DBF1BCD875000878193 /* Frameworks */,
+				07629DC01BCD875000878193 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JuliaOp;
+			productName = JuliaOp;
+			productReference = 07629DC21BCD875000878193 /* JuliaOp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07629DBA1BCD875000878193 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = wj;
+				TargetAttributes = {
+					07629DC11BCD875000878193 = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 07629DBD1BCD875000878193 /* Build configuration list for PBXProject "JuliaOp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07629DB91BCD875000878193;
+			productRefGroup = 07629DC31BCD875000878193 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07629DC11BCD875000878193 /* JuliaOp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07629DC01BCD875000878193 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07629DD01BCD875000878193 /* LaunchScreen.storyboard in Resources */,
+				07629DCD1BCD875000878193 /* Assets.xcassets in Resources */,
+				07629DCB1BCD875000878193 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07629DBE1BCD875000878193 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07629DDC1BCEF92400878193 /* complex.swift in Sources */,
+				07629DDA1BCEF46000878193 /* JuliaOperation.swift in Sources */,
+				07629DD81BCEF13E00878193 /* JuliaCell.swift in Sources */,
+				07629DDE1BCF1C3100878193 /* JuliaCollectionViewController.swift in Sources */,
+				07629DC61BCD875000878193 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		07629DC91BCD875000878193 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07629DCA1BCD875000878193 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07629DCE1BCD875000878193 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07629DCF1BCD875000878193 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07629DD21BCD875000878193 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		07629DD31BCD875000878193 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07629DD51BCD875000878193 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = JuliaOp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.JuliaOp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		07629DD61BCD875000878193 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = JuliaOp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.JuliaOp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07629DBD1BCD875000878193 /* Build configuration list for PBXProject "JuliaOp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07629DD21BCD875000878193 /* Debug */,
+				07629DD31BCD875000878193 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07629DD41BCD875000878193 /* Build configuration list for PBXNativeTarget "JuliaOp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07629DD51BCD875000878193 /* Debug */,
+				07629DD61BCD875000878193 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07629DBA1BCD875000878193 /* Project object */;
+}
