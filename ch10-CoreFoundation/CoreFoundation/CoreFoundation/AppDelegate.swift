@@ -50,8 +50,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("\(result)")
     }
+//    
+//    static void testTreeInArray() {
+//    PrintFunction();
+//    CFTreeContext ctx = {0, (void*)CFSTR("Info"), CFRetain,
+//    CFRelease, CFCopyDescription};
+//    CFTreeRef tree = CFTreeCreate(NULL, &ctx);
+//    NSArray *array = @[(__bridge id)tree];
+//    
+//    CFRelease(tree);
+//    
+//    NSLog(@"Array=%@", array);
+//    }
     
-    
+    func testTreeInArray(){
+        print("\(__FUNCTION__):")
+        var info = "info"
+        var ctx = CFTreeContext(version: CFIndex(0), info: &info, retain: nil  , release: nil, copyDescription: nil)
+        let tree = CFTreeCreate(nil, [ctx])
+        
+        let array = Array(arrayLiteral: tree)
+        print("tree = \(array)")
+        
+        
+
+    }
 
     var window: UIWindow?
 
@@ -64,6 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         testPascalString()
         
         testCopyUTF8String()
+        
+        testTreeInArray()
         
         // Override point for customization after application launch.
         return true
