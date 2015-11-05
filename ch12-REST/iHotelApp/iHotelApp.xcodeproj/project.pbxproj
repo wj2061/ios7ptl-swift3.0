@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0428CDB61BE7649F00D2C94F /* iHotelAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428CDB51BE7649F00D2C94F /* iHotelAppViewController.swift */; };
 		044504AC1BE4E72500578FAA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044504AB1BE4E72500578FAA /* AppDelegate.swift */; };
-		044504AE1BE4E72500578FAA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044504AD1BE4E72500578FAA /* ViewController.swift */; };
 		044504B11BE4E72500578FAA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044504AF1BE4E72500578FAA /* Main.storyboard */; };
 		044504B31BE4E72500578FAA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044504B21BE4E72500578FAA /* Assets.xcassets */; };
 		044504B61BE4E72500578FAA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 044504B41BE4E72500578FAA /* LaunchScreen.storyboard */; };
@@ -33,7 +32,6 @@
 		0428CDB51BE7649F00D2C94F /* iHotelAppViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iHotelAppViewController.swift; sourceTree = "<group>"; };
 		044504A81BE4E72500578FAA /* iHotelApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iHotelApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		044504AB1BE4E72500578FAA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		044504AD1BE4E72500578FAA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		044504B01BE4E72500578FAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		044504B21BE4E72500578FAA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		044504B51BE4E72500578FAA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 				0428CDB51BE7649F00D2C94F /* iHotelAppViewController.swift */,
 				049B5CEB1BE9FDDF0054BACA /* iHotelAppMenuViewController.swift */,
 				044504AB1BE4E72500578FAA /* AppDelegate.swift */,
-				044504AD1BE4E72500578FAA /* ViewController.swift */,
 				044504AF1BE4E72500578FAA /* Main.storyboard */,
 				0459FDCA1BE8A9DC00705018 /* MenuItem.swift */,
 				044504B21BE4E72500578FAA /* Assets.xcassets */,
@@ -285,7 +282,6 @@
 			files = (
 				0428CDB61BE7649F00D2C94F /* iHotelAppViewController.swift in Sources */,
 				0459FDCB1BE8A9DC00705018 /* MenuItem.swift in Sources */,
-				044504AE1BE4E72500578FAA /* ViewController.swift in Sources */,
 				049B5CEC1BE9FDDF0054BACA /* iHotelAppMenuViewController.swift in Sources */,
 				044504AC1BE4E72500578FAA /* AppDelegate.swift in Sources */,
 			);
