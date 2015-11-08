@@ -8,11 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		0747E2DE1BEF8CCF00D587A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747E2DD1BEF8CCF00D587A3 /* AppDelegate.swift */; };
-		0747E2E01BEF8CCF00D587A3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747E2DF1BEF8CCF00D587A3 /* ViewController.swift */; };
 		0747E2E31BEF8CCF00D587A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0747E2E11BEF8CCF00D587A3 /* Main.storyboard */; };
 		0747E2E51BEF8CCF00D587A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0747E2E41BEF8CCF00D587A3 /* Assets.xcassets */; };
 		0747E2E81BEF8CCF00D587A3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0747E2E61BEF8CCF00D587A3 /* LaunchScreen.storyboard */; };
 		0747E2F31BEF8CCF00D587A3 /* FileExplorerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747E2F21BEF8CCF00D587A3 /* FileExplorerTests.swift */; };
+		0747E2FE1BEF9A6C00D587A3 /* DirectoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0747E2FD1BEF9A6C00D587A3 /* DirectoryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +28,6 @@
 /* Begin PBXFileReference section */
 		0747E2DA1BEF8CCF00D587A3 /* FileExplorer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FileExplorer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0747E2DD1BEF8CCF00D587A3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0747E2DF1BEF8CCF00D587A3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		0747E2E21BEF8CCF00D587A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0747E2E41BEF8CCF00D587A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0747E2E71BEF8CCF00D587A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +35,7 @@
 		0747E2EE1BEF8CCF00D587A3 /* FileExplorerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FileExplorerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0747E2F21BEF8CCF00D587A3 /* FileExplorerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExplorerTests.swift; sourceTree = "<group>"; };
 		0747E2F41BEF8CCF00D587A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0747E2FD1BEF9A6C00D587A3 /* DirectoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectoryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,7 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				0747E2DD1BEF8CCF00D587A3 /* AppDelegate.swift */,
-				0747E2DF1BEF8CCF00D587A3 /* ViewController.swift */,
+				0747E2FD1BEF9A6C00D587A3 /* DirectoryViewController.swift */,
 				0747E2E11BEF8CCF00D587A3 /* Main.storyboard */,
 				0747E2E41BEF8CCF00D587A3 /* Assets.xcassets */,
 				0747E2E61BEF8CCF00D587A3 /* LaunchScreen.storyboard */,
@@ -197,8 +197,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0747E2E01BEF8CCF00D587A3 /* ViewController.swift in Sources */,
 				0747E2DE1BEF8CCF00D587A3 /* AppDelegate.swift in Sources */,
+				0747E2FE1BEF9A6C00D587A3 /* DirectoryViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,6 +326,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FileExplorer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.FileExplorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -337,6 +338,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = FileExplorer/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.FileExplorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
