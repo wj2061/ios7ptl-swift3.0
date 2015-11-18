@@ -1,0 +1,425 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		048A89431BFC44CB00ED7AAC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89421BFC44CB00ED7AAC /* AppDelegate.swift */; };
+		048A89451BFC44CB00ED7AAC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89441BFC44CB00ED7AAC /* ViewController.swift */; };
+		048A89481BFC44CB00ED7AAC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048A89461BFC44CB00ED7AAC /* Main.storyboard */; };
+		048A894A1BFC44CB00ED7AAC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 048A89491BFC44CB00ED7AAC /* Assets.xcassets */; };
+		048A894D1BFC44CB00ED7AAC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 048A894B1BFC44CB00ED7AAC /* LaunchScreen.storyboard */; };
+		048A89581BFC44CB00ED7AAC /* ZipTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89571BFC44CB00ED7AAC /* ZipTextTests.swift */; };
+		048A89631BFC44F400ED7AAC /* Lorem.txt in Resources */ = {isa = PBXBuildFile; fileRef = 048A89621BFC44F400ED7AAC /* Lorem.txt */; };
+		048A89651BFC494D00ED7AAC /* ZipTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89641BFC494D00ED7AAC /* ZipTextView.swift */; };
+		048A89671BFC627000ED7AAC /* ZipTextView1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89661BFC627000ED7AAC /* ZipTextView1.swift */; };
+		048A89691BFC63E400ED7AAC /* ZipTextView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A89681BFC63E400ED7AAC /* ZipTextView2.swift */; };
+		048A896B1BFC63FC00ED7AAC /* ZipTextView3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A896A1BFC63FC00ED7AAC /* ZipTextView3.swift */; };
+		048A896D1BFC640800ED7AAC /* ZipTextView4.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048A896C1BFC640800ED7AAC /* ZipTextView4.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		048A89541BFC44CB00ED7AAC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 048A89371BFC44CB00ED7AAC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 048A893E1BFC44CB00ED7AAC;
+			remoteInfo = ZipText;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		048A893F1BFC44CB00ED7AAC /* ZipText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZipText.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		048A89421BFC44CB00ED7AAC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		048A89441BFC44CB00ED7AAC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		048A89471BFC44CB00ED7AAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		048A89491BFC44CB00ED7AAC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		048A894C1BFC44CB00ED7AAC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		048A894E1BFC44CB00ED7AAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048A89531BFC44CB00ED7AAC /* ZipTextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ZipTextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		048A89571BFC44CB00ED7AAC /* ZipTextTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipTextTests.swift; sourceTree = "<group>"; };
+		048A89591BFC44CB00ED7AAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		048A89621BFC44F400ED7AAC /* Lorem.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Lorem.txt; sourceTree = "<group>"; };
+		048A89641BFC494D00ED7AAC /* ZipTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTextView.swift; sourceTree = "<group>"; };
+		048A89661BFC627000ED7AAC /* ZipTextView1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTextView1.swift; sourceTree = "<group>"; };
+		048A89681BFC63E400ED7AAC /* ZipTextView2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTextView2.swift; sourceTree = "<group>"; };
+		048A896A1BFC63FC00ED7AAC /* ZipTextView3.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTextView3.swift; sourceTree = "<group>"; };
+		048A896C1BFC640800ED7AAC /* ZipTextView4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZipTextView4.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		048A893C1BFC44CB00ED7AAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048A89501BFC44CB00ED7AAC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		048A89361BFC44CB00ED7AAC = {
+			isa = PBXGroup;
+			children = (
+				048A89411BFC44CB00ED7AAC /* ZipText */,
+				048A89561BFC44CB00ED7AAC /* ZipTextTests */,
+				048A89401BFC44CB00ED7AAC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		048A89401BFC44CB00ED7AAC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				048A893F1BFC44CB00ED7AAC /* ZipText.app */,
+				048A89531BFC44CB00ED7AAC /* ZipTextTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		048A89411BFC44CB00ED7AAC /* ZipText */ = {
+			isa = PBXGroup;
+			children = (
+				048A89641BFC494D00ED7AAC /* ZipTextView.swift */,
+				048A89661BFC627000ED7AAC /* ZipTextView1.swift */,
+				048A89681BFC63E400ED7AAC /* ZipTextView2.swift */,
+				048A896A1BFC63FC00ED7AAC /* ZipTextView3.swift */,
+				048A896C1BFC640800ED7AAC /* ZipTextView4.swift */,
+				048A89421BFC44CB00ED7AAC /* AppDelegate.swift */,
+				048A89441BFC44CB00ED7AAC /* ViewController.swift */,
+				048A89461BFC44CB00ED7AAC /* Main.storyboard */,
+				048A89491BFC44CB00ED7AAC /* Assets.xcassets */,
+				048A894B1BFC44CB00ED7AAC /* LaunchScreen.storyboard */,
+				048A894E1BFC44CB00ED7AAC /* Info.plist */,
+				048A89621BFC44F400ED7AAC /* Lorem.txt */,
+			);
+			path = ZipText;
+			sourceTree = "<group>";
+		};
+		048A89561BFC44CB00ED7AAC /* ZipTextTests */ = {
+			isa = PBXGroup;
+			children = (
+				048A89571BFC44CB00ED7AAC /* ZipTextTests.swift */,
+				048A89591BFC44CB00ED7AAC /* Info.plist */,
+			);
+			path = ZipTextTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		048A893E1BFC44CB00ED7AAC /* ZipText */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048A895C1BFC44CB00ED7AAC /* Build configuration list for PBXNativeTarget "ZipText" */;
+			buildPhases = (
+				048A893B1BFC44CB00ED7AAC /* Sources */,
+				048A893C1BFC44CB00ED7AAC /* Frameworks */,
+				048A893D1BFC44CB00ED7AAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ZipText;
+			productName = ZipText;
+			productReference = 048A893F1BFC44CB00ED7AAC /* ZipText.app */;
+			productType = "com.apple.product-type.application";
+		};
+		048A89521BFC44CB00ED7AAC /* ZipTextTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 048A895F1BFC44CB00ED7AAC /* Build configuration list for PBXNativeTarget "ZipTextTests" */;
+			buildPhases = (
+				048A894F1BFC44CB00ED7AAC /* Sources */,
+				048A89501BFC44CB00ED7AAC /* Frameworks */,
+				048A89511BFC44CB00ED7AAC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				048A89551BFC44CB00ED7AAC /* PBXTargetDependency */,
+			);
+			name = ZipTextTests;
+			productName = ZipTextTests;
+			productReference = 048A89531BFC44CB00ED7AAC /* ZipTextTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		048A89371BFC44CB00ED7AAC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = wj;
+				TargetAttributes = {
+					048A893E1BFC44CB00ED7AAC = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					048A89521BFC44CB00ED7AAC = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 048A893E1BFC44CB00ED7AAC;
+					};
+				};
+			};
+			buildConfigurationList = 048A893A1BFC44CB00ED7AAC /* Build configuration list for PBXProject "ZipText" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 048A89361BFC44CB00ED7AAC;
+			productRefGroup = 048A89401BFC44CB00ED7AAC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				048A893E1BFC44CB00ED7AAC /* ZipText */,
+				048A89521BFC44CB00ED7AAC /* ZipTextTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		048A893D1BFC44CB00ED7AAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048A894D1BFC44CB00ED7AAC /* LaunchScreen.storyboard in Resources */,
+				048A894A1BFC44CB00ED7AAC /* Assets.xcassets in Resources */,
+				048A89631BFC44F400ED7AAC /* Lorem.txt in Resources */,
+				048A89481BFC44CB00ED7AAC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048A89511BFC44CB00ED7AAC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		048A893B1BFC44CB00ED7AAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048A896D1BFC640800ED7AAC /* ZipTextView4.swift in Sources */,
+				048A89651BFC494D00ED7AAC /* ZipTextView.swift in Sources */,
+				048A896B1BFC63FC00ED7AAC /* ZipTextView3.swift in Sources */,
+				048A89671BFC627000ED7AAC /* ZipTextView1.swift in Sources */,
+				048A89691BFC63E400ED7AAC /* ZipTextView2.swift in Sources */,
+				048A89451BFC44CB00ED7AAC /* ViewController.swift in Sources */,
+				048A89431BFC44CB00ED7AAC /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		048A894F1BFC44CB00ED7AAC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				048A89581BFC44CB00ED7AAC /* ZipTextTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		048A89551BFC44CB00ED7AAC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 048A893E1BFC44CB00ED7AAC /* ZipText */;
+			targetProxy = 048A89541BFC44CB00ED7AAC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		048A89461BFC44CB00ED7AAC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				048A89471BFC44CB00ED7AAC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		048A894B1BFC44CB00ED7AAC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				048A894C1BFC44CB00ED7AAC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		048A895A1BFC44CB00ED7AAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		048A895B1BFC44CB00ED7AAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		048A895D1BFC44CB00ED7AAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZipText/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ZipText;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		048A895E1BFC44CB00ED7AAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ZipText/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ZipText;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		048A89601BFC44CB00ED7AAC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZipTextTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ZipTextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZipText.app/ZipText";
+			};
+			name = Debug;
+		};
+		048A89611BFC44CB00ED7AAC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ZipTextTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ZipTextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ZipText.app/ZipText";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		048A893A1BFC44CB00ED7AAC /* Build configuration list for PBXProject "ZipText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048A895A1BFC44CB00ED7AAC /* Debug */,
+				048A895B1BFC44CB00ED7AAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		048A895C1BFC44CB00ED7AAC /* Build configuration list for PBXNativeTarget "ZipText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048A895D1BFC44CB00ED7AAC /* Debug */,
+				048A895E1BFC44CB00ED7AAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		048A895F1BFC44CB00ED7AAC /* Build configuration list for PBXNativeTarget "ZipTextTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				048A89601BFC44CB00ED7AAC /* Debug */,
+				048A89611BFC44CB00ED7AAC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 048A89371BFC44CB00ED7AAC /* Project object */;
+}

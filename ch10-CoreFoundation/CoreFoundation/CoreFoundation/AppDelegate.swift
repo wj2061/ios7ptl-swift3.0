@@ -38,6 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let  string = CFStringCreateWithPascalString(kCFAllocatorDefault , &byteArray, CFStringBuiltInEncodings.UTF8.rawValue)
         // fail to fininsh
         CFShow(string)
+        let k = [UInt8](16)
     }
     
 
