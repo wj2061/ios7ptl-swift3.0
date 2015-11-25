@@ -1,0 +1,405 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		041D4AB01C05A065003411AF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D4AAF1C05A065003411AF /* AppDelegate.swift */; };
+		041D4AB21C05A065003411AF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D4AB11C05A065003411AF /* ViewController.swift */; };
+		041D4AB51C05A065003411AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041D4AB31C05A065003411AF /* Main.storyboard */; };
+		041D4AB71C05A065003411AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 041D4AB61C05A065003411AF /* Assets.xcassets */; };
+		041D4ABA1C05A065003411AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 041D4AB81C05A065003411AF /* LaunchScreen.storyboard */; };
+		041D4AC51C05A065003411AF /* DoubleLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D4AC41C05A065003411AF /* DoubleLayoutTests.swift */; };
+		041D4AD01C05A0F9003411AF /* LayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041D4ACF1C05A0F9003411AF /* LayoutView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		041D4AC11C05A065003411AF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 041D4AA41C05A064003411AF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 041D4AAB1C05A065003411AF;
+			remoteInfo = DoubleLayout;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		041D4AAC1C05A065003411AF /* DoubleLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubleLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		041D4AAF1C05A065003411AF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		041D4AB11C05A065003411AF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		041D4AB41C05A065003411AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		041D4AB61C05A065003411AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		041D4AB91C05A065003411AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		041D4ABB1C05A065003411AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		041D4AC01C05A065003411AF /* DoubleLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DoubleLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		041D4AC41C05A065003411AF /* DoubleLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLayoutTests.swift; sourceTree = "<group>"; };
+		041D4AC61C05A065003411AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		041D4ACF1C05A0F9003411AF /* LayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		041D4AA91C05A065003411AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041D4ABD1C05A065003411AF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		041D4AA31C05A064003411AF = {
+			isa = PBXGroup;
+			children = (
+				041D4AAE1C05A065003411AF /* DoubleLayout */,
+				041D4AC31C05A065003411AF /* DoubleLayoutTests */,
+				041D4AAD1C05A065003411AF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		041D4AAD1C05A065003411AF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				041D4AAC1C05A065003411AF /* DoubleLayout.app */,
+				041D4AC01C05A065003411AF /* DoubleLayoutTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		041D4AAE1C05A065003411AF /* DoubleLayout */ = {
+			isa = PBXGroup;
+			children = (
+				041D4AAF1C05A065003411AF /* AppDelegate.swift */,
+				041D4AB11C05A065003411AF /* ViewController.swift */,
+				041D4AB31C05A065003411AF /* Main.storyboard */,
+				041D4ACF1C05A0F9003411AF /* LayoutView.swift */,
+				041D4AB61C05A065003411AF /* Assets.xcassets */,
+				041D4AB81C05A065003411AF /* LaunchScreen.storyboard */,
+				041D4ABB1C05A065003411AF /* Info.plist */,
+			);
+			path = DoubleLayout;
+			sourceTree = "<group>";
+		};
+		041D4AC31C05A065003411AF /* DoubleLayoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				041D4AC41C05A065003411AF /* DoubleLayoutTests.swift */,
+				041D4AC61C05A065003411AF /* Info.plist */,
+			);
+			path = DoubleLayoutTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		041D4AAB1C05A065003411AF /* DoubleLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041D4AC91C05A065003411AF /* Build configuration list for PBXNativeTarget "DoubleLayout" */;
+			buildPhases = (
+				041D4AA81C05A065003411AF /* Sources */,
+				041D4AA91C05A065003411AF /* Frameworks */,
+				041D4AAA1C05A065003411AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DoubleLayout;
+			productName = DoubleLayout;
+			productReference = 041D4AAC1C05A065003411AF /* DoubleLayout.app */;
+			productType = "com.apple.product-type.application";
+		};
+		041D4ABF1C05A065003411AF /* DoubleLayoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 041D4ACC1C05A065003411AF /* Build configuration list for PBXNativeTarget "DoubleLayoutTests" */;
+			buildPhases = (
+				041D4ABC1C05A065003411AF /* Sources */,
+				041D4ABD1C05A065003411AF /* Frameworks */,
+				041D4ABE1C05A065003411AF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				041D4AC21C05A065003411AF /* PBXTargetDependency */,
+			);
+			name = DoubleLayoutTests;
+			productName = DoubleLayoutTests;
+			productReference = 041D4AC01C05A065003411AF /* DoubleLayoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		041D4AA41C05A064003411AF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = wj;
+				TargetAttributes = {
+					041D4AAB1C05A065003411AF = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					041D4ABF1C05A065003411AF = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 041D4AAB1C05A065003411AF;
+					};
+				};
+			};
+			buildConfigurationList = 041D4AA71C05A064003411AF /* Build configuration list for PBXProject "DoubleLayout" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 041D4AA31C05A064003411AF;
+			productRefGroup = 041D4AAD1C05A065003411AF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				041D4AAB1C05A065003411AF /* DoubleLayout */,
+				041D4ABF1C05A065003411AF /* DoubleLayoutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		041D4AAA1C05A065003411AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				041D4ABA1C05A065003411AF /* LaunchScreen.storyboard in Resources */,
+				041D4AB71C05A065003411AF /* Assets.xcassets in Resources */,
+				041D4AB51C05A065003411AF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041D4ABE1C05A065003411AF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		041D4AA81C05A065003411AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				041D4AB21C05A065003411AF /* ViewController.swift in Sources */,
+				041D4AB01C05A065003411AF /* AppDelegate.swift in Sources */,
+				041D4AD01C05A0F9003411AF /* LayoutView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		041D4ABC1C05A065003411AF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				041D4AC51C05A065003411AF /* DoubleLayoutTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		041D4AC21C05A065003411AF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 041D4AAB1C05A065003411AF /* DoubleLayout */;
+			targetProxy = 041D4AC11C05A065003411AF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		041D4AB31C05A065003411AF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				041D4AB41C05A065003411AF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		041D4AB81C05A065003411AF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				041D4AB91C05A065003411AF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		041D4AC71C05A065003411AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		041D4AC81C05A065003411AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		041D4ACA1C05A065003411AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DoubleLayout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.DoubleLayout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		041D4ACB1C05A065003411AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = DoubleLayout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.DoubleLayout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		041D4ACD1C05A065003411AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DoubleLayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.DoubleLayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoubleLayout.app/DoubleLayout";
+			};
+			name = Debug;
+		};
+		041D4ACE1C05A065003411AF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = DoubleLayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.DoubleLayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DoubleLayout.app/DoubleLayout";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		041D4AA71C05A064003411AF /* Build configuration list for PBXProject "DoubleLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041D4AC71C05A065003411AF /* Debug */,
+				041D4AC81C05A065003411AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		041D4AC91C05A065003411AF /* Build configuration list for PBXNativeTarget "DoubleLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041D4ACA1C05A065003411AF /* Debug */,
+				041D4ACB1C05A065003411AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		041D4ACC1C05A065003411AF /* Build configuration list for PBXNativeTarget "DoubleLayoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				041D4ACD1C05A065003411AF /* Debug */,
+				041D4ACE1C05A065003411AF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 041D4AA41C05A064003411AF /* Project object */;
+}

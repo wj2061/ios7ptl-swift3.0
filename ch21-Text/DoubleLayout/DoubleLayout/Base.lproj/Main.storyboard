@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="apH-So-Aht">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="F5T-JV-ZvO">
+            <objects>
+                <viewController id="apH-So-Aht" customClass="ViewController" customModule="DoubleLayout" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fak-iW-UWa"/>
+                        <viewControllerLayoutGuide type="bottom" id="kLK-Xa-41u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="a7i-xE-ByW">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="llW-WL-BR5">
+                                <rect key="frame" x="20" y="28" width="560" height="260"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="O7k-HU-04g">
+                                        <rect key="frame" x="0.0" y="0.0" width="276" height="260"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kkt-cX-BzZ" customClass="LayoutView" customModule="DoubleLayout" customModuleProvider="target">
+                                        <rect key="frame" x="284" y="0.0" width="276" height="260"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="textView" destination="O7k-HU-04g" id="B6J-jB-2zA"/>
+                                        </connections>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="260" id="uBF-RG-6Mq"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="llW-WL-BR5" firstAttribute="leading" secondItem="a7i-xE-ByW" secondAttribute="leadingMargin" id="6Y5-EQ-ARy"/>
+                            <constraint firstItem="llW-WL-BR5" firstAttribute="top" secondItem="fak-iW-UWa" secondAttribute="bottom" constant="8" symbolic="YES" id="Rhp-Cc-AJg"/>
+                            <constraint firstItem="llW-WL-BR5" firstAttribute="trailing" secondItem="a7i-xE-ByW" secondAttribute="trailingMargin" id="peK-4S-0J2"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="layoutView" destination="Kkt-cX-BzZ" id="hhM-FF-kQX"/>
+                        <outlet property="textView" destination="O7k-HU-04g" id="2wu-rm-t8g"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yOj-wO-Xx7" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="389"/>
+        </scene>
+    </scenes>
+</document>
