@@ -1,0 +1,415 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		07CBF2421C075D81007FB0EE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CBF2411C075D81007FB0EE /* AppDelegate.swift */; };
+		07CBF2441C075D81007FB0EE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CBF2431C075D81007FB0EE /* ViewController.swift */; };
+		07CBF2471C075D81007FB0EE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CBF2451C075D81007FB0EE /* Main.storyboard */; };
+		07CBF2491C075D81007FB0EE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07CBF2481C075D81007FB0EE /* Assets.xcassets */; };
+		07CBF24C1C075D81007FB0EE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07CBF24A1C075D81007FB0EE /* LaunchScreen.storyboard */; };
+		07CBF2571C075D82007FB0EE /* ScribbleLayoutTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CBF2561C075D82007FB0EE /* ScribbleLayoutTests.swift */; };
+		07CBF2621C075E27007FB0EE /* PTLScribbleTextStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CBF2611C075E27007FB0EE /* PTLScribbleTextStorage.swift */; };
+		07CBF2641C076A8F007FB0EE /* PTLScribbleLayoutManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07CBF2631C076A8F007FB0EE /* PTLScribbleLayoutManager.swift */; };
+		07CBF2661C077AA0007FB0EE /* sample.txt in Resources */ = {isa = PBXBuildFile; fileRef = 07CBF2651C077AA0007FB0EE /* sample.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		07CBF2531C075D82007FB0EE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 07CBF2361C075D81007FB0EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 07CBF23D1C075D81007FB0EE;
+			remoteInfo = ScribbleLayout;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		07CBF23E1C075D81007FB0EE /* ScribbleLayout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ScribbleLayout.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CBF2411C075D81007FB0EE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		07CBF2431C075D81007FB0EE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		07CBF2461C075D81007FB0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		07CBF2481C075D81007FB0EE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		07CBF24B1C075D81007FB0EE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		07CBF24D1C075D81007FB0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07CBF2521C075D82007FB0EE /* ScribbleLayoutTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScribbleLayoutTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		07CBF2561C075D82007FB0EE /* ScribbleLayoutTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScribbleLayoutTests.swift; sourceTree = "<group>"; };
+		07CBF2581C075D82007FB0EE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		07CBF2611C075E27007FB0EE /* PTLScribbleTextStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLScribbleTextStorage.swift; sourceTree = "<group>"; };
+		07CBF2631C076A8F007FB0EE /* PTLScribbleLayoutManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLScribbleLayoutManager.swift; sourceTree = "<group>"; };
+		07CBF2651C077AA0007FB0EE /* sample.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		07CBF23B1C075D81007FB0EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CBF24F1C075D82007FB0EE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		07CBF2351C075D81007FB0EE = {
+			isa = PBXGroup;
+			children = (
+				07CBF2401C075D81007FB0EE /* ScribbleLayout */,
+				07CBF2551C075D82007FB0EE /* ScribbleLayoutTests */,
+				07CBF23F1C075D81007FB0EE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		07CBF23F1C075D81007FB0EE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				07CBF23E1C075D81007FB0EE /* ScribbleLayout.app */,
+				07CBF2521C075D82007FB0EE /* ScribbleLayoutTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		07CBF2401C075D81007FB0EE /* ScribbleLayout */ = {
+			isa = PBXGroup;
+			children = (
+				07CBF2651C077AA0007FB0EE /* sample.txt */,
+				07CBF2611C075E27007FB0EE /* PTLScribbleTextStorage.swift */,
+				07CBF2631C076A8F007FB0EE /* PTLScribbleLayoutManager.swift */,
+				07CBF2411C075D81007FB0EE /* AppDelegate.swift */,
+				07CBF2431C075D81007FB0EE /* ViewController.swift */,
+				07CBF2451C075D81007FB0EE /* Main.storyboard */,
+				07CBF2481C075D81007FB0EE /* Assets.xcassets */,
+				07CBF24A1C075D81007FB0EE /* LaunchScreen.storyboard */,
+				07CBF24D1C075D81007FB0EE /* Info.plist */,
+			);
+			path = ScribbleLayout;
+			sourceTree = "<group>";
+		};
+		07CBF2551C075D82007FB0EE /* ScribbleLayoutTests */ = {
+			isa = PBXGroup;
+			children = (
+				07CBF2561C075D82007FB0EE /* ScribbleLayoutTests.swift */,
+				07CBF2581C075D82007FB0EE /* Info.plist */,
+			);
+			path = ScribbleLayoutTests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		07CBF23D1C075D81007FB0EE /* ScribbleLayout */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07CBF25B1C075D82007FB0EE /* Build configuration list for PBXNativeTarget "ScribbleLayout" */;
+			buildPhases = (
+				07CBF23A1C075D81007FB0EE /* Sources */,
+				07CBF23B1C075D81007FB0EE /* Frameworks */,
+				07CBF23C1C075D81007FB0EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ScribbleLayout;
+			productName = ScribbleLayout;
+			productReference = 07CBF23E1C075D81007FB0EE /* ScribbleLayout.app */;
+			productType = "com.apple.product-type.application";
+		};
+		07CBF2511C075D82007FB0EE /* ScribbleLayoutTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 07CBF25E1C075D82007FB0EE /* Build configuration list for PBXNativeTarget "ScribbleLayoutTests" */;
+			buildPhases = (
+				07CBF24E1C075D82007FB0EE /* Sources */,
+				07CBF24F1C075D82007FB0EE /* Frameworks */,
+				07CBF2501C075D82007FB0EE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				07CBF2541C075D82007FB0EE /* PBXTargetDependency */,
+			);
+			name = ScribbleLayoutTests;
+			productName = ScribbleLayoutTests;
+			productReference = 07CBF2521C075D82007FB0EE /* ScribbleLayoutTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		07CBF2361C075D81007FB0EE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0710;
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = wj;
+				TargetAttributes = {
+					07CBF23D1C075D81007FB0EE = {
+						CreatedOnToolsVersion = 7.1;
+					};
+					07CBF2511C075D82007FB0EE = {
+						CreatedOnToolsVersion = 7.1;
+						TestTargetID = 07CBF23D1C075D81007FB0EE;
+					};
+				};
+			};
+			buildConfigurationList = 07CBF2391C075D81007FB0EE /* Build configuration list for PBXProject "ScribbleLayout" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 07CBF2351C075D81007FB0EE;
+			productRefGroup = 07CBF23F1C075D81007FB0EE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				07CBF23D1C075D81007FB0EE /* ScribbleLayout */,
+				07CBF2511C075D82007FB0EE /* ScribbleLayoutTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		07CBF23C1C075D81007FB0EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CBF24C1C075D81007FB0EE /* LaunchScreen.storyboard in Resources */,
+				07CBF2491C075D81007FB0EE /* Assets.xcassets in Resources */,
+				07CBF2661C077AA0007FB0EE /* sample.txt in Resources */,
+				07CBF2471C075D81007FB0EE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CBF2501C075D82007FB0EE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		07CBF23A1C075D81007FB0EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CBF2641C076A8F007FB0EE /* PTLScribbleLayoutManager.swift in Sources */,
+				07CBF2441C075D81007FB0EE /* ViewController.swift in Sources */,
+				07CBF2621C075E27007FB0EE /* PTLScribbleTextStorage.swift in Sources */,
+				07CBF2421C075D81007FB0EE /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		07CBF24E1C075D82007FB0EE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				07CBF2571C075D82007FB0EE /* ScribbleLayoutTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		07CBF2541C075D82007FB0EE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 07CBF23D1C075D81007FB0EE /* ScribbleLayout */;
+			targetProxy = 07CBF2531C075D82007FB0EE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		07CBF2451C075D81007FB0EE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CBF2461C075D81007FB0EE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		07CBF24A1C075D81007FB0EE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				07CBF24B1C075D81007FB0EE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		07CBF2591C075D82007FB0EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		07CBF25A1C075D82007FB0EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		07CBF25C1C075D82007FB0EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScribbleLayout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ScribbleLayout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		07CBF25D1C075D82007FB0EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = ScribbleLayout/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ScribbleLayout;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		07CBF25F1C075D82007FB0EE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ScribbleLayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ScribbleLayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScribbleLayout.app/ScribbleLayout";
+			};
+			name = Debug;
+		};
+		07CBF2601C075D82007FB0EE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = ScribbleLayoutTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = wj.ScribbleLayoutTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ScribbleLayout.app/ScribbleLayout";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		07CBF2391C075D81007FB0EE /* Build configuration list for PBXProject "ScribbleLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CBF2591C075D82007FB0EE /* Debug */,
+				07CBF25A1C075D82007FB0EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		07CBF25B1C075D82007FB0EE /* Build configuration list for PBXNativeTarget "ScribbleLayout" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CBF25C1C075D82007FB0EE /* Debug */,
+				07CBF25D1C075D82007FB0EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		07CBF25E1C075D82007FB0EE /* Build configuration list for PBXNativeTarget "ScribbleLayoutTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07CBF25F1C075D82007FB0EE /* Debug */,
+				07CBF2601C075D82007FB0EE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 07CBF2361C075D81007FB0EE /* Project object */;
+}
