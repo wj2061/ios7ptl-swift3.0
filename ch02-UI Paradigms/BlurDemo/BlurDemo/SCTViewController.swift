@@ -15,36 +15,53 @@ class SCTViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-//    var layer = CALayer()
+    var blurLayer = CALayer()
+    
+    
+    
     let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
 
     
     @IBAction func buttonAction() {
-        /*
-        layer.frame=CGRectMake(80, 100, 160, 160)
-        view.layer.addSublayer(layer)
-        let scale = UIScreen.mainScreen().scale
         
-        UIGraphicsBeginImageContextWithOptions(layer.frame.size, true, scale)
-        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: false)
-        var image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        
-        if  let imageref = CGImageCreateWithImageInRect(image.CGImage, CGRectMake(layer.frame.origin.x*scale,
-                                                                                  layer.frame.origin.y*scale,
-                                                                                  layer.frame.size.width*scale,
-                                                                                  layer.frame.size.height*scale))
-        {
-           image = UIImage(CGImage: imageref)
+        if (view.layer.sublayers?.contains(blurLayer))! {
+            blurLayer.removeFromSuperlayer()
+        }else{
+            if (blurLayer.contents == nil) {
+                self.constructBlurLayer()
+            }
+            view.layer.addSublayer(blurLayer)
+            
         }
-        */
-        // I gave up.
+        
+        // since iOS 8.0, use UIVisualEffectView instead
         
         if view.subviews.contains(blurEffectView){
             blurEffectView.removeFromSuperview()
         }else{
-            blurEffectView.frame = CGRect(x: 80, y: 100, width: 160, height: 160)
+            blurEffectView.frame = CGRect(x: 120, y: 300, width: 160, height: 160)
             view.addSubview(blurEffectView)
+        }
+    }
+    
+    func constructBlurLayer() {
+        blurLayer.frame=CGRect(x: 80, y: 100, width: 160, height: 160)
+        view.layer.addSublayer(blurLayer)
+        let scale = UIScreen.main.scale
+        
+        UIGraphicsBeginImageContextWithOptions(blurLayer.frame.size, true, scale)
+        view.drawHierarchy(in: view.frame, afterScreenUpdates: false)
+        var image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if  let imageref = image!.cgImage!.cropping(to: CGRect(x:blurLayer.frame.origin.x*scale,
+                                                               y:blurLayer.frame.origin.y*scale,
+                                                               width:blurLayer.frame.size.width*scale,
+                                                               height:blurLayer.frame.size.height*scale))
+        {
+            image = UIImage(cgImage: imageref)
+            image = image!.applyBlur(withRadius: 50, tintColor: UIColor(red:0, green:1, blue:0, alpha:0.1), saturationDeltaFactor: 2, maskImage: nil)
+            self.blurLayer.contents = image!.cgImage
         }
     }
 }

@@ -13,6 +13,7 @@
 		0464B3B51BBA1FC100053206 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0464B3B41BBA1FC100053206 /* Assets.xcassets */; };
 		0464B3B81BBA1FC100053206 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0464B3B61BBA1FC100053206 /* LaunchScreen.storyboard */; };
 		0464B3C01BBA21EE00053206 /* Image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0464B3BF1BBA21EE00053206 /* Image.jpg */; };
+		37DE77711D8DFF23009BDF2A /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 37DE77701D8DFF23009BDF2A /* UIImage+ImageEffects.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		0464B3B71BBA1FC100053206 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0464B3B91BBA1FC100053206 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0464B3BF1BBA21EE00053206 /* Image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Image.jpg; sourceTree = "<group>"; };
+		37DE776E1D8DFF23009BDF2A /* BlurDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlurDemo-Bridging-Header.h"; sourceTree = "<group>"; };
+		37DE776F1D8DFF23009BDF2A /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		37DE77701D8DFF23009BDF2A /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +63,13 @@
 			children = (
 				0464B3AD1BBA1FC100053206 /* AppDelegate.swift */,
 				0464B3AF1BBA1FC100053206 /* SCTViewController.swift */,
+				37DE776F1D8DFF23009BDF2A /* UIImage+ImageEffects.h */,
+				37DE77701D8DFF23009BDF2A /* UIImage+ImageEffects.m */,
 				0464B3B11BBA1FC100053206 /* Main.storyboard */,
 				0464B3B41BBA1FC100053206 /* Assets.xcassets */,
 				0464B3B61BBA1FC100053206 /* LaunchScreen.storyboard */,
 				0464B3B91BBA1FC100053206 /* Info.plist */,
+				37DE776E1D8DFF23009BDF2A /* BlurDemo-Bridging-Header.h */,
 			);
 			path = BlurDemo;
 			sourceTree = "<group>";
@@ -141,6 +148,7 @@
 			files = (
 				0464B3B01BBA1FC100053206 /* SCTViewController.swift in Sources */,
 				0464B3AE1BBA1FC100053206 /* AppDelegate.swift in Sources */,
+				37DE77711D8DFF23009BDF2A /* UIImage+ImageEffects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,10 +264,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BlurDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.BlurDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlurDemo/BlurDemo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -268,10 +279,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BlurDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.BlurDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BlurDemo/BlurDemo-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
