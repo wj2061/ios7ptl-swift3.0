@@ -16,7 +16,7 @@ class SCTViewController: UIViewController {
     }
     
 //    var layer = CALayer()
-    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.Light))
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: UIBlurEffectStyle.light))
 
     
     @IBAction func buttonAction() {
@@ -43,7 +43,7 @@ class SCTViewController: UIViewController {
         if view.subviews.contains(blurEffectView){
             blurEffectView.removeFromSuperview()
         }else{
-            blurEffectView.frame = CGRectMake(80, 100, 160, 160)
+            blurEffectView.frame = CGRect(x: 80, y: 100, width: 160, height: 160)
             view.addSubview(blurEffectView)
         }
     }
