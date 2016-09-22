@@ -12,39 +12,25 @@ import ObjectiveC
 var kRepresentedObject:UInt8 = 0
 
 class ViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    }
-
-    @IBOutlet weak var button1: UIButton!{
-        didSet{ objc_setAssociatedObject(button1, &kRepresentedObject, "button1",  objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
-    
-    @IBOutlet weak var button2: UIButton!{
-        didSet{objc_setAssociatedObject(button2, &kRepresentedObject, "button2", objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
-    }
     
     @IBOutlet weak var buttonLabel: UILabel!
-    
-    
+
     @IBAction func doSomething(_ sender: UIButton) {
         let alertView = UIAlertController(title: "Alert",
-                                        message: nil,
-                                 preferredStyle: UIAlertControllerStyle.alert)
+                                          message: nil,
+                                          preferredStyle: UIAlertControllerStyle.alert)
         
-        alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (_ ) -> Void in
-            let name = objc_getAssociatedObject(sender, &kRepresentedObject) as? String ?? ""
-            self.buttonLabel.text=name
-        }))
+        let okAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (alertAction ) -> Void in
+            let button = objc_getAssociatedObject(alertAction, &kRepresentedObject) as! UIButton
+            self.buttonLabel.text = button.title(for:.normal)
+        });
         
-      present(alertView, animated: true, completion: nil)
+        objc_setAssociatedObject(okAlertAction, &kRepresentedObject, sender, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         
+        alertView.addAction(okAlertAction)
+
         
+        present(alertView, animated: true, completion: nil)
     }
-    
 }
 
