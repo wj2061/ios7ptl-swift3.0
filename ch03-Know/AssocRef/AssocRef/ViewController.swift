@@ -31,17 +31,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonLabel: UILabel!
     
     
-    @IBAction func doSomething(sender: UIButton) {
+    @IBAction func doSomething(_ sender: UIButton) {
         let alertView = UIAlertController(title: "Alert",
                                         message: nil,
-                                 preferredStyle: UIAlertControllerStyle.Alert)
+                                 preferredStyle: UIAlertControllerStyle.alert)
         
-        alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (_ ) -> Void in
+        alertView.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: { (_ ) -> Void in
             let name = objc_getAssociatedObject(sender, &kRepresentedObject) as? String ?? ""
             self.buttonLabel.text=name
         }))
         
-      presentViewController(alertView, animated: true, completion: nil)
+      present(alertView, animated: true, completion: nil)
         
         
     }
