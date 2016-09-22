@@ -9,13 +9,14 @@
 import UIKit
 import ObjectiveC
 
-var kRepresentedObject:UInt8 = 0
-
 class ViewController: UIViewController {
     
     @IBOutlet weak var buttonLabel: UILabel!
+    
 
     @IBAction func doSomething(_ sender: UIButton) {
+        var  kRepresentedObject = Selector(("doSomething"))
+        
         let alertView = UIAlertController(title: "Alert",
                                           message: nil,
                                           preferredStyle: UIAlertControllerStyle.alert)
