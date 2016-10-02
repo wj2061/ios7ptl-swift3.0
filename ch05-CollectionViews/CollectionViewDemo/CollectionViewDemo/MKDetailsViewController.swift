@@ -24,12 +24,12 @@ class MKDetailsViewController: UIViewController {
             let component=NSString(string: path).lastPathComponent
             textLabel?.text=NSString(string: component).deletingPathExtension
             
-            DispatchQueue.global(qos: .userInitiated).async(execute: { () -> Void in
+            DispatchQueue.global(qos: .`default`).async{ () -> Void in
                 let  image = UIImage(contentsOfFile: path)
-                DispatchQueue.main.async(execute: { () -> Void in
+                DispatchQueue.main.async{ () -> Void in
                     self.imageView?.image=image
-                })
-            })
+                }
+            }
         }
     }
     
