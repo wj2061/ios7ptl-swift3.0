@@ -72,32 +72,32 @@ class MKViewController: UICollectionViewController ,UICollectionViewDelegateFlow
     
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let  orientation = self.photoOrientation[(indexPath as NSIndexPath).row]
+        let  orientation = self.photoOrientation[indexPath.row]
         let identifier = orientation==PhotoOrientation.photoOrientationLandscape ? cellReuseIdentifier.landscape :cellReuseIdentifier.portrait
         let size = orientation==PhotoOrientation.photoOrientationLandscape ? CGSize(width: 200, height: 300):CGSize(width: 300, height: 200)
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MKCollectionViewCell
-        let photoName = self.photoList?[(indexPath as NSIndexPath).row] ?? ""
+        let photoName = self.photoList?[indexPath.row] ?? ""
         let photoFilePath = self.photoDirectory()+"/"+photoName
         var thumbImage = self.photosCache[photoName]
         cell.photoView.image = thumbImage
+        
         if thumbImage == nil{
-           DispatchQueue.global(qos: .default).async(execute: { () -> Void in
+           DispatchQueue.global(qos: .default).async{ () -> Void in
             if let image = UIImage(contentsOfFile: photoFilePath){
                 
-//                let layout = collectionView.collectionViewLayout as! MkCoverFlowLayout
                 let scale = UIScreen.main.scale
                 UIGraphicsBeginImageContextWithOptions(size, true, scale)
                 image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
                 thumbImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
             }
-            DispatchQueue.main.async(execute: { () -> Void in
+            DispatchQueue.main.async{ () -> Void in
                 self.photosCache[photoName] = thumbImage
                 cell.photoView.image=thumbImage
-            })
+            }
             
-           })
+           }
         }
         return cell
     }
@@ -106,7 +106,7 @@ class MKViewController: UICollectionViewController ,UICollectionViewDelegateFlow
 
      func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let orientation = photoOrientation[indexPath.row]
-        if orientation == PhotoOrientation.photoOrientationPortrait{
+        if orientation == .photoOrientationPortrait{
             return CGSize(width: 200 , height: 300)
         }else {
             return CGSize(width: 300 , height: 200)
