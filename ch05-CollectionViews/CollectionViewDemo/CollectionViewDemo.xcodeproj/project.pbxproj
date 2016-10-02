@@ -13,8 +13,8 @@
 		075C23E71BB05EB200D87BD3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 075C23E61BB05EB200D87BD3 /* Assets.xcassets */; };
 		075C23EA1BB05EB200D87BD3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 075C23E81BB05EB200D87BD3 /* LaunchScreen.storyboard */; };
 		075C23F21BB05EE100D87BD3 /* MKCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075C23F11BB05EE100D87BD3 /* MKCollectionViewCell.swift */; };
-		075C245F1BB060E500D87BD3 /* Photos in Resources */ = {isa = PBXBuildFile; fileRef = 075C245E1BB060E500D87BD3 /* Photos */; };
 		075C24611BB0618E00D87BD3 /* MKViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075C24601BB0618E00D87BD3 /* MKViewController.swift */; };
+		372C55B51DA1416200B6D8B1 /* Photos in Resources */ = {isa = PBXBuildFile; fileRef = 372C55B41DA1416200B6D8B1 /* Photos */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,8 +26,8 @@
 		075C23E91BB05EB200D87BD3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		075C23EB1BB05EB200D87BD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		075C23F11BB05EE100D87BD3 /* MKCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKCollectionViewCell.swift; sourceTree = "<group>"; };
-		075C245E1BB060E500D87BD3 /* Photos */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Photos; sourceTree = "<group>"; };
 		075C24601BB0618E00D87BD3 /* MKViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKViewController.swift; sourceTree = "<group>"; };
+		372C55B41DA1416200B6D8B1 /* Photos */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Photos; path = ../Photos; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		075C23D31BB05EB200D87BD3 = {
 			isa = PBXGroup;
 			children = (
-				075C245E1BB060E500D87BD3 /* Photos */,
+				372C55B41DA1416200B6D8B1 /* Photos */,
 				075C23DE1BB05EB200D87BD3 /* CollectionViewDemo */,
 				075C23DD1BB05EB200D87BD3 /* Products */,
 			);
@@ -134,7 +134,7 @@
 				075C23EA1BB05EB200D87BD3 /* LaunchScreen.storyboard in Resources */,
 				075C23E71BB05EB200D87BD3 /* Assets.xcassets in Resources */,
 				075C23E51BB05EB200D87BD3 /* Main.storyboard in Resources */,
-				075C245F1BB060E500D87BD3 /* Photos in Resources */,
+				372C55B51DA1416200B6D8B1 /* Photos in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
