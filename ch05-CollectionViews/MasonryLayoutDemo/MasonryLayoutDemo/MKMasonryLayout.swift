@@ -88,10 +88,8 @@ class MKMasonryLayout: UICollectionViewLayout {
     }
     
     override var collectionViewContentSize : CGSize {
-        var maxHeight:CGFloat = 0.0
-        for currentColumns in 0..<numberOfColumns{
-            let y = lastYValueForColumn[currentColumns]
-            maxHeight = max(y, maxHeight)
+        let maxHeight =  lastYValueForColumn.reduce(0) {
+            $1 > $0 ? $1 : $0
         }
         return CGSize(width: collectionView!.frame.width, height: maxHeight)
     }
