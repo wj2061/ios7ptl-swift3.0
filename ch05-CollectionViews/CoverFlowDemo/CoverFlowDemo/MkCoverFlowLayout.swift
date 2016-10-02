@@ -9,30 +9,30 @@
 import UIKit
 
 class MkCoverFlowLayout: UICollectionViewFlowLayout {
-    override func prepareLayout() {
-        scrollDirection=UICollectionViewScrollDirection.Horizontal
+    override func prepare() {
+        scrollDirection=UICollectionViewScrollDirection.horizontal
         if let size = collectionView?.frame.size{
-           itemSize = CGSizeMake(size.width/4, size.height*0.7)
+           itemSize = CGSize(width: size.width/4, height: size.height*0.7)
            sectionInset = UIEdgeInsetsMake(size.height*0.15, size.height*0.1, size.height*0.15, size.height*0.1)
         }
     }
     
-    override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
+    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
     struct Constant  {
        static let zoomFactor:CGFloat = 0.35
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        if  let allAttributesArray = super.layoutAttributesForElementsInRect(rect){
-            var visibleRect:CGRect =  CGRectZero
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        if  let allAttributesArray = super.layoutAttributesForElements(in: rect){
+            var visibleRect:CGRect =  CGRect.zero
             visibleRect.origin=collectionView!.contentOffset
             visibleRect.size = collectionView!.bounds.size
             let collectionViewHalfFrame = collectionView!.frame.width/2
             
             for attribute in allAttributesArray{
-                if CGRectIntersectsRect(rect, attribute.frame){
+                if rect.intersects(attribute.frame){
                     let distance = visibleRect.midX - attribute.frame.midX
                     let normalizeddistance =  distance/collectionViewHalfFrame
                     

@@ -10,91 +10,90 @@ import UIKit
 
 
 private enum PhotoOrientation{
-    case  PhotoOrientationLandscape
-    case  PhotoOrientationPortrait
+    case  photoOrientationLandscape
+    case  photoOrientationPortrait
 }
 
 
 class MKViewController: UICollectionViewController ,UICollectionViewDelegateFlowLayout{
     var  photoList:[String]?
-    private var  photoOrientation=[PhotoOrientation]()
-    private var  photosCache = NSCache()
+    fileprivate var  photoOrientation = [PhotoOrientation]()
+    fileprivate var  photosCache = [String:UIImage]()
     
     func photoDirectory()->String{
-        return NSBundle.mainBundle().resourcePath!.stringByAppendingString("/Photos")
+        return Bundle.main.resourcePath! + "/Photos"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(photoDirectory())
-        var photosArray:[String]?
-        do{
-          try   photosArray=NSFileManager.defaultManager().contentsOfDirectoryAtPath(photoDirectory())
-        }catch{
         
+        var photosArray:[String]!
+        do{
+            try   photosArray = FileManager.default.contentsOfDirectory(atPath: photoDirectory())
+        }catch(let error){
+            print("There is an error when init photos: \(error.localizedDescription)")
+            return;
         }
-        if photosArray != nil{
-            let qos = Int(QOS_CLASS_USER_INITIATED.rawValue)
-            dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
-                for  obj in photosArray!{
-                    let path = self.photoDirectory() + "/" + obj
-                    if let image  = UIImage(contentsOfFile: path){
-                        let size = image.size
-                        if size.width>size.height{
-                            self.photoOrientation.append(PhotoOrientation.PhotoOrientationLandscape)
-                        }else{
-                            self.photoOrientation.append(PhotoOrientation.PhotoOrientationPortrait)
-                        }
+        
+        DispatchQueue.global(qos: .`default`).async { () -> Void in
+            photosArray.forEach({ (obj) in
+                let path = self.photoDirectory() + "/" + obj
+                if let image  = UIImage(contentsOfFile: path){
+                    let size = image.size
+                    if size.width>size.height{
+                        self.photoOrientation.append(.photoOrientationLandscape)
+                    }else{
+                        self.photoOrientation.append(.photoOrientationPortrait)
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.photoList=photosArray
-                    self.collectionView?.reloadData()
-                })
-            }
+            })
+            DispatchQueue.main.async{ () -> Void in
+                self.photoList = photosArray
+                self.collectionView?.reloadData()
+            };
         }
     }
 
     
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  self.photoList?.count ?? 0
     }
 
-    private struct cellReuseIdentifier{
+    fileprivate struct cellReuseIdentifier{
      static   let landscape="MKPhotoCell"
      static   let portrait="MKPhotoCell"
     }
     
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let  orientation = self.photoOrientation[indexPath.row]
-        let identifier = orientation==PhotoOrientation.PhotoOrientationLandscape ? cellReuseIdentifier.landscape :cellReuseIdentifier.portrait
-        let size = orientation==PhotoOrientation.PhotoOrientationLandscape ? CGSizeMake(200, 300):CGSizeMake(300, 200)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let  orientation = self.photoOrientation[(indexPath as NSIndexPath).row]
+        let identifier = orientation==PhotoOrientation.photoOrientationLandscape ? cellReuseIdentifier.landscape :cellReuseIdentifier.portrait
+        let size = orientation==PhotoOrientation.photoOrientationLandscape ? CGSize(width: 200, height: 300):CGSize(width: 300, height: 200)
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! MKCollectionViewCell
-        let photoName = self.photoList?[indexPath.row] ?? ""
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MKCollectionViewCell
+        let photoName = self.photoList?[(indexPath as NSIndexPath).row] ?? ""
         let photoFilePath = self.photoDirectory()+"/"+photoName
-        var thumbImage = self.photosCache.objectForKey(photoName) as? UIImage
+        var thumbImage = self.photosCache[photoName]
         cell.photoView.image = thumbImage
         if thumbImage == nil{
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+           DispatchQueue.global(qos: .default).async(execute: { () -> Void in
             if let image = UIImage(contentsOfFile: photoFilePath){
                 
 //                let layout = collectionView.collectionViewLayout as! MkCoverFlowLayout
-                let scale = UIScreen.mainScreen().scale
+                let scale = UIScreen.main.scale
                 UIGraphicsBeginImageContextWithOptions(size, true, scale)
-                image.drawInRect(CGRectMake(0, 0, size.width, size.height))
+                image.draw(in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
                 thumbImage = UIGraphicsGetImageFromCurrentImageContext()
                 UIGraphicsEndImageContext()
             }
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.photosCache.setObject(thumbImage!, forKey: photoName)
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.photosCache[photoName] = thumbImage
                 cell.photoView.image=thumbImage
             })
             
@@ -105,12 +104,12 @@ class MKViewController: UICollectionViewController ,UICollectionViewDelegateFlow
 
     // MARK: UICollectionViewDelegateFlowLayout
 
-     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         let orientation = photoOrientation[indexPath.row]
-        if orientation == PhotoOrientation.PhotoOrientationPortrait{
-            return CGSizeMake(200 , 300)
+        if orientation == PhotoOrientation.photoOrientationPortrait{
+            return CGSize(width: 200 , height: 300)
         }else {
-            return CGSizeMake(300 , 200)
+            return CGSize(width: 300 , height: 200)
         }
     }
 
