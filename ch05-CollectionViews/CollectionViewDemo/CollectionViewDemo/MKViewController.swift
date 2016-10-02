@@ -35,7 +35,7 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
             return;
         }
         
-        DispatchQueue.global(qos: .`default`).async { () -> Void in
+        DispatchQueue.global(qos: .default).async { () -> Void in
             photosArray.forEach({ (obj) in
                 let path = self.photoDirectory() + "/" + obj
                 if let image  = UIImage(contentsOfFile: path){
@@ -112,7 +112,7 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
         cell.photoView.image = thumbImage
         
         if thumbImage == nil{
-            DispatchQueue.global(qos:.`default`).async{ () -> Void in
+            DispatchQueue.global(qos:.default).async{ () -> Void in
                 if let image = UIImage(contentsOfFile: photoFilePath){
                     if orientation == PhotoOrientation.photoOrientationPortrait{
                         UIGraphicsBeginImageContext(CGSize(width: 180.0, height: 120.0))
