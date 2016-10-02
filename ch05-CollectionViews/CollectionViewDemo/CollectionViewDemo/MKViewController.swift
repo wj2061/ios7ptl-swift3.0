@@ -18,7 +18,7 @@ private enum PhotoOrientation{
 class MKViewController: UICollectionViewController ,UIAdaptivePresentationControllerDelegate{
     var  photoList:[String]?
     fileprivate var  photoOrientation=[PhotoOrientation]()
-    fileprivate var  photosCache = NSCache<NSString, UIImage>()
+    fileprivate var  photosCache = [String:UIImage]()
     
     
     func photoDirectory()->String{
@@ -107,7 +107,7 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
         let photoName = self.photoList?[(indexPath as NSIndexPath).row] ?? ""
         let photoFilePath = self.photoDirectory()+"/"+photoName
         cell.nameLabel.text = NSString(string: photoName).deletingPathExtension
-        var thumbImage = self.photosCache.object(forKey: photoName as NSString)
+        var thumbImage = self.photosCache[photoName]
         cell.photoView.image = thumbImage
         if thumbImage == nil{
            DispatchQueue.global(qos:.userInitiated).async(execute: { () -> Void in
@@ -126,7 +126,7 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
                 }
             }
             DispatchQueue.main.async(execute: { () -> Void in
-                self.photosCache.setObject(thumbImage!, forKey: photoName as NSString)
+                self.photosCache[photoName] = thumbImage
                 cell.photoView.image=thumbImage
             })
             
