@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MKMasonryViewLayoutDelegate{
+protocol MKMasonryViewLayoutDelegate:NSObjectProtocol{
     func collectionView(_ collectionView:UICollectionView,layout:MKMasonryLayout,heightForItemAtIndexPath indexPath:IndexPath)->CGFloat
 }
 
@@ -16,7 +16,7 @@ class MKMasonryLayout: UICollectionViewLayout {
     
     let numberOfColumns:Int = 3
     let interItemSpacing:CGFloat = 12.5
-    var delegate:MKMasonryViewLayoutDelegate?
+    weak var delegate:MKMasonryViewLayoutDelegate?
     
     fileprivate var lastYValueForColumn:[CGFloat] = [0,0,0]
     fileprivate var layoutInfo:[IndexPath:UICollectionViewLayoutAttributes] = [:]

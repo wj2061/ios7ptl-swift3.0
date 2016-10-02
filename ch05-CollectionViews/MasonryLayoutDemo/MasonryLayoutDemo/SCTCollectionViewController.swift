@@ -16,7 +16,7 @@ class SCTCollectionViewController: UICollectionViewController,MKMasonryViewLayou
         super.viewDidLoad()
         
         if let layout = collectionView?.collectionViewLayout  as? MKMasonryLayout{
-            layout.delegate=self
+            layout.delegate = self
         }
     }
  
