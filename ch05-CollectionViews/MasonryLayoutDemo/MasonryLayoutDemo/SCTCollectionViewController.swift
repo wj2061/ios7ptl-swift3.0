@@ -21,34 +21,34 @@ class SCTCollectionViewController: UICollectionViewController,MKMasonryViewLayou
     }
  
     // this will be called if our layout is UICollectionViewFlowLayout
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath)->CGSize{
-        let randomHeight = 100.0 + CGFloat(random()%140)
-        return CGSizeMake(100, randomHeight)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: IndexPath)->CGSize{
+        let randomHeight = 100.0 + CGFloat(arc4random()%140)
+        return CGSize(width: 100, height: randomHeight)
     }
     
     // this will be called if our layout is MKMasonryViewLayout
     // MARK: MKMasonryViewLayoutDelegate
-    func collectionView(collectionView: UICollectionView, layout: MKMasonryLayout, heightForItemAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let randomHeight = 100.0 + CGFloat(random()%140)
+    func collectionView(_ collectionView: UICollectionView, layout: MKMasonryLayout, heightForItemAtIndexPath indexPath: IndexPath) -> CGFloat {
+        let randomHeight = 100.0 + CGFloat(arc4random()%140)
         return randomHeight
     }
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100    }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         return cell
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         print("invalidateLayout")
       collectionView?.collectionViewLayout.invalidateLayout()
     }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MKMasonryViewLayoutDelegate{
-    func collectionView(collectionView:UICollectionView,layout:MKMasonryLayout,heightForItemAtIndexPath indexPath:NSIndexPath)->CGFloat
+    func collectionView(_ collectionView:UICollectionView,layout:MKMasonryLayout,heightForItemAtIndexPath indexPath:IndexPath)->CGFloat
 }
 
 class MKMasonryLayout: UICollectionViewLayout {
@@ -18,10 +18,10 @@ class MKMasonryLayout: UICollectionViewLayout {
     var interItemSpacing:CGFloat = 12.5
     var delegate:MKMasonryViewLayoutDelegate?
     
-    private var lastYValueForColumn:[CGFloat] = [0,0,0]
-    private var layoutInfo:[NSIndexPath:UICollectionViewLayoutAttributes] = [:]
+    fileprivate var lastYValueForColumn:[CGFloat] = [0,0,0]
+    fileprivate var layoutInfo:[IndexPath:UICollectionViewLayoutAttributes] = [:]
 
-    override func prepareLayout() {
+    override func prepare() {
         print("prepare")
         
         lastYValueForColumn=[0,0,0]
@@ -32,21 +32,21 @@ class MKMasonryLayout: UICollectionViewLayout {
         let availableSpaceExcludingPadding = fullWidth-(interItemSpacing*CGFloat(numberOfColumns+1))
         let itemWidth = availableSpaceExcludingPadding/CGFloat(numberOfColumns)
         
-        var indexPath=NSIndexPath(forRow: 0, inSection: 0)
+        var indexPath=IndexPath(row: 0, section: 0)
         
-        let numSections = collectionView!.numberOfSections()
+        let numSections = collectionView!.numberOfSections
         
         for section in 0..<numSections{
-            let numItems = collectionView!.numberOfItemsInSection(section)
+            let numItems = collectionView!.numberOfItems(inSection: section)
             for item in 0..<numItems{
-                indexPath=NSIndexPath(forItem: item, inSection: section)
+                indexPath=IndexPath(item: item, section: section)
                 
-                let itemAttributes = UICollectionViewLayoutAttributes(forCellWithIndexPath: indexPath)
+                let itemAttributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 let x = interItemSpacing+(interItemSpacing+itemWidth)*CGFloat(currentColumn)
                 var y = lastYValueForColumn[currentColumn]
                 let height = delegate?.collectionView(collectionView!, layout: self, heightForItemAtIndexPath: indexPath) ?? itemWidth
                 
-                itemAttributes.frame = CGRectMake(x, y, itemWidth, height)
+                itemAttributes.frame = CGRect(x: x, y: y, width: itemWidth, height: height)
                 y += height
                 y += interItemSpacing
                 
@@ -59,7 +59,7 @@ class MKMasonryLayout: UICollectionViewLayout {
         }
     }
     
-    private func nextColumn()->Int{
+    fileprivate func nextColumn()->Int{
         var nextColumn = 0
         var minYValue = lastYValueForColumn[0]
         for column in 1..<numberOfColumns{
@@ -71,22 +71,22 @@ class MKMasonryLayout: UICollectionViewLayout {
         return nextColumn
     }
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         var allAttributes:[UICollectionViewLayoutAttributes]=[]
         for (_,attributes) in layoutInfo{
-            if CGRectIntersectsRect(rect, attributes.frame){
+            if rect.intersects(attributes.frame){
                 allAttributes.append(attributes)
             }
         }
         return allAttributes
     }
     
-    override func collectionViewContentSize() -> CGSize {
+    override var collectionViewContentSize : CGSize {
         var maxHeight:CGFloat = 0.0
         for currentColumns in 0..<numberOfColumns{
             let y = lastYValueForColumn[currentColumns]
             maxHeight = max(y, maxHeight)
         }
-        return CGSizeMake(collectionView!.frame.width, maxHeight)
+        return CGSize(width: collectionView!.frame.width, height: maxHeight)
     }
 }
