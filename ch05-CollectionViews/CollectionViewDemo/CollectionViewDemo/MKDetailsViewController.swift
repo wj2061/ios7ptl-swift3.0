@@ -16,17 +16,17 @@ class MKDetailsViewController: UIViewController {
     @IBOutlet weak var textLabel: UILabel!
 
     @IBAction func doneTapped() {
-        dismissViewControllerAnimated(true , completion: nil)
+        dismiss(animated: true , completion: nil)
     }
     
     func updateUI(){
         if let  path = photoPath{
             let component=NSString(string: path).lastPathComponent
-            textLabel?.text=NSString(string: component).stringByDeletingPathExtension
+            textLabel?.text=NSString(string: component).deletingPathExtension
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), { () -> Void in
+            DispatchQueue.global(qos: .userInitiated).async(execute: { () -> Void in
                 let  image = UIImage(contentsOfFile: path)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     self.imageView?.image=image
                 })
             })
@@ -41,7 +41,7 @@ class MKDetailsViewController: UIViewController {
 
 
     
-    override func shouldAutorotate() -> Bool {
+    override var shouldAutorotate : Bool {
       return true
     }
 

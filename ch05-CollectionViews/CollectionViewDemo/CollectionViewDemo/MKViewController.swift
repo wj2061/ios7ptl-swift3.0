@@ -10,18 +10,19 @@ import UIKit
 
 
 private enum PhotoOrientation{
-    case  PhotoOrientationLandscape
-    case  PhotoOrientationPortrait
+    case  photoOrientationLandscape
+    case  photoOrientationPortrait
 }
 
 
 class MKViewController: UICollectionViewController ,UIAdaptivePresentationControllerDelegate{
     var  photoList:[String]?
-    private var  photoOrientation=[PhotoOrientation]()
-    private var  photosCache = NSCache()
+    fileprivate var  photoOrientation=[PhotoOrientation]()
+    fileprivate var  photosCache = NSCache<NSString, UIImage>()
+    
     
     func photoDirectory()->String{
-        return NSBundle.mainBundle().resourcePath!.stringByAppendingString("/Photos")
+        return Bundle.main.resourcePath! + "/Photos"
     }
     
     override func viewDidLoad() {
@@ -29,25 +30,24 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
         print(photoDirectory())
         var photosArray:[String]?
         do{
-          try   photosArray=NSFileManager.defaultManager().contentsOfDirectoryAtPath(photoDirectory())
+          try   photosArray=FileManager.default.contentsOfDirectory(atPath: photoDirectory())
         }catch{
         
         }
         if photosArray != nil{
-            let qos = Int(QOS_CLASS_USER_INITIATED.rawValue)
-            dispatch_async(dispatch_get_global_queue(qos, 0)) { () -> Void in
+            DispatchQueue.global(qos: .userInitiated).async { () -> Void in
                 for  obj in photosArray!{
                     let path = self.photoDirectory() + "/" + obj
                     if let image  = UIImage(contentsOfFile: path){
                         let size = image.size
                         if size.width>size.height{
-                            self.photoOrientation.append(PhotoOrientation.PhotoOrientationLandscape)
+                            self.photoOrientation.append(PhotoOrientation.photoOrientationLandscape)
                         }else{
-                            self.photoOrientation.append(PhotoOrientation.PhotoOrientationPortrait)
+                            self.photoOrientation.append(PhotoOrientation.photoOrientationPortrait)
                         }
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                DispatchQueue.main.async(execute: { () -> Void in
                     self.photoList=photosArray
                     self.collectionView?.reloadData()
                 })
@@ -56,17 +56,17 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
     }
 
     
-    override func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.All
+    override var supportedInterfaceOrientations : UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.all
     }
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "MainSegue"{
-            let selectedIndexPath = sender as! NSIndexPath
-            let photoName = photoList![selectedIndexPath.row]
-            let controller = segue.destinationViewController as! MKDetailsViewController
+            let selectedIndexPath = sender as! IndexPath
+            let photoName = photoList![(selectedIndexPath as NSIndexPath).row]
+            let controller = segue.destination as! MKDetailsViewController
             controller.photoPath = photoDirectory()+"/"+photoName
             if let pc = controller.presentationController{
                 pc.delegate=self
@@ -76,57 +76,57 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
     
     //MARK: -AdaptivePresentationControllerDelegate
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
-        return UIModalPresentationStyle.None
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return  self.photoList?.count ?? 0
     }
 
-    private struct cellReuseIdentifier{
+    fileprivate struct cellReuseIdentifier{
      static   let landscape="MKPhotoCellLandscape"
      static   let portrait="MKPhotoCellPortrait"
      static   let Supplementaryr="SupplementaryViewIdentifier"
     }
     
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let  orientation = self.photoOrientation[indexPath.row]
-        let identifier = orientation==PhotoOrientation.PhotoOrientationLandscape ? cellReuseIdentifier.landscape :cellReuseIdentifier.portrait
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(identifier, forIndexPath: indexPath) as! MKCollectionViewCell
-        let photoName = self.photoList?[indexPath.row] ?? ""
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let  orientation = self.photoOrientation[(indexPath as NSIndexPath).row]
+        let identifier = orientation==PhotoOrientation.photoOrientationLandscape ? cellReuseIdentifier.landscape :cellReuseIdentifier.portrait
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! MKCollectionViewCell
+        let photoName = self.photoList?[(indexPath as NSIndexPath).row] ?? ""
         let photoFilePath = self.photoDirectory()+"/"+photoName
-        cell.nameLabel.text = NSString(string: photoName).stringByDeletingPathExtension
-        var thumbImage = self.photosCache.objectForKey(photoName) as? UIImage
+        cell.nameLabel.text = NSString(string: photoName).deletingPathExtension
+        var thumbImage = self.photosCache.object(forKey: photoName as NSString)
         cell.photoView.image = thumbImage
         if thumbImage == nil{
-           dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), { () -> Void in
+           DispatchQueue.global(qos:.userInitiated).async(execute: { () -> Void in
             if let image = UIImage(contentsOfFile: photoFilePath){
-                if orientation == PhotoOrientation.PhotoOrientationPortrait{
-                    UIGraphicsBeginImageContext(CGSizeMake(180.0, 120.0))
-                    image.drawInRect(CGRectMake(0, 0, 180.0, 120.0))
+                if orientation == PhotoOrientation.photoOrientationPortrait{
+                    UIGraphicsBeginImageContext(CGSize(width: 180.0, height: 120.0))
+                    image.draw(in: CGRect(x: 0, y: 0, width: 180.0, height: 120.0))
                     thumbImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
                 }else{
                     
-                    UIGraphicsBeginImageContext(CGSizeMake(120.0, 180.0))
-                    image.drawInRect(CGRectMake(0, 0, 120.0, 180.0))
+                    UIGraphicsBeginImageContext(CGSize(width: 120.0, height: 180.0))
+                    image.draw(in: CGRect(x: 0, y: 0, width: 120.0, height: 180.0))
                     thumbImage = UIGraphicsGetImageFromCurrentImageContext()
                     UIGraphicsEndImageContext()
                 }
             }
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.photosCache.setObject(thumbImage!, forKey: photoName)
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.photosCache.setObject(thumbImage!, forKey: photoName as NSString)
                 cell.photoView.image=thumbImage
             })
             
@@ -136,22 +136,22 @@ class MKViewController: UICollectionViewController ,UIAdaptivePresentationContro
     }
 
     
-    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("MainSegue", sender: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "MainSegue", sender: indexPath)
     }
     
     // MARK: UICollectionViewDelegate
 
     
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        return collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: cellReuseIdentifier.Supplementaryr, forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        return collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: cellReuseIdentifier.Supplementaryr, for: indexPath)
     }
     
-    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     
-    override func collectionView(collectionView: UICollectionView, shouldSelectItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }
     

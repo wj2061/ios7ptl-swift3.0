@@ -18,7 +18,7 @@ class MKCollectionViewCell: UICollectionViewCell {
         self.selectedBackgroundView=UIView(frame: self.frame)
         self.selectedBackgroundView?.backgroundColor=UIColor(white: 0.3, alpha: 0.5)
         
-        self.photoView.layer.borderColor=UIColor.whiteColor().CGColor
+        self.photoView.layer.borderColor=UIColor.white.cgColor
         self.photoView.layer.borderWidth=5.0
         super.awakeFromNib()
     }
