@@ -14,16 +14,14 @@ protocol MKMasonryViewLayoutDelegate{
 
 class MKMasonryLayout: UICollectionViewLayout {
     
-    var numberOfColumns:Int = 3
-    var interItemSpacing:CGFloat = 12.5
+    let numberOfColumns:Int = 3
+    let interItemSpacing:CGFloat = 12.5
     var delegate:MKMasonryViewLayoutDelegate?
     
     fileprivate var lastYValueForColumn:[CGFloat] = [0,0,0]
     fileprivate var layoutInfo:[IndexPath:UICollectionViewLayoutAttributes] = [:]
 
-    override func prepare() {
-        print("prepare")
-        
+    override func prepare() {        
         lastYValueForColumn=[0,0,0]
         layoutInfo=[:]
 
@@ -60,6 +58,7 @@ class MKMasonryLayout: UICollectionViewLayout {
     }
     
     fileprivate func nextColumn()->Int{
+  
         var nextColumn = 0
         var minYValue = lastYValueForColumn[0]
         for column in 1..<numberOfColumns{
