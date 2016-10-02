@@ -22,8 +22,8 @@ class MKMasonryLayout: UICollectionViewLayout {
     fileprivate var layoutInfo:[IndexPath:UICollectionViewLayoutAttributes] = [:]
 
     override func prepare() {        
-        lastYValueForColumn=[0,0,0]
-        layoutInfo=[:]
+        lastYValueForColumn = [0,0,0]
+        layoutInfo = [:]
 
         var currentColumn:Int = 0
         let fullWidth = collectionView!.frame.size.width
@@ -48,23 +48,30 @@ class MKMasonryLayout: UICollectionViewLayout {
                 y += height
                 y += interItemSpacing
                 
-                lastYValueForColumn[currentColumn]=y
-//                currentColumn++
-//                if currentColumn>=numberOfColumns{ currentColumn=0 }
+                lastYValueForColumn[currentColumn] = y
+                
+                //this was the original implemation of iOS7-ptl
+//                currentColumn += 1
+//                if currentColumn >= numberOfColumns{
+//                    currentColumn=0
+//                }
+                
+                //this is another interesting implemation
                 currentColumn = nextColumn()
                 layoutInfo[indexPath]=itemAttributes
+                //end
             }
         }
     }
     
     fileprivate func nextColumn()->Int{
-  
         var nextColumn = 0
         var minYValue = lastYValueForColumn[0]
-        for column in 1..<numberOfColumns{
-            if lastYValueForColumn[column]<minYValue{
-                nextColumn = column
-                minYValue = lastYValueForColumn[column]
+        
+        for (index,value) in lastYValueForColumn.enumerated() {
+            if value < minYValue {
+                nextColumn = index
+                minYValue = value
             }
         }
         return nextColumn
