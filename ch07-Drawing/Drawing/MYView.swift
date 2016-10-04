@@ -9,34 +9,34 @@
 import UIKit
 
 class MYView: UIView {
-    private struct kImageSize{
+    fileprivate struct kImageSize{
         static let width = 200
         static let height = 200
     }
     
-    func reverseImageForText(text:String)->UIImage?{
-        let font = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        let color = UIColor.redColor()
+    func reverseImageForText(_ text:String)->UIImage?{
+        let font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        let color = UIColor.red
         
         UIGraphicsBeginImageContext(CGSize(width: kImageSize.width,height: kImageSize.height))
         
-        NSString(string: text).drawInRect(CGRect(x: 0, y: 0, width: kImageSize.width, height: kImageSize.height), withAttributes: [NSFontAttributeName: font,NSForegroundColorAttributeName: color])
-        let textImage = UIGraphicsGetImageFromCurrentImageContext().CGImage
+        NSString(string: text).draw(in: CGRect(x: 0, y: 0, width: kImageSize.width, height: kImageSize.height), withAttributes: [NSFontAttributeName: font,NSForegroundColorAttributeName: color])
+        let textImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         
         UIGraphicsEndImageContext()
         
         if (textImage != nil)  {
-          let image = UIImage(CGImage: textImage!, scale: 1, orientation: UIImageOrientation.UpMirrored)
+          let image = UIImage(cgImage: textImage!, scale: 1, orientation: UIImageOrientation.upMirrored)
           return image
         }
         return nil
     }
    
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
        UIColor(red: 0, green: 0, blue: 1, alpha: 0.1).set()
         if  let image = reverseImageForText("Hello World"){
-            image .drawAtPoint(CGPoint(x: 50, y: 150))
+            image .draw(at: CGPoint(x: 50, y: 150))
         }
-        UIRectFillUsingBlendMode(CGRect(x: 100, y: 100, width: 100, height: 100), CGBlendMode.Normal)
+        UIRectFillUsingBlendMode(CGRect(x: 100, y: 100, width: 100, height: 100), CGBlendMode.normal)
     }
 }
