@@ -20,23 +20,29 @@ class MYView: UIView {
         
         UIGraphicsBeginImageContext(CGSize(width: kImageSize.width,height: kImageSize.height))
         
-        NSString(string: text).draw(in: CGRect(x: 0, y: 0, width: kImageSize.width, height: kImageSize.height), withAttributes: [NSFontAttributeName: font,NSForegroundColorAttributeName: color])
+        NSString(string: text).draw(in: CGRect(x: 0,
+                                               y: 0,
+                                               width: kImageSize.width,
+                                               height: kImageSize.height),
+                                    withAttributes: [NSFontAttributeName: font,
+                                                     NSForegroundColorAttributeName: color])
         let textImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         
         UIGraphicsEndImageContext()
         
         if (textImage != nil)  {
-          let image = UIImage(cgImage: textImage!, scale: 1, orientation: UIImageOrientation.upMirrored)
+          let image = UIImage(cgImage: textImage!, scale: 1, orientation: .upMirrored)
           return image
         }
         return nil
     }
    
     override func draw(_ rect: CGRect) {
-       UIColor(red: 0, green: 0, blue: 1, alpha: 0.1).set()
         if  let image = reverseImageForText("Hello World"){
             image .draw(at: CGPoint(x: 50, y: 150))
         }
+        
+        UIColor(red: 0, green: 0, blue: 1, alpha: 0.1).setFill()
         UIRectFillUsingBlendMode(CGRect(x: 100, y: 100, width: 100, height: 100), CGBlendMode.normal)
     }
 }
