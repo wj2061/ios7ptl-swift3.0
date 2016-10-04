@@ -39,7 +39,12 @@ class GraphView: UIView {
         values.append(CGFloat(nextValue))
         print("\(nextValue) = \(values.count)")
         let size = bounds.size
-        let maxDimension = max(size.width, size.height)
+        //ptl  original way to calculate maxDimension
+//        let maxDimension = max(size.width, size.height)
+        
+        //use width instead to make the Graph move as soon as possible
+        let maxDimension = size.width
+        
         let maxValues = Int( maxDimension/KScale.x )
         
         if values.count > maxValues {
