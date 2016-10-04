@@ -20,12 +20,12 @@ class MYView: UIView {
         
         UIGraphicsBeginImageContext(CGSize(width: kImageSize.width,height: kImageSize.height))
         
-        NSString(string: text).draw(in: CGRect(x: 0,
-                                               y: 0,
-                                               width: kImageSize.width,
-                                               height: kImageSize.height),
-                                    withAttributes: [NSFontAttributeName: font,
-                                                     NSForegroundColorAttributeName: color])
+        text.draw(in: CGRect(x: 0,
+                             y: 0,
+                             width: kImageSize.width,
+                             height: kImageSize.height),
+                  withAttributes: [NSFontAttributeName: font,
+                                   NSForegroundColorAttributeName: color])
         let textImage = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         
         UIGraphicsEndImageContext()
