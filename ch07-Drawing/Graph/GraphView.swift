@@ -11,7 +11,7 @@ import UIKit
 class GraphView: UIView {
    var values = [CGFloat]()
    
-    let timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: DispatchQueue.main)
+    let timer = DispatchSource.makeTimerSource(queue: DispatchQueue.main)
     
     @inline(__always) func CGAffineTransformMakeScaleTranslate(_ sx:CGFloat,sy:CGFloat,dx:CGFloat,dy:CGFloat)->CGAffineTransform{
         return CGAffineTransform(a: sx, b: 0, c: 0, d: sy, tx: dx, ty: dy)
