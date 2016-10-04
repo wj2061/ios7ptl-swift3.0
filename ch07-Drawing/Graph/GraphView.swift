@@ -11,30 +11,31 @@ import UIKit
 class GraphView: UIView {
    var values = [CGFloat]()
    
-    let timer = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, dispatch_get_main_queue())
+    let timer = DispatchSource.makeTimerSource(flags: DispatchSource.TimerFlags(rawValue: UInt(0)), queue: DispatchQueue.main)
     
-    @inline(__always) func CGAffineTransformMakeScaleTranslate(sx:CGFloat,sy:CGFloat,dx:CGFloat,dy:CGFloat)->CGAffineTransform{
-        return CGAffineTransformMake(sx, 0, 0, sy, dx, dy)
+    @inline(__always) func CGAffineTransformMakeScaleTranslate(_ sx:CGFloat,sy:CGFloat,dx:CGFloat,dy:CGFloat)->CGAffineTransform{
+        return CGAffineTransform(a: sx, b: 0, c: 0, d: sy, tx: dx, ty: dy)
     }
     
     override func awakeFromNib() {
-        contentMode = UIViewContentMode.Right
+        contentMode = UIViewContentMode.right
         weak var weakself = self
-        let delay:UInt64 = UInt64( Double(NSEC_PER_SEC)*0.25 )
-        dispatch_source_set_timer(timer, dispatch_walltime(nil  , 0), delay, 0)
-        dispatch_source_set_event_handler(timer) { () -> Void in
+     
+        timer.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.milliseconds(250), leeway: DispatchTimeInterval.seconds(0))
+
+        timer.setEventHandler { () -> Void in
             weakself!.updateValues()
         }
-        dispatch_resume(timer)
+        timer.resume()
     }
     
-    private struct KScale  {
+    fileprivate struct KScale  {
        static let x:CGFloat = 5.0
        static let y:CGFloat = 100.0
     }
     
     func updateValues(){
-        let nextValue = sin(CFAbsoluteTimeGetCurrent()) + Double(rand())/Double(RAND_MAX)
+        let nextValue = sin(CFAbsoluteTimeGetCurrent()) + Double(arc4random())/Double(RAND_MAX)
         values.append(CGFloat(nextValue))
         print("\(nextValue) = \(values.count)")
         let size = bounds.size
@@ -42,7 +43,7 @@ class GraphView: UIView {
         let maxValues = Int( maxDimension/KScale.x )
         
         if values.count > maxValues {
-            values.removeRange(Range(start: 0,end: values.count-maxValues))
+            values.removeSubrange((0 ..< values.count-maxValues))
         }
         
         setNeedsDisplay()
@@ -50,29 +51,29 @@ class GraphView: UIView {
     
     deinit{
         print("deinit")
-        dispatch_source_cancel(timer)
+        timer.cancel()
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         if var  y = values.first{
             let ctx = UIGraphicsGetCurrentContext()
-            CGContextSetStrokeColorWithColor(ctx, UIColor.redColor().CGColor)
-            CGContextSetLineJoin(ctx, CGLineJoin.Round)
-            CGContextSetLineWidth(ctx, 5.0)
+            ctx?.setStrokeColor(UIColor.red.cgColor)
+            ctx?.setLineJoin(CGLineJoin.round)
+            ctx?.setLineWidth(5.0)
             
-            let pathref = CGPathCreateMutable()
+            let pathref = CGMutablePath()
             let yOffset = bounds.size.height/2
             
-            var transform = CGAffineTransformMakeScaleTranslate(KScale.x, sy: KScale.y, dx: 0, dy: yOffset)
+            let transform = CGAffineTransformMakeScaleTranslate(KScale.x, sy: KScale.y, dx: 0, dy: yOffset)
             
-            CGPathMoveToPoint(pathref, &transform, 0, y)
+            pathref.move(to:CGPoint(x:0,y:y), transform:transform)
             for x in 1..<values.count{
                y = values[x]
-                CGPathAddLineToPoint(pathref, &transform, CGFloat( x ), y)
+               pathref.addLine(to:CGPoint(x:CGFloat( x ), y:y), transform: transform)
             }
             
-            CGContextAddPath(ctx, pathref)
-            CGContextStrokePath(ctx)
+            ctx?.addPath(pathref)
+            ctx?.strokePath()
       
         }
     }
