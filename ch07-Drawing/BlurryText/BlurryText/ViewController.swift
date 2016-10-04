@@ -14,15 +14,15 @@ class ViewController: UIViewController {
     @IBOutlet weak var label: UILabel!
     
     @IBAction func toggleBlur() {
-        let scale = UIScreen.mainScreen().scale
+        let scale = UIScreen.main.scale
         var x = label.frame.origin.x
         
         if x == floor(x){
             x = x + 0.5/scale
-            print("11")
+            print("blur")
         }else{
             x = CGFloat( floor(x) )
-            print("22")
+            print("unblur")
         }
         label.frame.origin.x=x
     }
