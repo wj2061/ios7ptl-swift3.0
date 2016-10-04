@@ -13,20 +13,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var activity: UIActivityIndicatorView!
     
     func dosomethingTimeconsuming(){
-        NSThread.sleepForTimeInterval(5)
+        Thread.sleep(forTimeInterval: 5)
     }
     
-    @IBAction func dosomething(sender: UIButton) {
-        sender.enabled=false
+    @IBAction func dosomething(_ sender: UIButton) {
+        sender.isEnabled=false
         activity.startAnimating()
-        let bgQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        dispatch_async(bgQueue) { () -> Void in
+        let bgQueue = DispatchQueue.global(qos: .default)
+        bgQueue.async { () -> Void in
             self.dosomethingTimeconsuming()
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async{ () -> Void in
                 self.activity.stopAnimating()
-                sender.enabled=true
-            })
+                sender.isEnabled=true
+            }
         }
     }
 }
