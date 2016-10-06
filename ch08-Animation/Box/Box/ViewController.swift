@@ -12,9 +12,9 @@ class ViewController: UIViewController {
     let kSize:CGFloat = 100
     let kPanScale:CGFloat = 1.0/100.0
     
-    private func layer(color:UIColor,transform:CATransform3D)->CALayer{
+    fileprivate func layer(_ color:UIColor,transform:CATransform3D)->CALayer{
         let  layer = CALayer()
-        layer.backgroundColor = color.CGColor
+        layer.backgroundColor = color.cgColor
         layer.bounds = CGRect(x: 0, y: 0, width: kSize, height: kSize)
         layer.position = view.center
         layer.transform = transform
@@ -34,43 +34,43 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         var transform = CATransform3DMakeTranslation(0, -kSize/2, 0)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 1, 0, 0)
-        layer(UIColor.redColor(), transform: transform)
+        layer(UIColor.red, transform: transform)
         
         transform = CATransform3DMakeTranslation(0, kSize/2, 0)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 1, 0, 0)
-        layer(UIColor.greenColor(), transform: transform)
+        layer(UIColor.green, transform: transform)
         
         transform = CATransform3DMakeTranslation(kSize/2, 0 , 0)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 0, 1, 0)
-        layer(UIColor.blueColor(), transform: transform)
+        layer(UIColor.blue, transform: transform)
         
         transform = CATransform3DMakeTranslation(-kSize/2, 0 , 0)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 0, 1, 0)
-        layer(UIColor.cyanColor(), transform: transform)
+        layer(UIColor.cyan, transform: transform)
         
         transform = CATransform3DMakeTranslation(0 , 0, -kSize/2)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 0, 0, 0)
-        layer(UIColor.yellowColor(), transform: transform)
+        layer(UIColor.yellow, transform: transform)
         
         transform = CATransform3DMakeTranslation(0, 0, kSize/2)
         transform = CATransform3DRotate(transform,CGFloat( M_PI_2 ), 0, 0, 0)
-        layer(UIColor.magentaColor(), transform: transform)
+        layer(UIColor.magenta, transform: transform)
         
         view.layer.sublayerTransform = MakePerspetiveTransform
         
-        let g  = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
+        let g  = UIPanGestureRecognizer(target: self, action: #selector(ViewController.pan(_:)))
         view.addGestureRecognizer(g)
     }
 
-    func pan(gesture:UIPanGestureRecognizer){
+    func pan(_ gesture:UIPanGestureRecognizer){
         switch gesture.state {
-        case .Changed :
-            let  translation = gesture.translationInView(view)
+        case .changed :
+            let  translation = gesture.translation(in: view)
             var transform = view.layer.sublayerTransform
             transform = CATransform3DRotate(transform, kPanScale*translation.x, 0, 1, 0)
             transform = CATransform3DRotate(transform, -kPanScale*translation.y, 1, 0, 0)
             view.layer.sublayerTransform = transform
-            gesture.setTranslation(CGPointZero, inView: view)
+            gesture.setTranslation(CGPoint.zero, in: view)
             
         default :
             break
