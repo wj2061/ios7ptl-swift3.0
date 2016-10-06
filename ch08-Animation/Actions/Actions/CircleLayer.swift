@@ -11,19 +11,22 @@ import UIKit
 class CircleLayer: CALayer {
     var radius:CGFloat = 0{ didSet{setNeedsDisplay()} }
     
+    //This is the designated initializer for layer objects that are not in the presentation layer.
     override init() {
         super.init()
         setNeedsDisplay()
     }
+    
+    //This method is the designated initializer for layer objects in the presentation layer.
     override init(layer: Any) {
         super.init()
         setNeedsDisplay()
     }
 
+    //init method  required by NSCoding
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setNeedsDisplay()
-        fatalError("init(coder:) has not been implemented")
     }
 
     override func draw(in ctx: CGContext) {
