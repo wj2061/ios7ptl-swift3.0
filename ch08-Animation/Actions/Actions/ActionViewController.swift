@@ -25,12 +25,12 @@ class ActionViewController: UIViewController {
         actions["position"] = anim
         
         let fadeanim = CABasicAnimation(keyPath: "opacity")
-        fadeanim.fromValue = NSNumber(float: 0.4)
-        fadeanim.toValue = NSNumber(float: 1)
+        fadeanim.fromValue = NSNumber(value: 0.4 as Float)
+        fadeanim.toValue = NSNumber(value: 1 as Float)
         
         let growAnim = CABasicAnimation(keyPath: "transform.scale")
-        growAnim.fromValue = NSNumber(float: 0.8)
-        growAnim.toValue = NSNumber(float: 1)
+        growAnim.fromValue = NSNumber(value: 0.8 as Float)
+        growAnim.toValue = NSNumber(value: 1 as Float)
         
         let group = CAAnimationGroup()
         group.animations = [fadeanim,growAnim]
@@ -38,12 +38,12 @@ class ActionViewController: UIViewController {
         actions[kCAOnOrderIn] = group
         circleLayer.actions=actions
         
-        let g = UITapGestureRecognizer(target: self, action: Selector("tap:"))
+        let g = UITapGestureRecognizer(target: self, action: #selector(ActionViewController.tap(_:)))
         view.addGestureRecognizer(g)
         
     }
     
-    func tap(gesture:UITapGestureRecognizer){
+    func tap(_ gesture:UITapGestureRecognizer){
      circleLayer.position = CGPoint(x: 100, y: 100)
      circleLayer.radius = 100
 
