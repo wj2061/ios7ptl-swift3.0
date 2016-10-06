@@ -14,10 +14,10 @@ class BoxTransformViewController: UIViewController {
     var contentLayer = CATransformLayer()
     
     
-    func layer(x:CGFloat,y:CGFloat,z:CGFloat,color:UIColor,transform:CATransform3D)->CALayer{
+    func layer(_ x:CGFloat,y:CGFloat,z:CGFloat,color:UIColor,transform:CATransform3D)->CALayer{
         let layer = CALayer()
-        layer.backgroundColor = color.CGColor
-        layer.bounds = CGRectMake(0, 0, kSize, kSize)
+        layer.backgroundColor = color.cgColor
+        layer.bounds = CGRect(x: 0, y: 0, width: kSize, height: kSize)
         layer.position = CGPoint(x: x, y: y)
         layer.zPosition = z
         layer.transform = transform
@@ -25,7 +25,7 @@ class BoxTransformViewController: UIViewController {
         return layer
     }
     
-    func MakeSideRotation(x:CGFloat,y:CGFloat,z:CGFloat)->CATransform3D{
+    func MakeSideRotation(_ x:CGFloat,y:CGFloat,z:CGFloat)->CATransform3D{
          return  CATransform3DMakeRotation(CGFloat( M_PI_2 ), x, y, z)
     }
     
@@ -36,31 +36,31 @@ class BoxTransformViewController: UIViewController {
         contentLayer.transform = CATransform3DMakeTranslation(size.width/2, size.height/2, 0)
         view.layer.addSublayer(contentLayer)
         
-        layer(0, y: -kSize/2, z: 0, color: UIColor.redColor(), transform: MakeSideRotation(1, y: 0, z: 0))
+        layer(0, y: -kSize/2, z: 0, color: UIColor.red, transform: MakeSideRotation(1, y: 0, z: 0))
         
-        layer(0, y: kSize/2, z: 0, color: UIColor.greenColor(), transform: MakeSideRotation(1, y: 0, z: 0))
+        layer(0, y: kSize/2, z: 0, color: UIColor.green, transform: MakeSideRotation(1, y: 0, z: 0))
         
-        layer(kSize/2, y: 0, z: 0, color: UIColor.blueColor(), transform: MakeSideRotation(0 , y: 1, z: 0))
+        layer(kSize/2, y: 0, z: 0, color: UIColor.blue, transform: MakeSideRotation(0 , y: 1, z: 0))
         
-        layer(-kSize/2, y: 0, z: 0, color: UIColor.cyanColor(), transform: MakeSideRotation(0 , y: 1, z: 0))
+        layer(-kSize/2, y: 0, z: 0, color: UIColor.cyan, transform: MakeSideRotation(0 , y: 1, z: 0))
         
-        layer(0, y: 0, z: -kSize/2, color: UIColor.yellowColor(), transform: CATransform3DIdentity)
+        layer(0, y: 0, z: -kSize/2, color: UIColor.yellow, transform: CATransform3DIdentity)
         
-        layer(0, y: 0, z: kSize/2, color: UIColor.magentaColor(), transform: CATransform3DIdentity)
+        layer(0, y: 0, z: kSize/2, color: UIColor.magenta, transform: CATransform3DIdentity)
 
-        let g = UIPanGestureRecognizer(target: self, action: Selector("pan:"))
+        let g = UIPanGestureRecognizer(target: self, action: #selector(BoxTransformViewController.pan(_:)))
         view.addGestureRecognizer(g)
     }
     
-    func pan(gesture:UIPanGestureRecognizer){
+    func pan(_ gesture:UIPanGestureRecognizer){
         switch gesture.state {
-        case .Changed :
-            let  translation = gesture.translationInView(view)
+        case .changed :
+            let  translation = gesture.translation(in: view)
             var transform = view.layer.sublayerTransform
             transform = CATransform3DRotate(transform, kPanScale*translation.x, 0, 1, 0)
             transform = CATransform3DRotate(transform, -kPanScale*translation.y, 1, 0, 0)
             view.layer.sublayerTransform = transform
-            gesture.setTranslation(CGPointZero, inView: view)
+            gesture.setTranslation(CGPoint.zero, in: view)
             
         default :
             break
