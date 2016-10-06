@@ -12,17 +12,17 @@ class CircleView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        opaque = false
+        isOpaque = false
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        opaque = false
+        isOpaque = false
     }
     
-    override func drawRect(rect: CGRect) {
-         UIColor.redColor().setFill()
-         UIBezierPath(ovalInRect: bounds).fill()
+    override func draw(_ rect: CGRect) {
+         UIColor.red.setFill()
+         UIBezierPath(ovalIn: bounds).fill()
      }
 
 

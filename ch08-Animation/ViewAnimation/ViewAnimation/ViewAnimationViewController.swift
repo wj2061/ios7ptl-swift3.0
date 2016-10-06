@@ -17,20 +17,20 @@ class ViewAnimationViewController: UIViewController {
         circleView.center=CGPoint(x: 100, y: 40)
         view.addSubview(circleView)
         
-        let g = UITapGestureRecognizer(target: self, action:Selector("dropAnimate:"))
+        let g = UITapGestureRecognizer(target: self, action:#selector(ViewAnimationViewController.dropAnimate(_:)))
         view.addGestureRecognizer(g)
     }
 
-    func dropAnimate(recognizer:UIGestureRecognizer){
-        UIView.animateWithDuration(3, animations: { () -> Void in
-            recognizer.enabled=false
+    func dropAnimate(_ recognizer:UIGestureRecognizer){
+        UIView.animate(withDuration: 3, animations: { () -> Void in
+            recognizer.isEnabled=false
             self.circleView.center=CGPoint(x: 100, y: 300)
-            }) { (_) -> Void in
-                UIView.animateWithDuration(1, animations: { () -> Void in
+            }, completion: { (_) -> Void in
+                UIView.animate(withDuration: 1, animations: { () -> Void in
                     self.circleView.center=CGPoint(x: 250, y: 300)
                     }, completion: { (_) -> Void in
-                        recognizer.enabled=true
+                        recognizer.isEnabled=true
                 })
-        }
+        }) 
     }
 }
