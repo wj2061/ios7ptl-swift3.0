@@ -26,9 +26,11 @@ class ViewAnimationViewController: UIViewController {
             recognizer.isEnabled=false
             self.circleView.center=CGPoint(x: 100, y: 300)
             }, completion: { (_) -> Void in
+                
                 UIView.animate(withDuration: 1, animations: { () -> Void in
                     self.circleView.center=CGPoint(x: 250, y: 300)
                     }, completion: { (_) -> Void in
+                        
                         recognizer.isEnabled=true
                 })
         }) 
