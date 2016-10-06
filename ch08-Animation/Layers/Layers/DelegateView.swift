@@ -14,28 +14,22 @@ class DelegateView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layer.setNeedsDisplay()
-        print("1=\(layer.contentsScale)")
-//        layer.contentsScale=UIScreen.mainScreen().scale
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         layer.setNeedsDisplay()
-        layer.contentsScale=UIScreen.mainScreen().scale
     }
 
-    override func drawLayer(layer: CALayer, inContext ctx: CGContext) {
-        print("2=\(layer.contentsScale)")
-
- 
+    override func draw(_ layer: CALayer, in ctx: CGContext) {
         UIGraphicsPushContext(ctx)
-        UIColor.whiteColor().set()
+        UIColor.white.set()
         UIRectFill(layer.bounds)
         
-        let font  = UIFont.preferredFontForTextStyle(UIFontTextStyleHeadline)
-        let color = UIColor.blackColor()
+        let font  = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
+        let color = UIColor.black
         let style = NSMutableParagraphStyle()
-        style.alignment = NSTextAlignment.Center
+        style.alignment = NSTextAlignment.center
         
         let attribs = [NSFontAttributeName: font,
             NSForegroundColorAttributeName: color,
@@ -44,7 +38,7 @@ class DelegateView: UIView {
         
         let text  = NSAttributedString(string: "Pushing The Limits", attributes: attribs)
         
-        text.drawInRect(CGRectInset(layer.bounds, 10, 100))
+        text.draw(in: layer.bounds.insetBy(dx: 10, dy: 100))
         UIGraphicsPopContext()
     }
     
