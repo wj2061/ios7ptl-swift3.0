@@ -9,6 +9,8 @@
 import UIKit
 
 class LayerViewController: UIViewController {
+    
+    var delegateView = DelegateView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,13 +19,25 @@ class LayerViewController: UIViewController {
         view.layer.contentsGravity = kCAGravityCenter
         view.layer.contents = image?.cgImage
         
-        let g = UITapGestureRecognizer(target: self, action: #selector(LayerViewController.performFlip(_:)))
-        view.addGestureRecognizer(g)
+        let flipGesture = UITapGestureRecognizer(target: self, action: #selector(LayerViewController.performFlip(_:)))
+        view.addGestureRecognizer(flipGesture)
+        
+        delegateView.frame = view.frame
+        let flipBackGesture =  UITapGestureRecognizer(target: self, action: #selector(LayerViewController.performFlipback(_:)))
+        
+        delegateView.addGestureRecognizer(flipBackGesture)    
     }
     
     func performFlip(_ gesture:UIGestureRecognizer){
-        let delegateView = DelegateView(frame: view.frame)
         UIView.transition(from: view, to: delegateView, duration: 1, options: UIViewAnimationOptions.transitionFlipFromRight){ (_) -> Void in
         }
+    }
+    
+    
+    func performFlipback(_ gesture:UIGestureRecognizer){
+        UIView.transition(from: delegateView, to: view, duration: 1, options: UIViewAnimationOptions.transitionFlipFromRight){ (_) -> Void in
+        }
+
+        
     }
 }
