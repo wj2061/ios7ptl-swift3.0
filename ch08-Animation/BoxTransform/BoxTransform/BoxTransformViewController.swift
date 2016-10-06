@@ -13,6 +13,12 @@ class BoxTransformViewController: UIViewController {
     let kPanScale:CGFloat = -1.0/100.0
     var contentLayer = CATransformLayer()
     
+    var topLayer:CALayer?
+    var bottomLayer:CALayer?
+    var leftLayer:CALayer?
+    var rightLayer:CALayer?
+    var frontLayer:CALayer?
+    var backLayer:CALayer?
     
     func layer(_ x:CGFloat,y:CGFloat,z:CGFloat,color:UIColor,transform:CATransform3D)->CALayer{
         let layer = CALayer()
@@ -36,17 +42,17 @@ class BoxTransformViewController: UIViewController {
         contentLayer.transform = CATransform3DMakeTranslation(size.width/2, size.height/2, 0)
         view.layer.addSublayer(contentLayer)
         
-        layer(0, y: -kSize/2, z: 0, color: UIColor.red, transform: MakeSideRotation(1, y: 0, z: 0))
+        topLayer = layer(0, y: -kSize/2, z: 0, color: UIColor.red, transform: MakeSideRotation(1, y: 0, z: 0))
         
-        layer(0, y: kSize/2, z: 0, color: UIColor.green, transform: MakeSideRotation(1, y: 0, z: 0))
+        bottomLayer = layer(0, y: kSize/2, z: 0, color: UIColor.green, transform: MakeSideRotation(1, y: 0, z: 0))
         
-        layer(kSize/2, y: 0, z: 0, color: UIColor.blue, transform: MakeSideRotation(0 , y: 1, z: 0))
+        rightLayer = layer(kSize/2, y: 0, z: 0, color: UIColor.blue, transform: MakeSideRotation(0 , y: 1, z: 0))
         
-        layer(-kSize/2, y: 0, z: 0, color: UIColor.cyan, transform: MakeSideRotation(0 , y: 1, z: 0))
+        leftLayer = layer(-kSize/2, y: 0, z: 0, color: UIColor.cyan, transform: MakeSideRotation(0 , y: 1, z: 0))
         
-        layer(0, y: 0, z: -kSize/2, color: UIColor.yellow, transform: CATransform3DIdentity)
+        frontLayer = layer(0, y: 0, z: -kSize/2, color: UIColor.yellow, transform: CATransform3DIdentity)
         
-        layer(0, y: 0, z: kSize/2, color: UIColor.magenta, transform: CATransform3DIdentity)
+        backLayer = layer(0, y: 0, z: kSize/2, color: UIColor.magenta, transform: CATransform3DIdentity)
 
         let g = UIPanGestureRecognizer(target: self, action: #selector(BoxTransformViewController.pan(_:)))
         view.addGestureRecognizer(g)
