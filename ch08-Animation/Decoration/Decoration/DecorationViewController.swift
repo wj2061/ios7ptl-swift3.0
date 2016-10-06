@@ -15,8 +15,8 @@ class DecorationViewController: UIViewController {
         var layer = CALayer()
         layer.frame = CGRect(x: 100, y: 100, width: 100, height: 100)
         layer.cornerRadius = 10
-        layer.backgroundColor = UIColor.redColor().CGColor
-        layer.borderColor = UIColor.blueColor().CGColor
+        layer.backgroundColor = UIColor.red.cgColor
+        layer.borderColor = UIColor.blue.cgColor
         layer.borderWidth = 5
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 3, height: 3)
@@ -25,7 +25,7 @@ class DecorationViewController: UIViewController {
         layer = CALayer()
         layer.frame = CGRect(x: 150, y: 150, width: 100, height: 100)
         layer.cornerRadius = 10
-        layer.backgroundColor = UIColor.greenColor().CGColor
+        layer.backgroundColor = UIColor.green.cgColor
         layer.borderWidth = 5
         layer.shadowOpacity = 0.5
         layer.shadowOffset = CGSize(width: 3, height: 3)
