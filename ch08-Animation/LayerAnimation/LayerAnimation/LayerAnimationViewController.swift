@@ -33,6 +33,15 @@ class LayerAnimationViewController: UIViewController {
         
         squareView.center = CGPoint(x: 100, y: 250)
     }
+    
+    
+    @IBAction func reset(_ sender: AnyObject) {
+        squareLayer.frame = CGRect(x: 100, y: 100, width: 20, height: 20)
+        squareLayer.removeAnimation(forKey: "opacity")
+        squareLayer.opacity = 1
+
+        squareView.frame = CGRect(x: 200, y: 100, width: 20, height: 20)
+    }
 }
 
   private extension CALayer{
@@ -43,7 +52,6 @@ class LayerAnimationViewController: UIViewController {
          let anim = CABasicAnimation(keyPath: keypath)
          anim.duration = duration
          anim.beginTime = CACurrentMediaTime()+delay
-         anim.fillMode = kCAFillModeBoth
          anim.fromValue = presentation()?.value(forKey: keypath)
          anim.toValue = value
          anim.autoreverses = true
