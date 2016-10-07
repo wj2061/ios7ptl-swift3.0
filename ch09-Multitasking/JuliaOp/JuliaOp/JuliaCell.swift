@@ -51,8 +51,8 @@ class JuliaCell: UICollectionViewCell {
         
         srandom(UInt32(seed))
         
-        op.c = Double(arc4random()%100) / 100.0 + Double(arc4random()%100)/100.0.i
-        op.blowup = Double( arc4random() ) + Double( arc4random() ).i
+        op.c = Double(Int(arc4random())/Int.max) + Double(Int(arc4random())/Int.max).i
+        op.blowup = Double( arc4random() ) + 0.i
         op.rScale = Int(arc4random())%20
         op.gScale = Int(arc4random())%20
         op.bScale = Int(arc4random())%20

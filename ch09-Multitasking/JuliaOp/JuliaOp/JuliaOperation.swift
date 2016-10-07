@@ -36,12 +36,10 @@ class JuliaOperation: Operation {
     
     override func main(){
         let components:Int = 4
-//        var data = NSMutableData(length: width*height*components*sizeof(__uint8_t))!
-//        let bits = data.mutableBytes
-//        let bits = UnsafeMutablePointer<Int>(allocatingCapacity: width*height*components*MemoryLayout<__uint8_t>.size)
-        
+       
         let size = MemoryLayout<__uint8_t>.size
         let count = width*height*components*size
+        
         let bits = UnsafeMutablePointer<Int>.allocate(capacity:count)
         let kScale:Double = 1.5
         
@@ -51,19 +49,19 @@ class JuliaOperation: Operation {
                     return
                 }
                 var iteration = 0
-                let temx = (kScale*Double(x*2))/Double(width)-kScale
-                let temy = (kScale*Double(y*2))/Double(width)-kScale
+                let temx = (kScale*Double(x*2))/(Double(width)-kScale)
+                let temy = (kScale*Double(y*2))/(Double(width)-kScale)
 
                 var z:Complex64  = temx + temy.i
-                while z.abs<0.8 && iteration < 256{
-                    z=f(z,c: c)
+                while z.tuple.0 < blowup.tuple.0 && iteration < 256{
+                    z=self.f(z,c: self.c)
                     iteration += 1
                 }
                 let offset = y*width*components + x*components
                 
-                bits[offset+0] = iteration * rScale
-                bits[offset+1] = iteration * bScale
-                bits[offset+2] = iteration * gScale
+                bits[offset+0] = (iteration * rScale)
+                bits[offset+1] = (iteration * bScale)
+                bits[offset+2] = (iteration * gScale)
             }
         }
         let colorSpace = CGColorSpaceCreateDeviceRGB()
