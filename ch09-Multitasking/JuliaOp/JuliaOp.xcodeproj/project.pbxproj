@@ -11,10 +11,10 @@
 		07629DCB1BCD875000878193 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07629DC91BCD875000878193 /* Main.storyboard */; };
 		07629DCD1BCD875000878193 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07629DCC1BCD875000878193 /* Assets.xcassets */; };
 		07629DD01BCD875000878193 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07629DCE1BCD875000878193 /* LaunchScreen.storyboard */; };
-		07629DD81BCEF13E00878193 /* JuliaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD71BCEF13E00878193 /* JuliaCell.swift */; settings = {ASSET_TAGS = (); }; };
-		07629DDA1BCEF46000878193 /* JuliaOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD91BCEF46000878193 /* JuliaOperation.swift */; settings = {ASSET_TAGS = (); }; };
-		07629DDC1BCEF92400878193 /* complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDB1BCEF92400878193 /* complex.swift */; settings = {ASSET_TAGS = (); }; };
-		07629DDE1BCF1C3100878193 /* JuliaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDD1BCF1C3100878193 /* JuliaCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		07629DD81BCEF13E00878193 /* JuliaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD71BCEF13E00878193 /* JuliaCell.swift */; };
+		07629DDA1BCEF46000878193 /* JuliaOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DD91BCEF46000878193 /* JuliaOperation.swift */; };
+		07629DDC1BCEF92400878193 /* complex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDB1BCEF92400878193 /* complex.swift */; };
+		07629DDE1BCF1C3100878193 /* JuliaCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07629DDD1BCF1C3100878193 /* JuliaCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,11 +99,12 @@
 		07629DBA1BCD875000878193 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = wj;
 				TargetAttributes = {
 					07629DC11BCD875000878193 = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -186,8 +187,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -231,8 +234,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -251,6 +256,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -264,6 +270,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.JuliaOp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -275,6 +283,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.JuliaOp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

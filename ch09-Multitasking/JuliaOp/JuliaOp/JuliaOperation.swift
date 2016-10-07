@@ -9,7 +9,8 @@
 import UIKit
 import CoreGraphics;
 
-class JuliaOperation: NSOperation {
+
+class JuliaOperation: Operation {
 //    (long double)random()/LONG_MAX + I*(long double)random()/LONG_MAX;
 //Double(random()/LONG_MAX) + Double(random()/LONG_MAX).i
     var c :Complex64 = 0.0 + 0.i
@@ -27,22 +28,26 @@ class JuliaOperation: NSOperation {
     var image : UIImage?
     
     
-    func f(z:Complex64,c :Complex64)->Complex64{
+    func f(_ z:Complex64,c :Complex64)->Complex64{
         return z*z + c
     }
     
     override var description:String{ get{return "(\(c.real), \(c.imag))\(contentScaleFactor)"}}
     
     override func main(){
-        let components = 4
+        let components:Int = 4
 //        var data = NSMutableData(length: width*height*components*sizeof(__uint8_t))!
 //        let bits = data.mutableBytes
-        let bits = UnsafeMutablePointer<Int>.alloc(width*height*components*sizeof(__uint8_t))
+//        let bits = UnsafeMutablePointer<Int>(allocatingCapacity: width*height*components*MemoryLayout<__uint8_t>.size)
+        
+        let size = MemoryLayout<__uint8_t>.size
+        let count = width*height*components*size
+        let bits = UnsafeMutablePointer<Int>.allocate(capacity:count)
         let kScale:Double = 1.5
         
         for y in 0..<height{
             for x in 0..<width{
-                if self.cancelled{
+                if self.isCancelled{
                     return
                 }
                 var iteration = 0
@@ -52,7 +57,7 @@ class JuliaOperation: NSOperation {
                 var z:Complex64  = temx + temy.i
                 while z.abs<0.8 && iteration < 256{
                     z=f(z,c: c)
-                    iteration++
+                    iteration += 1
                 }
                 let offset = y*width*components + x*components
                 
@@ -62,11 +67,11 @@ class JuliaOperation: NSOperation {
             }
         }
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.NoneSkipLast.rawValue)
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipLast.rawValue)
         
-        let context = CGBitmapContextCreate(bits, width, height, 8, width * components, colorSpace, bitmapInfo.rawValue)
+        let context = CGContext(data: bits, width: width, height: height, bitsPerComponent: 8, bytesPerRow: width * components, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)
         
-        let cgImage = CGBitmapContextCreateImage(context)
-        image = UIImage(CGImage: cgImage!, scale: contentScaleFactor, orientation: UIImageOrientation.Up)
+        let cgImage = context?.makeImage()
+        image = UIImage(cgImage: cgImage!, scale: contentScaleFactor, orientation: UIImageOrientation.up)
     }
 }
