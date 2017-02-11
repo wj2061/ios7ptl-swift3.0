@@ -13,16 +13,16 @@ import MapKit
 
 class Spot: NSManagedObject , MKAnnotation {
     
-    class func spotWith(coordinate:CLLocationCoordinate2D,context:NSManagedObjectContext )->Spot {
-        let sp = NSEntityDescription.insertNewObjectForEntityForName("Spot", inManagedObjectContext: context) as! Spot
+    class func spotWith(_ coordinate:CLLocationCoordinate2D,context:NSManagedObjectContext )->Spot {
+        let sp = NSEntityDescription.insertNewObject(forEntityName: "Spot", into: context) as! Spot
         
-        let df =  NSDateFormatter()
-        df.dateStyle  = NSDateFormatterStyle.ShortStyle
-        df.timeStyle  = NSDateFormatterStyle.ShortStyle
+        let df =  DateFormatter()
+        df.dateStyle  = DateFormatter.Style.short
+        df.timeStyle  = DateFormatter.Style.short
         
-        sp.name = "New Spot \(df.stringFromDate(NSDate()))"
-        sp.longitude = coordinate.longitude
-        sp.latitude  = coordinate.latitude 
+        sp.name = "New Spot \(df.string(from: Date()))"
+        sp.longitude = NSNumber(value:coordinate.longitude)
+        sp.latitude  = NSNumber(value:coordinate.latitude)
         return sp
     }
     

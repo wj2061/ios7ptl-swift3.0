@@ -15,8 +15,8 @@ struct MapViewConst{
 }
 
 class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , MKMapViewDelegate{
-    private let manager = CLLocationManager()
-    var fetchedResultsController:NSFetchedResultsController?
+    fileprivate let manager = CLLocationManager()
+    var fetchedResultsController:NSFetchedResultsController<NSFetchRequestResult>?
     
     var managedObjectContext:NSManagedObjectContext?
     
@@ -24,14 +24,14 @@ class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.NotDetermined {
+        if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.notDetermined {
             manager.requestWhenInUseAuthorization()
         }
         
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
+        let app = UIApplication.shared.delegate as? AppDelegate
          managedObjectContext = app!.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "Spot")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spot")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         fetchedResultsController  =  NSFetchedResultsController(fetchRequest: request, managedObjectContext: managedObjectContext!, sectionNameKeyPath: nil, cacheName: nil)
         
@@ -44,7 +44,7 @@ class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , 
         
         
         mapView.showsUserLocation = true
-        let  lpgr = UILongPressGestureRecognizer(target: self, action: Selector("handleLongPress:"))
+        let  lpgr = UILongPressGestureRecognizer(target: self, action: #selector(MapViewController.handleLongPress(_:)))
         lpgr.minimumPressDuration = 1.5
         mapView.addGestureRecognizer(lpgr)
         mapView.delegate = self
@@ -59,21 +59,21 @@ class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , 
         }
     }
     
-    func handleLongPress(gesture:UILongPressGestureRecognizer){
-        if gesture.state != UIGestureRecognizerState.Began{
+    func handleLongPress(_ gesture:UILongPressGestureRecognizer){
+        if gesture.state != UIGestureRecognizerState.began{
             return
         }
         
-        let touchPoint = gesture.locationInView(mapView)
-        let touchMapCoordinate = mapView.convertPoint(touchPoint, toCoordinateFromView: mapView)
+        let touchPoint = gesture.location(in: mapView)
+        let touchMapCoordinate = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         let spot = Spot.spotWith(touchMapCoordinate, context: managedObjectContext!)
-        performSegueWithIdentifier("newSpot", sender: spot)
+        performSegue(withIdentifier: "newSpot", sender: spot)
     }
     
     //MARK: - MKMapViewDelegate
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
-        var an = mapView.dequeueReusableAnnotationViewWithIdentifier(MapViewConst.annotationIdentity)
+        var an = mapView.dequeueReusableAnnotationView(withIdentifier: MapViewConst.annotationIdentity)
         if an == nil {
             an = MKPinAnnotationView(annotation: annotation, reuseIdentifier: MapViewConst.annotationIdentity)
         }
@@ -81,19 +81,19 @@ class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , 
         return an!
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-       performSegueWithIdentifier("newSpot", sender: view.annotation)
+       performSegue(withIdentifier: "newSpot", sender: view.annotation)
         mapView.deselectAnnotation(view.annotation, animated: false)
     }
     
 
     //MARK : - NSFetchedResultsControllerDelegate
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type{
-        case .Insert:
+        case .insert:
             mapView.addAnnotation(anObject as! Spot)
-        case .Delete:
+        case .delete:
             mapView.removeAnnotation(anObject as! Spot)
         default:
             break
@@ -106,10 +106,10 @@ class MapViewController: UIViewController ,NSFetchedResultsControllerDelegate , 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "newSpot"{
             if let sp = sender as? Spot{
-                let VC = segue.destinationViewController as!DetailViewController
+                let VC = segue.destination as!DetailViewController
                 VC.spot = sp
             }
         }

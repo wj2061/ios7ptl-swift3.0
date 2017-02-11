@@ -12,35 +12,35 @@ import CoreData
 
 class MasterViewController: UITableViewController,NSFetchedResultsControllerDelegate,UIDataSourceModelAssociation {
     
-    lazy var fetchedResultsController:NSFetchedResultsController = {
-        let app = UIApplication.sharedApplication().delegate as? AppDelegate
+    lazy var fetchedResultsController:NSFetchedResultsController = { () -> NSFetchedResultsController<NSFetchRequestResult> in 
+        let app = UIApplication.shared.delegate as? AppDelegate
         let  context = app!.managedObjectContext
         
-        let request = NSFetchRequest(entityName: "Spot")
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Spot")
         request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: false)]
         request.fetchBatchSize = 20
         let  Controller  =  NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         
-        Controller.delegate = self
-        do {
-            try  Controller.performFetch()
-        }catch{
-            print("Unresolved error")
-        }
         return Controller
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchedResultsController.delegate = self;
+        do {
+            try  fetchedResultsController.performFetch()
+        }catch{
+            print("Unresolved error")
+        }
       
         
 
 
     }
     
-    func configureCell(cell:UITableViewCell,indexpath:NSIndexPath){
-        if let spot = fetchedResultsController.objectAtIndexPath(indexpath) as? Spot{
+    func configureCell(_ cell:UITableViewCell,indexpath:IndexPath){
+        if let spot = fetchedResultsController.object(at: indexpath) as? Spot{
             cell.textLabel?.text = spot.name
         }
     }
@@ -49,16 +49,16 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fetchedResultsController.sections![0].numberOfObjects ?? 0
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fetchedResultsController.sections![0].numberOfObjects
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         configureCell(cell, indexpath: indexPath)
 
         // Configure the cell...
@@ -67,16 +67,16 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     }
 
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
             let context = fetchedResultsController.managedObjectContext
-            context.deleteObject(fetchedResultsController.objectAtIndexPath(indexPath) as! NSManagedObject)
+            context.delete(fetchedResultsController.object(at: indexPath) as! NSManagedObject)
             
             
             // Delete the row from the data source
@@ -92,16 +92,16 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
     */
 
     // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return false
     }
 
     // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
-            let vc = segue.destinationViewController as! DetailViewController
+            let vc = segue.destination as! DetailViewController
             let indexPath = tableView.indexPathForSelectedRow!
-            let spot = fetchedResultsController.objectAtIndexPath(indexPath) as! Spot
+            let spot = fetchedResultsController.object(at: indexPath) as! Spot
             vc.spot = spot
         }
     }
@@ -115,26 +115,26 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
 //        }
 //    }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type{
-        case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
-        case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
-        case .Update:
-            let cell = tableView.cellForRowAtIndexPath(indexPath!)
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
+        case .update:
+            let cell = tableView.cellForRow(at: indexPath!)
             configureCell(cell!, indexpath: indexPath!)
-        case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: UITableViewRowAnimation.Fade)
+        case .move:
+            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
+            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
         }
     }
     
-    func controllerWillChangeContent(controller: NSFetchedResultsController) {
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.beginUpdates()
     }
     
-    func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
     }
     
@@ -142,22 +142,22 @@ class MasterViewController: UITableViewController,NSFetchedResultsControllerDele
   
 
     
-    func modelIdentifierForElementAtIndexPath(idx: NSIndexPath, inView view: UIView) -> String? {
-        print("\(__FUNCTION__)" )
-        if let spot = fetchedResultsController.objectAtIndexPath(idx) as? Spot{
-            return spot.objectID.URIRepresentation().absoluteString
+    func modelIdentifierForElement(at idx: IndexPath, in view: UIView) -> String? {
+        print("\(#function)" )
+        if let spot = fetchedResultsController.object(at: idx) as? Spot{
+            return spot.objectID.uriRepresentation().absoluteString
         }
         return nil
     }
     
-    func indexPathForElementWithModelIdentifier(identifier: String, inView view: UIView) -> NSIndexPath? {
-        print("\(__FUNCTION__)" )
-        let numbersOfRows = tableView.numberOfRowsInSection(0)
+    func indexPathForElement(withModelIdentifier identifier: String, in view: UIView) -> IndexPath? {
+        print("\(#function)" )
+        let numbersOfRows = tableView.numberOfRows(inSection: 0)
         
         for row in 0..<numbersOfRows{
-            let indexpath = NSIndexPath(forRow: row, inSection: 0)
-           let spot = fetchedResultsController.objectAtIndexPath(indexpath) as! Spot
-            if spot.objectID.URIRepresentation().absoluteURL == identifier{
+            let indexpath = IndexPath(row: row, section: 0)
+           let spot = fetchedResultsController.object(at: indexpath) as! Spot
+            if spot.objectID.uriRepresentation().absoluteString == identifier{
                 return indexpath
             }
         }

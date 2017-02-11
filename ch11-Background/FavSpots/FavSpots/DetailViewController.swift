@@ -20,31 +20,31 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.dismissKeyboard(_:)))
         view.addGestureRecognizer(tap)
         
-        let  g = UITapGestureRecognizer(target: self, action: Selector("handleNoteTap:"))
+        let  g = UITapGestureRecognizer(target: self, action: #selector(DetailViewController.handleNoteTap(_:)))
         noteTextView.addGestureRecognizer(g)
 
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         spot?.name = nameTextField.text
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateUI()
     }
     
     //MARK: - gesture method
-    func dismissKeyboard(gesture:UITapGestureRecognizer){
+    func dismissKeyboard(_ gesture:UITapGestureRecognizer){
         nameTextField.resignFirstResponder()
     }
     
-    func handleNoteTap(gesture:UITapGestureRecognizer){
-        performSegueWithIdentifier("editNote", sender: self)
+    func handleNoteTap(_ gesture:UITapGestureRecognizer){
+        performSegue(withIdentifier: "editNote", sender: self)
     }
     
     func updateUI(){
@@ -60,30 +60,30 @@ class DetailViewController: UIViewController {
     
     
     //MARK:- Unitily
-    func roundTo(dou:Double)->Double{
+    func roundTo(_ dou:Double)->Double{
         return round(dou*100)/100.0
     }
     
-    override func encodeRestorableStateWithCoder(coder: NSCoder) {
-        print("\(__FUNCTION__)")
-        super.encodeRestorableStateWithCoder(coder)
+    override func encodeRestorableState(with coder: NSCoder) {
+        print("\(#function)")
+        super.encodeRestorableState(with: coder)
         if spot != nil{
             coder.ptl_encodeSpot(spot!, key: kSpotConstant.spotKey)
         }
     }
     
-    override func decodeRestorableStateWithCoder(coder: NSCoder) {
-        print("\(__FUNCTION__)")
-        super.decodeRestorableStateWithCoder(coder)
+    override func decodeRestorableState(with coder: NSCoder) {
+        print("\(#function)")
+        super.decodeRestorableState(with: coder)
         spot =  coder.ptl_decodeSpotForKey(kSpotConstant.spotKey)
     }
     
     
     // MARK: - Navigation
 
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "editNote" {
-            let vc = segue.destinationViewController as! TextEditViewController
+            let vc = segue.destination as! TextEditViewController
             vc.spot = spot
         }
     }

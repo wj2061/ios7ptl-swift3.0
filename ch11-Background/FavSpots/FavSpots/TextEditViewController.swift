@@ -27,29 +27,29 @@ class TextEditViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configureView()
         textView.becomeFirstResponder()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         spot?.notes = textView.text
     }
 
     
-    override func encodeRestorableStateWithCoder(coder: NSCoder) {
-        print("\(__FUNCTION__)")
-        super.encodeRestorableStateWithCoder(coder)
+    override func encodeRestorableState(with coder: NSCoder) {
+        print("\(#function)")
+        super.encodeRestorableState(with: coder)
         if spot != nil{
         coder.ptl_encodeSpot(spot!, key: kSpotConstant.spotKey)
         }
     }
     
-    override func decodeRestorableStateWithCoder(coder: NSCoder) {
-        print("\(__FUNCTION__)")
-        super.decodeRestorableStateWithCoder(coder)
+    override func decodeRestorableState(with coder: NSCoder) {
+        print("\(#function)")
+        super.decodeRestorableState(with: coder)
         spot =  coder.ptl_decodeSpotForKey(kSpotConstant.spotKey)
     }
     

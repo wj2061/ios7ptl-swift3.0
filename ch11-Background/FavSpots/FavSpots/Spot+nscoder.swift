@@ -10,19 +10,19 @@ import Foundation
 import UIKit
 
 extension NSCoder{
-    func ptl_encodeSpot(spot:Spot,key:String){
+    func ptl_encodeSpot(_ spot:Spot,key:String){
         let spotID = spot.objectID
-        encodeObject(spotID.URIRepresentation(), forKey: key)
+        encode(spotID.uriRepresentation(), forKey: key)
     }
     
-    func ptl_decodeSpotForKey(key:String)->Spot?{
+    func ptl_decodeSpotForKey(_ key:String)->Spot?{
         var spot:Spot? = nil
-        if let spotURI = decodeObjectForKey(key)  as? NSURL{
-            let app = UIApplication.sharedApplication().delegate as? AppDelegate
+        if let spotURI = decodeObject(forKey: key)  as? URL{
+            let app = UIApplication.shared.delegate as? AppDelegate
             let context = app!.managedObjectContext
             
-            if   let  spotID = context.persistentStoreCoordinator?.managedObjectIDForURIRepresentation(spotURI){
-                spot = context.objectWithID(spotID) as? Spot
+            if   let  spotID = context.persistentStoreCoordinator?.managedObjectID(forURIRepresentation: spotURI){
+                spot = context.object(with: spotID) as? Spot
             }
         }
         return spot
