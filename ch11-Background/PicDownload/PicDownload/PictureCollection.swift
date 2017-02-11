@@ -20,50 +20,50 @@ class PictureCollection:NSObject{
     
     
     func updatePictures(){
-        let url = FlickrFetcher.URLforRecentGeoreferencedPhotos()
-       downloadManager.fetchDataAtURL(url) { (data, error ) -> Void in
+        let url = FlickrFetcher.urLforRecentGeoreferencedPhotos()
+       downloadManager.fetchDataAtURL(url!) { (data, error ) -> Void in
         if let err = error {
             print("Error downloading metadata:\(err )")
         }else{
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.updatePicturesWithMetadata(data!)
             })
         }
         }
     }
     
-    func documentURLForPath(path:String)->NSURL{
-        return cPTLDownloadManager.documentDirectoryURL.URLByAppendingPathComponent(path)
+    func documentURLForPath(_ path:String)->URL{
+        return cPTLDownloadManager.documentDirectoryURL.appendingPathComponent(path)
     }
     
-    func updatePicturesWithMetadata(data:NSData){
-        print("\(__FUNCTION__)")
-        willChangeValueForKey("count")
+    func updatePicturesWithMetadata(_ data:Data){
+        print("\(#function)")
+        willChangeValue(forKey: "count")
         do {
-             let dict = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-             let pictureInfos = dict.valueForKeyPath(FLICKR_RESULTS_PHOTOS) as! NSArray
+             let dict = try JSONSerialization.jsonObject(with: data, options: [])
+             let pictureInfos = (dict as AnyObject).value(forKeyPath: FLICKR_RESULTS_PHOTOS) as! NSArray
             for pictureInfo in pictureInfos{
-                let picURL = FlickrFetcher.URLforPhoto(pictureInfo as!  [NSObject : AnyObject], format: FlickrPhotoFormatOriginal)
+                let picURL = FlickrFetcher.urLforPhoto(pictureInfo as!  [AnyHashable: Any], format: FlickrPhotoFormatOriginal)
               
-                let picture = Picture(RemoteURL: picURL, manager: downloadManager)
+                let picture = Picture(RemoteURL: picURL!, manager: downloadManager)
                 pictures.append(picture )
                 print(pictures.count)
             }
         }catch{
             print("Error parsing metadata")
         }
-        didChangeValueForKey("count")
+        didChangeValue(forKey: "count")
     }
     
-    func pictureAtIndex(index:Int)->Picture{
+    func pictureAtIndex(_ index:Int)->Picture{
         return pictures[index]
     }
     
     func reset(){
-        let fm = NSFileManager.defaultManager()
+        let fm = FileManager.default
             for pic in pictures{
                 do{
-                try fm.removeItemAtURL(pic.localURL())
+                try fm.removeItem(at: pic.localURL() as URL)
                 }catch{}
             }
     }

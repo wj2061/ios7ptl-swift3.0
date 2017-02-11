@@ -11,12 +11,12 @@
 		07F8002A1BDB8895001897B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07F800281BDB8895001897B2 /* Main.storyboard */; };
 		07F8002C1BDB8895001897B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07F8002B1BDB8895001897B2 /* Assets.xcassets */; };
 		07F8002F1BDB8895001897B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 07F8002D1BDB8895001897B2 /* LaunchScreen.storyboard */; };
-		07F8003F1BDB89AA001897B2 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F8003E1BDB89AA001897B2 /* FlickrFetcher.m */; settings = {ASSET_TAGS = (); }; };
-		07F800471BDB8D39001897B2 /* PictureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F800461BDB8D39001897B2 /* PictureCollection.swift */; settings = {ASSET_TAGS = (); }; };
-		07F800491BDBB67C001897B2 /* PTLDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F800481BDBB67C001897B2 /* PTLDownloadManager.swift */; settings = {ASSET_TAGS = (); }; };
-		07F8004B1BDBD28E001897B2 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004A1BDBD28E001897B2 /* Picture.swift */; settings = {ASSET_TAGS = (); }; };
-		07F8004D1BDBE51D001897B2 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004C1BDBE51D001897B2 /* MainCollectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		07F8004F1BDBED0B001897B2 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004E1BDBED0B001897B2 /* PictureCell.swift */; settings = {ASSET_TAGS = (); }; };
+		07F8003F1BDB89AA001897B2 /* FlickrFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F8003E1BDB89AA001897B2 /* FlickrFetcher.m */; };
+		07F800471BDB8D39001897B2 /* PictureCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F800461BDB8D39001897B2 /* PictureCollection.swift */; };
+		07F800491BDBB67C001897B2 /* PTLDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F800481BDBB67C001897B2 /* PTLDownloadManager.swift */; };
+		07F8004B1BDBD28E001897B2 /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004A1BDBD28E001897B2 /* Picture.swift */; };
+		07F8004D1BDBE51D001897B2 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004C1BDBE51D001897B2 /* MainCollectionViewController.swift */; };
+		07F8004F1BDBED0B001897B2 /* PictureCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07F8004E1BDBED0B001897B2 /* PictureCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 		07F8003C1BDB89AA001897B2 /* FlickrAPIKey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrAPIKey.h; sourceTree = "<group>"; };
 		07F8003D1BDB89AA001897B2 /* FlickrFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrFetcher.h; sourceTree = "<group>"; };
 		07F8003E1BDB89AA001897B2 /* FlickrFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrFetcher.m; sourceTree = "<group>"; };
-		07F800451BDB8BA6001897B2 /* Flicker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Flicker-Bridging-Header.h"; sourceTree = "<group>"; };
+		07F800451BDB8BA6001897B2 /* Flicker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Flicker-Bridging-Header.h"; path = "Flickr Fetcher/Flicker-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		07F800461BDB8D39001897B2 /* PictureCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PictureCollection.swift; sourceTree = "<group>"; };
 		07F800481BDBB67C001897B2 /* PTLDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PTLDownloadManager.swift; sourceTree = "<group>"; };
 		07F8004A1BDBD28E001897B2 /* Picture.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
@@ -119,11 +119,13 @@
 		07F800191BDB8895001897B2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = wj;
 				TargetAttributes = {
 					07F800201BDB8895001897B2 = {
 						CreatedOnToolsVersion = 7.0.1;
+						DevelopmentTeam = P3B969BC6Y;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -208,8 +210,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -253,8 +257,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -273,6 +279,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = 2;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -282,11 +289,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P3B969BC6Y;
 				INFOPLIST_FILE = PicDownload/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.PicDownload;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/h/Documents/ios7ptl-swift2.0/ch11-Background/PicDownload/Flickr Fetcher/Flicker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/Flickr Fetcher/Flicker-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -294,11 +304,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = P3B969BC6Y;
 				INFOPLIST_FILE = PicDownload/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wj.PicDownload;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/h/Documents/ios7ptl-swift2.0/ch11-Background/PicDownload/Flickr Fetcher/Flicker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "${PROJECT_DIR}/Flickr Fetcher/Flicker-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -321,6 +334,7 @@
 				07F800351BDB8895001897B2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

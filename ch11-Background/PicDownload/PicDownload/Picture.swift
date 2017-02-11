@@ -9,27 +9,27 @@
 import Foundation
 import UIKit
 class Picture:NSObject{
-    var remoteURL:NSURL
+    var remoteURL:URL
     var image:UIImage?
     var downloadManager:PTLDownloadManager
     
-    init(RemoteURL:NSURL,manager:PTLDownloadManager){
+    init(RemoteURL:URL,manager:PTLDownloadManager){
         downloadManager = manager
         remoteURL = RemoteURL
         super.init()
-        if !NSFileManager.defaultManager().fileExistsAtPath(manager.localURLForRemoteURL(RemoteURL).path!){
+        if !FileManager.default.fileExists(atPath: manager.localURLForRemoteURL(RemoteURL).path){
             downloadManager.downloadURLToDocuments(RemoteURL)
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("downloadManagerDidDownloadFile:"), name: cPTLDownloadManager.DidDownloadFileNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(Picture.downloadManagerDidDownloadFile(_:)), name: NSNotification.Name(rawValue: cPTLDownloadManager.DidDownloadFileNotification), object: nil)
         }
         reloadImage()
     }
     
     deinit{
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func downloadManagerDidDownloadFile(note:NSNotification){
-        if let dict = note.userInfo as? [String:NSURL]{
+    func downloadManagerDidDownloadFile(_ note:Notification){
+        if let dict = note.userInfo as? [String:URL]{
             let url = dict[cPTLDownloadManager.SourceURLKey]
             if  url == remoteURL{
                 reloadImage()
@@ -38,15 +38,15 @@ class Picture:NSObject{
     }
     
     func reloadImage(){
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { () -> Void in
-            let image = UIImage(contentsOfFile: self.localURL().path!)
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.global(qos:.default).async { () -> Void in
+            let image = UIImage(contentsOfFile: self.localURL().path)
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.image = image
             })
         }
     }
     
-    func localURL()->NSURL{
+    func localURL()->URL{
       return  downloadManager.localURLForRemoteURL(remoteURL)
     }
     

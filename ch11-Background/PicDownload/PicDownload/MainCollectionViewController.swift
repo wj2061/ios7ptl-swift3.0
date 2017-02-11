@@ -17,12 +17,12 @@ class MainCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         pictureCollection.addObserver(self, forKeyPath: "count", options: [], context: nil)
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         pictureCollection.removeObserver(self, forKeyPath: "count")
     }
@@ -39,31 +39,32 @@ class MainCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pictureCollection.count
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! PictureCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PictureCell
         cell.picture = pictureCollection.pictureAtIndex(indexPath.row)
         return cell
     }
 
     
-    @IBAction func reset(sender: UIBarButtonItem) {
+    @IBAction func reset(_ sender: UIBarButtonItem) {
         pictureCollection.reset()
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         print("observe")
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            collectionView?.reloadData()
+        weak var weakself = self;
+        DispatchQueue.main.async { () -> Void in
+            weakself?.collectionView?.reloadData()
         }
     }
     // MARK: UICollectionViewDelegate

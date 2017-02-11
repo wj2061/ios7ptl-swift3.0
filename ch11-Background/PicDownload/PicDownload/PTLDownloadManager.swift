@@ -8,23 +8,23 @@
 
 import Foundation
 
-class PTLDownloadManager:NSObject, NSURLSessionDelegate{
+class PTLDownloadManager:NSObject, URLSessionDelegate{
     var backgroundSessionCompletionHandler:(()->Void)?
     
     static var downloadManagers = [String:PTLDownloadManager]()
   
 
     
-    private let foregroundSession = NSURLSession.sharedSession()
-    private var backgroundSession:NSURLSession!
+    fileprivate let foregroundSession = Foundation.URLSession.shared
+    fileprivate var backgroundSession:Foundation.URLSession!
     
     init(identifier:String){
         super.init()
-        let configuration = NSURLSessionConfiguration.backgroundSessionConfigurationWithIdentifier(identifier)
-        backgroundSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        let configuration = URLSessionConfiguration.background(withIdentifier: identifier)
+        backgroundSession = Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: nil)
     }
     
-    class func downloadManagerWithIdentifier(identifier:String)->PTLDownloadManager {
+    class func downloadManagerWithIdentifier(_ identifier:String)->PTLDownloadManager {
         var downloadManager = downloadManagers[identifier]
         if downloadManager == nil {
           downloadManager =  PTLDownloadManager(identifier: identifier)
@@ -33,45 +33,46 @@ class PTLDownloadManager:NSObject, NSURLSessionDelegate{
         return downloadManager!
     }
     
-    func fetchDataAtURL(url:NSURL,handle:(NSData?,NSError?)->Void){
-        print("\(__FUNCTION__):\(url)")
+    func fetchDataAtURL(_ url:URL,handle:@escaping (Data?,NSError?)->Void){
+        print("\(#function):\(url)")
       
-        let task = foregroundSession.dataTaskWithURL(url) { (data , response , error ) -> Void in
-            handle(data,error )
+        let task = foregroundSession.dataTask(with: url) { (data: Data?, response: URLResponse?, error: Error?) in
+            handle(data, error as NSError?);
         }
+ 
         task.resume()
-        print("exit:\(__FUNCTION__)")
+        print("exit:\(#function)")
     }
     
-    func downloadURLToDocuments(url:NSURL){
-        print("\(__FUNCTION__):\(url)")
-        let task = backgroundSession.downloadTaskWithURL(url)
+    func downloadURLToDocuments(_ url:URL){
+        print("\(#function):\(url)")
+        let task = backgroundSession.downloadTask(with: url)
         task.resume()
     }
     
-    func localURLForRemoteURL(url:NSURL)->NSURL{
+    func localURLForRemoteURL(_ url:URL)->URL{
         let filename = url.lastPathComponent
-        let lcurl = cPTLDownloadManager.documentDirectoryURL.URLByAppendingPathComponent(filename!)
+        let lcurl = cPTLDownloadManager.documentDirectoryURL.appendingPathComponent(filename)
         return lcurl
     }
     
-    func moveFileFromLocation(url:NSURL,task:NSURLSessionDownloadTask){
-        let sourceURL = task.originalRequest?.URL
+    func moveFileFromLocation(_ url:URL,task:URLSessionDownloadTask){
+        let sourceURL = task.originalRequest?.url
         let destURL = localURLForRemoteURL(sourceURL!)
         
-        let fm = NSFileManager.defaultManager()
-        if fm.fileExistsAtPath(destURL.path!){
+        let fm = FileManager.default
+        if fm.fileExists(atPath: destURL.path){
             do {
-                try  fm.removeItemAtURL(destURL)
+                try  fm.removeItem(at: destURL)
             }catch{
                 print("Could not delete file")
             }
         }
         
         do {
-            try fm.moveItemAtURL(url, toURL: destURL)
-            let center = NSNotificationCenter.defaultCenter()
-            center.postNotificationName(cPTLDownloadManager.DidDownloadFileNotification,
+            try fm.moveItem(at: url, to: destURL)
+            let center = NotificationCenter.default
+            center.post(name: Notification.Name(rawValue: cPTLDownloadManager.DidDownloadFileNotification),
                                        object: self,
                                       userInfo: [cPTLDownloadManager.SourceURLKey:sourceURL!,
                                                  cPTLDownloadManager.DestinationURLKey:destURL])
@@ -81,12 +82,12 @@ class PTLDownloadManager:NSObject, NSURLSessionDelegate{
         }
     }
     
-    func  URLSession(session: NSURLSession,  downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL){
-        print("\(__FUNCTION__)\(location)")
+    func  URLSession(_ session: Foundation.URLSession,  downloadTask: URLSessionDownloadTask, didFinishDownloadingToURL location: URL){
+        print("\(#function)\(location)")
         moveFileFromLocation(location, task: downloadTask)
     }
     
-    func URLSession(session: NSURLSession,  task: NSURLSessionTask, didCompleteWithError error: NSError?){
+    func URLSession(_ session: Foundation.URLSession,  task: URLSessionTask, didCompleteWithError error: NSError?){
         backgroundSession.getTasksWithCompletionHandler { (datatasks , uploadtasks, downloadtasks ) -> Void in
             let count = datatasks.count + uploadtasks.count + downloadtasks.count
             if count == 0{
@@ -101,7 +102,7 @@ class PTLDownloadManager:NSObject, NSURLSessionDelegate{
 }
 
 protocol PTLDownloadManagerDelegate{
-    func downloadManager(manager: PTLDownloadManager,FromURL:NSURL, toURL:NSURL)
+    func downloadManager(_ manager: PTLDownloadManager,FromURL:URL, toURL:URL)
 }
 
 struct cPTLDownloadManager{
@@ -109,7 +110,7 @@ struct cPTLDownloadManager{
     static let SourceURLKey = "PTLDownloadManagerSourceURLKey"
     static let DestinationURLKey = "PTLDownloadManagerDestinationURLKey"
     static let Identifier = "com.iosptl.PicDownloader.PictureCollection"
-    static let documentDirectoryURL = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!)
+    static let documentDirectoryURL = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true).first!)
 }
 
 
