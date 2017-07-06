@@ -60,7 +60,6 @@ class SCTViewController: UIViewController {
                                                                height:blurLayer.frame.size.height*scale))
         {
             image = UIImage(cgImage: imageref)
-//            image = image!.applyBlur(withRadius: 50, tintColor: UIColor(red:0, green:1, blue:0, alpha:0.1), saturationDeltaFactor: 2, maskImage: nil)
             image = image!.applyBlur(blurRadius:50, tintColor:UIColor(red:0, green:1, blue:0, alpha:0.1),  saturationDeltaFactor:2, maskImage: nil)
             self.blurLayer.contents = image!.cgImage
         }
