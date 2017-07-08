@@ -40,7 +40,7 @@ class MkCoverFlowLayout: UICollectionViewFlowLayout {
                         let zoom = 1 + Constant.zoomFactor*(1-abs( normalizeddistance))
                         var rotationAndPerspectiveTransform = CATransform3DIdentity
                         rotationAndPerspectiveTransform.m34 = 1/(-500.0)
-                        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, normalizeddistance*CGFloat(M_PI_4), 0, 1, 0)
+                        rotationAndPerspectiveTransform = CATransform3DRotate(rotationAndPerspectiveTransform, normalizeddistance*CGFloat(Double.pi/4), 0, 1, 0)
                         let zoomTranform = CATransform3DMakeScale(zoom, zoom, 0)
                         attribute.transform3D = CATransform3DConcat(zoomTranform, rotationAndPerspectiveTransform)
                         attribute.zIndex = Int(abs(normalizeddistance)*10.0)
