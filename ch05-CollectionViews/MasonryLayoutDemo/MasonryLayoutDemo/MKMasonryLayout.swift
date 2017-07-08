@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MKMasonryViewLayoutDelegate:NSObjectProtocol{
+protocol MKMasonryViewLayoutDelegate:UICollectionViewDelegate{
     func collectionView(_ collectionView:UICollectionView,layout:MKMasonryLayout,heightForItemAtIndexPath indexPath:IndexPath)->CGFloat
 }
 
