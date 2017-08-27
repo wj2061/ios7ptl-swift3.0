@@ -1,6 +1,10 @@
 use_frameworks!
 platform :ios, ‘8.0’ #手机的系统
 
+target 'iHotelApp' do
+#
+pod 'Alamofire’, '~> 4.5.0’
+pod 'SwiftyJSON', '~> 3.1.4’
+#
+end
 
-pod 'Alamofire', '~> 3.0'
-pod 'SwiftyJSON'

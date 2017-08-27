@@ -14,7 +14,7 @@ class iHotelAppViewController: UIViewController {
     
     var token = ""{
         didSet{
-            NSUserDefaults.standardUserDefaults().setValue(token, forKey: "token")
+            UserDefaults.standard.setValue(token, forKey: "token")
         }
     }
 
@@ -29,19 +29,20 @@ class iHotelAppViewController: UIViewController {
         let user = "mugunth"
         let password = "mugunth"
         
-        let credentialData = "\(user):\(password)".dataUsingEncoding(NSUTF8StringEncoding)!
-        let base64Credentials = credentialData.base64EncodedStringWithOptions([])
+        let credentialData = "\(user):\(password)".data(using: String.Encoding.utf8)!
+        let base64Credentials = credentialData.base64EncodedString(options: [])
         
         let headers = ["Authorization": "Basic \(base64Credentials)"]
         
-        Alamofire.request(.GET, url, headers: headers)
+        
+        Alamofire.request(url, headers: headers)
             .responseJSON { response in
                 print(response.description)
              let json = JSON(data: response.data!)
                 self.token = json["accessToken"].string!
-                let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil ))
-                self.presentViewController(alert, animated: true , completion: nil)
+                let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
+                self.present(alert, animated: true , completion: nil)
         }
     }
 
@@ -52,12 +53,12 @@ class iHotelAppViewController: UIViewController {
         let url = "http://restfulengine.iosptl.com/404"
         let headers = ["Authorization": "Token token=\(token)"]
         
-        Alamofire.request(.GET, url, headers: headers).responseJSON { (response ) -> Void in
+        Alamofire.request(url, headers: headers).responseJSON { (response ) -> Void in
             if let error =  response.result.error {
             
-            let alert = UIAlertController(title: "Alert", message: "\(error.localizedDescription)", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil ))
-            self.presentViewController(alert, animated: true , completion: nil)
+            let alert = UIAlertController(title: "Alert", message: "\(error.localizedDescription)", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
+            self.present(alert, animated: true , completion: nil)
             }
         }
     }

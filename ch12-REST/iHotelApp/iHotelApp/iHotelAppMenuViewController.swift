@@ -13,8 +13,8 @@ import SwiftyJSON
 class iHotelAppMenuViewController: UITableViewController {
     var token:String  {
         get{
-            let userDefault = NSUserDefaults.standardUserDefaults()
-            return userDefault.stringForKey("token") ?? ""
+            let userDefault = UserDefaults.standard
+            return userDefault.string(forKey: "token") ?? ""
         }
     }
     
@@ -25,12 +25,12 @@ class iHotelAppMenuViewController: UITableViewController {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         let url = "http://restfulengine.iosptl.com/menuitem"
         let headers = ["Authorization": "Token token=\(token)"]
-        
-        Alamofire.request(.GET, url, headers: headers).responseJSON { (response ) -> Void in
+                
+        Alamofire.request(url, headers: headers).responseJSON { (response ) -> Void in
             print(response.description)
             let json = JSON(data: response.data!)
             self.menuItems = json["menuitems"].array!
@@ -42,16 +42,16 @@ class iHotelAppMenuViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return menuItems.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = menuItems[indexPath.row]["name"].string
         return cell
     }
