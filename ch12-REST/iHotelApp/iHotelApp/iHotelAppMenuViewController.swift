@@ -32,6 +32,14 @@ class iHotelAppMenuViewController: UITableViewController {
                 
         Alamofire.request(url, headers: headers).responseJSON { (response ) -> Void in
             print(response.description)
+            
+            if let error = response.error{
+                let alert = UIAlertController(title: "error", message: error.localizedDescription, preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
+                self.present(alert, animated: true , completion: nil)
+                return;
+            }
+            
             let json = JSON(data: response.data!)
             self.menuItems = json["menuitems"].array!
             self.tableView.reloadData()
