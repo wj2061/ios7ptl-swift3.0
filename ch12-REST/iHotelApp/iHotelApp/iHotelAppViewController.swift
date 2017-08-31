@@ -43,13 +43,15 @@ class iHotelAppViewController: UIViewController {
                     alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
                     self.present(alert, animated: true , completion: nil)
                     return;
+                }else if let data = response.data{
+                    let json = JSON(data: data)
+                    self.token = json["accessToken"].string!
+                    let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
+                    self.present(alert, animated: true , completion: nil)
+                    
                 }
-                
-             let json = JSON(data: response.data!)
-                self.token = json["accessToken"].string!
-                let alert = UIAlertController(title: "Success", message: "Login successful", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
-                self.present(alert, animated: true , completion: nil)
+
         }
     }
 

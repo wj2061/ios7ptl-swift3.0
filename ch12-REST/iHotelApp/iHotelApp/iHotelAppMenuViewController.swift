@@ -38,11 +38,13 @@ class iHotelAppMenuViewController: UITableViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil ))
                 self.present(alert, animated: true , completion: nil)
                 return;
+            }else if let data = response.data{
+                let json = JSON(data: data)
+                self.menuItems = json["menuitems"].array!
+                self.tableView.reloadData()
             }
             
-            let json = JSON(data: response.data!)
-            self.menuItems = json["menuitems"].array!
-            self.tableView.reloadData()
+            
         }
     }
 
