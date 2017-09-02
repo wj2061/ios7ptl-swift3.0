@@ -28,33 +28,33 @@ class ViewController: UIViewController,CBCentralManagerDelegate,CBPeripheralDele
     
     
    //MARK: - CBCentralManagerDelegate
-    func centralManagerDidUpdateState(central: CBCentralManager) {
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
         switch central.state{
-        case .PoweredOff:
-            let alert = UIAlertController(title: "Bluetooth Turned Off", message: "Turn on bluetooth and try again", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil ))
-            presentViewController(alert, animated: true, completion: nil)
-        case .Unsupported:
-            let alert = UIAlertController(title: "Bluetooth LE not available on this device", message: "TThis is not a iPhone 4S+ device", preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil ))
-            presentViewController(alert, animated: true, completion: nil)
-        case .PoweredOn:
-            centralManager.scanForPeripheralsWithServices(nil , options: nil)
+        case .poweredOff:
+            let alert = UIAlertController(title: "Bluetooth Turned Off", message: "Turn on bluetooth and try again", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil ))
+            present(alert, animated: true, completion: nil)
+        case .unsupported:
+            let alert = UIAlertController(title: "Bluetooth LE not available on this device", message: "TThis is not a iPhone 4S+ device", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil ))
+            present(alert, animated: true, completion: nil)
+        case .poweredOn:
+            centralManager.scanForPeripherals(withServices: nil , options: nil)
             print("start scan")
         default:
             print("\(central.state.rawValue)")
         }
     }
     
-    func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if !peripherals.contains(peripheral) {
             statusLabel.text = "Connecting to Peripheral"
             peripheral.delegate = self
-            central.connectPeripheral(peripheral, options: nil)
+            central.connect(peripheral, options: nil)
         }
     }
     
-    func centralManager(central: CBCentralManager, didConnectPeripheral peripheral: CBPeripheral) {
+    func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         statusLabel.text = "Discovering Services…"
         peripheral.discoverServices(nil )
     }
@@ -68,12 +68,12 @@ class ViewController: UIViewController,CBCentralManagerDelegate,CBPeripheralDele
 //    }
     
     //MARK: - CBPeripheralDelegate
-    func peripheral(peripheral: CBPeripheral, didDiscoverServices error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverServices error: Error?) {
         statusLabel.text = "Discovering characteristics…"
         var found = false
         for service in peripheral.services!{
-            if service.UUID == CBUUID(string: "F000AA00-0451-4000-B000-000000000000"){
-                peripheral.discoverCharacteristics(nil , forService: service)
+            if service.uuid == CBUUID(string: "F000AA00-0451-4000-B000-000000000000"){
+                peripheral.discoverCharacteristics(nil , for: service)
                 found = true
             }
         }
@@ -82,37 +82,39 @@ class ViewController: UIViewController,CBCentralManagerDelegate,CBPeripheralDele
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         statusLabel.text = "Reading temperature…"
         for character in service.characteristics!{
-            if character.UUID == "F000AA02-0451-4000-B000-000000000000"{
+            if character.uuid.uuidString == "F000AA02-0451-4000-B000-000000000000"{
                 var parameter = NSInteger(1)
-                let data = NSData(bytes: &parameter, length: 1)
-                peripheral.writeValue(data, forCharacteristic: character, type: .WithResponse)
+//                let data = Data(bytes: UnsafePointer<UInt8>(&parameter), count: 1)
+                
+                let data = NSData(bytes: &parameter, length: MemoryLayout<Int>.size)
+                peripheral.writeValue(data as Data, for: character, type: .withResponse)
             }
-            if character.UUID == "F000AA01-0451-4000-B000-000000000000"{
-                peripheral.setNotifyValue(true , forCharacteristic: character)
+            if character.uuid.uuidString == "F000AA01-0451-4000-B000-000000000000"{
+                peripheral.setNotifyValue(true , for: character)
             }
         }
     }
     
-    func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
+    func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
        let temp = temperatureFormData(characteristic.value!)
         statusLabel.text = "Room temperature"
         temperatuerLabel.text = "\(round(temp*10)/10)°C"
     }
     
     
-    func temperatureFormData(data:NSData)->Float{
-        var scratchVal=[UInt8](count: data.length, repeatedValue: 0)
-        data.getBytes(&scratchVal, length: data.length)
+    func temperatureFormData(_ data:Data)->Float{
+        var scratchVal=[UInt8](repeating: 0, count: data.count)
+        (data as NSData).getBytes(&scratchVal, length: data.count)
         return fromByteArray(scratchVal, Float.self)
     }
     
 
-    func fromByteArray<T>(value: [UInt8], _: T.Type) -> T {
+    func fromByteArray<T>(_ value: [UInt8], _: T.Type) -> T {
         return value.withUnsafeBufferPointer {
-            return UnsafePointer<T>($0.baseAddress).memory
+            return UnsafeRawPointer($0.baseAddress!).load(as: T.self)
         }
     }
 
