@@ -10,41 +10,41 @@ import UIKit
 
 
 
-class ViewController: UIViewController ,NSURLSessionDelegate,NSURLSessionDataDelegate{
+class ViewController: UIViewController ,URLSessionDelegate,URLSessionDataDelegate{
     var connection: NSURLConnection!
-    var session:NSURLSession?
+    var session:Foundation.URLSession?
     
-    var task : NSURLSessionDataTask?
+    var task : URLSessionDataTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let url = NSURL(string: "https://encrypted.google.com")!
+        let url = URL(string: "https://encrypted.google.com")!
         
-        let configure = NSURLSessionConfiguration.defaultSessionConfiguration()
-        session = NSURLSession(configuration: configure, delegate: self, delegateQueue: nil)
+        let configure = URLSessionConfiguration.default
+        session = Foundation.URLSession(configuration: configure, delegate: self, delegateQueue: nil)
         
-        task =  session!.dataTaskWithURL(url)  {(data, response, error) in
+        task =  session!.dataTask(with: url, completionHandler: {(data, response, error) in
             print("2")
-        }
+        })  
         task?.resume()
     }
     
-    func URLSession(session: NSURLSession, didReceiveChallenge challenge: NSURLAuthenticationChallenge, completionHandler: (NSURLSessionAuthChallengeDisposition, NSURLCredential?) -> Void) {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
 
         print("Am in NSURLSessionDelegate didReceiveChallenge")
         
         if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust  {
             NSLog("yep authorised")
-            let credential = NSURLCredential(trust: challenge.protectionSpace.serverTrust!)
-            challenge.sender!.useCredential(credential, forAuthenticationChallenge: challenge)
+            let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
+            challenge.sender!.use(credential, for: challenge)
         } else {
             NSLog("nope")
         }
         
         
-        let credential = NSURLCredential(trust: challenge.protectionSpace.serverTrust!)
+        let credential = URLCredential(trust: challenge.protectionSpace.serverTrust!)
 
-        completionHandler(NSURLSessionAuthChallengeDisposition.UseCredential,credential)
+        completionHandler(Foundation.URLSession.AuthChallengeDisposition.useCredential,credential)
 
         print("trust: \(challenge.protectionSpace.authenticationMethod)")
         
