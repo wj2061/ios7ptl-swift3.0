@@ -30,67 +30,66 @@ class DirectoryViewController: UITableViewController {
         if path == nil{
             path  = "/"
         }
-        let fileManager = NSFileManager()
+        let fileManager = FileManager()
         
         do {
-            contents = try  fileManager.contentsOfDirectoryAtPath(path!)
+            contents = try  fileManager.contentsOfDirectory(atPath: path!)
         }catch let error {
             print("error : \(error )")
         }
         print("contents: \(contents.count)")
     }
     
-    func isDirectoryAtEntryPath(entryPath:String)->Bool  {
-        let isDirectory = UnsafeMutablePointer<ObjCBool>.alloc(1)
-        isDirectory[0] = false
-        let fm = NSFileManager()
-        let fullPath = (path! as NSString).stringByAppendingPathComponent(entryPath)
-        fm.fileExistsAtPath(fullPath, isDirectory: isDirectory)
-        return Bool(isDirectory[0])
+    func isDirectoryAtEntryPath(_ entryPath:String)->Bool  {
+        var isDirectory:ObjCBool = false;
+        let fm = FileManager()
+        let fullPath = (path! as NSString).appendingPathComponent(entryPath)
+        fm.fileExists(atPath: fullPath, isDirectory: &isDirectory)
+        return isDirectory.boolValue;
     }
 
 
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let entryPath = contents[indexPath.row]
-        let fm = NSFileManager()
-        var attributes=[String:AnyObject]()
+        let fm = FileManager()
+        var attributes=[FileAttributeKey:Any]()
         
         do{
-            attributes = try  fm.attributesOfItemAtPath(entryPath)
+            attributes = try  fm.attributesOfItem(atPath: entryPath)
         }catch let error {
             print("error = \(error)")
         }
         print("attributes = \(attributes)")
         
-        let Permissions = attributes[NSFilePosixPermissions] == nil ? "" : "\(attributes[NSFilePosixPermissions]!)"
-        let name = attributes[NSFileOwnerAccountName] == nil ? "" : "\(attributes[NSFileOwnerAccountName]!)"
-        let id = attributes[NSFileOwnerAccountID] == nil ? "" : "\(attributes[NSFileOwnerAccountID]!)"
-        cell.textLabel?.text = "\(Permissions)  \(name)(\(id))  \((entryPath as NSString).lastPathComponent)"
+        let permissions = attributes[FileAttributeKey.posixPermissions] == nil ? "" : "\(attributes[FileAttributeKey.posixPermissions]!)"
+        let name = attributes[FileAttributeKey.ownerAccountName] == nil ? "" : "\(attributes[FileAttributeKey.ownerAccountName]!)"
+        let id = attributes[FileAttributeKey.ownerAccountID] == nil ? "" : "\(attributes[FileAttributeKey.ownerAccountID]!)"
+        cell.textLabel?.text = "\(permissions)  \(name)(\(id))  \((entryPath as NSString).lastPathComponent)"
         
         if isDirectoryAtEntryPath(entryPath){
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            cell.selectionStyle = UITableViewCellSelectionStyle.Blue
+            cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell.selectionStyle = UITableViewCellSelectionStyle.blue
         }else{
-            cell.accessoryType = UITableViewCellAccessoryType.None
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.accessoryType = UITableViewCellAccessoryType.none
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
         }
 
         return cell
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let entrypath = contents[indexPath.row]
         return isDirectoryAtEntryPath(entrypath) ? indexPath : nil
     }
@@ -98,12 +97,12 @@ class DirectoryViewController: UITableViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let VC = segue.destinationViewController as! DirectoryViewController
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as! DirectoryViewController
         
         let entrypath = contents[tableView.indexPathForSelectedRow!.row]
-        let fullpath = (path! as NSString).stringByAppendingPathComponent(entrypath)
+        let fullpath = (path! as NSString).appendingPathComponent(entrypath)
         
-        VC.path = fullpath
+        vc.path = fullpath
     }
 }
