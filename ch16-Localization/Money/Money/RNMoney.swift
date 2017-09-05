@@ -20,8 +20,8 @@ class RNMoney: NSObject,NSCoding {
     
     init(amount:NSDecimalNumber?,currencyCode:String?){
         super.init()
-        self.amount = amount ?? NSDecimalNumber(double: 0.0)
-        self.currencyCode = currencyCode ?? NSNumberFormatter().currencyCode
+        self.amount = amount ?? NSDecimalNumber(value: 0.0 as Double)
+        self.currencyCode = currencyCode ?? NumberFormatter().currencyCode
     }
     
     
@@ -30,12 +30,12 @@ class RNMoney: NSObject,NSCoding {
     }
     
     convenience init(integerAmount:Int,currencyCode:String?){
-        let  amount = NSDecimalNumber(integer: integerAmount)
+        let  amount = NSDecimalNumber(value: integerAmount as Int)
         self.init(amount:amount,currencyCode:currencyCode)
     }
     
     convenience init(integerAmount:Int){
-        let  amount = NSDecimalNumber(integer: integerAmount)
+        let  amount = NSDecimalNumber(value: integerAmount as Int)
         self.init(amount:amount,currencyCode:nil)
     }
     
@@ -43,29 +43,29 @@ class RNMoney: NSObject,NSCoding {
         self.init(amount:0)
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(amount, forKey: kRNMoney.AmountKey)
-        aCoder.encodeObject(currencyCode, forKey: kRNMoney.CurrencyCodeKey)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(amount, forKey: kRNMoney.AmountKey)
+        aCoder.encode(currencyCode, forKey: kRNMoney.CurrencyCodeKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        if  let amount = aDecoder.decodeObjectForKey(kRNMoney.AmountKey) as? NSDecimalNumber,
-            let currencyCode = aDecoder.decodeObjectForKey(kRNMoney.CurrencyCodeKey) as? String{
+        if  let amount = aDecoder.decodeObject(forKey: kRNMoney.AmountKey) as? NSDecimalNumber,
+            let currencyCode = aDecoder.decodeObject(forKey: kRNMoney.CurrencyCodeKey) as? String{
             self.init(amount:amount,currencyCode:currencyCode)
         }
         return nil
     }
     
-    func localizedStringForLocale(alocale:NSLocale)->String{
-        let formatter = NSNumberFormatter()
+    func localizedStringForLocale(_ alocale:Locale)->String{
+        let formatter = NumberFormatter()
         formatter.locale = alocale
         formatter.currencyCode = currencyCode
-        formatter.numberStyle = NSNumberFormatterStyle.CurrencyStyle
-        return formatter.stringFromNumber(amount!)!
+        formatter.numberStyle = NumberFormatter.Style.currency
+        return formatter.string(from: amount!)!
     }
     
     func localizedString()->String{
-        return localizedStringForLocale(NSLocale.currentLocale())
+        return localizedStringForLocale(Locale.current)
     }
     
     override var  description:String { get{   return localizedString()}}

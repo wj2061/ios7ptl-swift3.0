@@ -10,7 +10,7 @@ import Foundation
 
 print("Hello, World!")
 
-let russianLocale = NSLocale(localeIdentifier: "ru_RU")
+let russianLocale = Locale(identifier: "ru_RU")
 
 let money = RNMoney(amount: 100)
 
