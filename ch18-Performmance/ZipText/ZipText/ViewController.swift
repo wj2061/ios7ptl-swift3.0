@@ -14,10 +14,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let path = NSBundle.mainBundle().pathForResource("Lorem", ofType: "txt")!
+        let path = Bundle.main.path(forResource: "Lorem", ofType: "txt")!
         var text = ""
         do {
-           text = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding) as String
+           text = try NSString(contentsOfFile: path, encoding: String.Encoding.utf8.rawValue) as String
             print(text)
         }catch  let error as NSError{
             print("error : \(error)")

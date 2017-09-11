@@ -10,16 +10,16 @@ import UIKit
 
 class ZipTextView2: ZipTextView {
     override  func appendNextCharacter(){
-        self.index++
+        self.index += 1
         self.setNeedsDisplay()
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         for i in 0...self.index{
             if i < (text as NSString).length{
-                let character = (text as NSString).substringWithRange(NSMakeRange(i , 1))
+                let character = (text as NSString).substring(with: NSMakeRange(i , 1))
                 let origin = originAtIndex(i, fontSize: kFontSize)
-                (character as NSString).drawAtPoint(origin, withAttributes: [NSFontAttributeName:UIFont.systemFontOfSize(kFontSize)])
+                (character as NSString).draw(at: origin, withAttributes: [NSFontAttributeName:UIFont.systemFont(ofSize: kFontSize)])
             }
         }
     }

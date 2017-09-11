@@ -10,12 +10,12 @@ import UIKit
 
 class ZipTextView4: ZipTextView3{
     override  func appendNextCharacter(){
-        self.index++
+        self.index += 1
         if self.index < ( text as NSString).length{
             var dirtyRect = CGRect()
             dirtyRect.origin = originAtIndex(index, fontSize: kFontSize)
             dirtyRect.size = CGSize(width: kFontSize, height: kFontSize)
-            setNeedsDisplayInRect(dirtyRect)
+            setNeedsDisplay(dirtyRect)
         }
         self.setNeedsDisplay()
     }

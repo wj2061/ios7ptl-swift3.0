@@ -9,17 +9,17 @@
 import UIKit
 
 class ZipTextView3: ZipTextView2 {
-    var locations = [CGPointZero]
+    var locations = [CGPoint.zero]
     
-    override    func originAtIndex(index:Int,fontSize:CGFloat)->CGPoint{
+    override    func originAtIndex(_ index:Int,fontSize:CGFloat)->CGPoint{
         if  locations.count > index{
             return locations[index]
         }
         var origin = self.originAtIndex(index-1, fontSize: fontSize )
-        let prevCharacter = (text as NSString).substringWithRange(NSMakeRange(index-1, 1))
-        let prevCharacterSize = (prevCharacter as NSString).sizeWithAttributes([NSFontAttributeName:UIFont.systemFontOfSize(fontSize)])
+        let prevCharacter = (text as NSString).substring(with: NSMakeRange(index-1, 1))
+        let prevCharacterSize = (prevCharacter as NSString).size(attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: fontSize)])
         origin.x += prevCharacterSize.width
-        if origin.x > CGRectGetWidth(self.bounds){
+        if origin.x > self.bounds.width{
             origin.x = 0
             origin.y += prevCharacterSize.height
         }
