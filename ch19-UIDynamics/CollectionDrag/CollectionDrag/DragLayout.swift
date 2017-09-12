@@ -9,18 +9,18 @@
 import UIKit
 
 class DragLayout: UICollectionViewFlowLayout {
-    var indexPath:NSIndexPath?
+    var indexPath:IndexPath?
     lazy var animatar: UIDynamicAnimator? = {
         return    UIDynamicAnimator(collectionViewLayout: self)
     }()
     var behaivor:UIAttachmentBehavior?
     
-    func startDraggingIndexPath(indexpath:NSIndexPath,fromPoint:CGPoint){
+    func startDraggingIndexPath(_ indexpath:IndexPath,fromPoint:CGPoint){
         animatar?.removeAllBehaviors()
 
         self.indexPath = indexpath
         
-        let attributes = super.layoutAttributesForItemAtIndexPath(indexpath)
+        let attributes = super.layoutAttributesForItem(at: indexpath)
         attributes!.zIndex += 1
         
         behaivor = UIAttachmentBehavior(item: attributes!, attachedToAnchor: fromPoint)
@@ -35,13 +35,13 @@ class DragLayout: UICollectionViewFlowLayout {
         updateDragLocation(fromPoint)
     }
     
-    func updateDragLocation(point:CGPoint){
+    func updateDragLocation(_ point:CGPoint){
         behaivor?.anchorPoint = point
     }
 
     func stopDraging(){
         if let  index = indexPath{
-        let attributes = super.layoutAttributesForItemAtIndexPath(index)
+        let attributes = super.layoutAttributesForItem(at: index)
         updateDragLocation(attributes!.center)
         indexPath = nil
         behaivor = nil
@@ -49,8 +49,8 @@ class DragLayout: UICollectionViewFlowLayout {
     }
     
     
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let existingAttributes = super.layoutAttributesForElementsInRect(rect)
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let existingAttributes = super.layoutAttributesForElements(in: rect)
         var allAttributes = [UICollectionViewLayoutAttributes]()
         for attribute in existingAttributes!{
             if attribute.indexPath != indexPath{
@@ -61,7 +61,7 @@ class DragLayout: UICollectionViewFlowLayout {
 //            }
         } 
 //        animatar!.layoutAttributesForCellAtIndexPath(indexPath!)
-        allAttributes.appendContentsOf(animatar!.itemsInRect(rect) as! [UICollectionViewLayoutAttributes])
+        allAttributes.append(contentsOf: animatar!.items(in: rect) as! [UICollectionViewLayoutAttributes])
      return allAttributes
     }
     

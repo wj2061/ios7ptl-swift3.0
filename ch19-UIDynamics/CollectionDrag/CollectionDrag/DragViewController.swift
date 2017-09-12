@@ -12,21 +12,21 @@ private let reuseIdentifier = "Cell"
 
 class DragViewController: UICollectionViewController {
 
-    @IBAction func handleLongPress(sender: UILongPressGestureRecognizer) {
+    @IBAction func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         let dragLayout = collectionViewLayout as! DragLayout
-        let location = sender.locationInView(collectionView!)
+        let location = sender.location(in: collectionView!)
         
-        if  let indexPath = collectionView!.indexPathForItemAtPoint(location){
-            let cell = collectionView!.cellForItemAtIndexPath(indexPath)!
+        if  let indexPath = collectionView!.indexPathForItem(at: location){
+            let cell = collectionView!.cellForItem(at: indexPath)!
             switch sender.state{
-            case .Began:
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    cell.backgroundColor = UIColor.redColor()
+            case .began:
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    cell.backgroundColor = UIColor.red
                 })
                 dragLayout.startDraggingIndexPath(indexPath, fromPoint: location)
-            case .Ended ,.Cancelled:
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    cell.backgroundColor = UIColor.lightGrayColor()
+            case .ended ,.cancelled:
+                UIView.animate(withDuration: 0.25, animations: { () -> Void in
+                    cell.backgroundColor = UIColor.lightGray
                 })
                 dragLayout.stopDraging()
             default:
@@ -39,17 +39,17 @@ class DragViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
 
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }
 
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
         return cell
     }
 }
