@@ -30,14 +30,14 @@ class ViewController: UIViewController {
     @IBAction func reset() {
         dynamicAnimator.removeAllBehaviors()
         box1.center = kInitial.point1
-        box1.transform = CGAffineTransformIdentity
+        box1.transform = CGAffineTransform.identity
         box2.center = kInitial.point2
-        box2.transform = CGAffineTransformIdentity
+        box2.transform = CGAffineTransform.identity
     }
 
     @IBAction func snap() {
         let point = randomPoint()
-        let snap = UISnapBehavior(item: box1, snapToPoint: point)
+        let snap = UISnapBehavior(item: box1, snapTo: point)
         snap.damping = 0.25
         addTemporaryBehavior(snap)
     }
@@ -46,17 +46,17 @@ class ViewController: UIViewController {
         let attach1 = UIAttachmentBehavior(item: box1, offsetFromCenter: UIOffsetMake(25, 25), attachedToAnchor: box1.center)
         dynamicAnimator.addBehavior(attach1)
         
-        let attach2 = UIAttachmentBehavior(item: box1, attachedToItem: box2)
+        let attach2 = UIAttachmentBehavior(item: box1, attachedTo: box2)
         dynamicAnimator.addBehavior(attach2)
         
-        let push = UIPushBehavior(items: [box1], mode: .Instantaneous)
-        push.pushDirection = CGVectorMake(0, 2)
+        let push = UIPushBehavior(items: [box1], mode: .instantaneous)
+        push.pushDirection = CGVector(dx: 0, dy: 2)
         dynamicAnimator.addBehavior(push)
     }
 
     @IBAction func push() {
-        let push = UIPushBehavior(items: [box1], mode: .Instantaneous)
-        push.pushDirection = CGVectorMake(1, 1)
+        let push = UIPushBehavior(items: [box1], mode: .instantaneous)
+        push.pushDirection = CGVector(dx: 1, dy: 1)
         dynamicAnimator.addBehavior(push)
     }
     
@@ -70,8 +70,8 @@ class ViewController: UIViewController {
         let collision = UICollisionBehavior(items: [box1,box2])
         dynamicAnimator.addBehavior(collision)
         
-        let push = UIPushBehavior(items: [box1], mode: .Instantaneous)
-        push.pushDirection = CGVectorMake(3, 0)
+        let push = UIPushBehavior(items: [box1], mode: .instantaneous)
+        push.pushDirection = CGVector(dx: 3, dy: 0)
         addTemporaryBehavior(push)
     }
 
@@ -83,9 +83,9 @@ class ViewController: UIViewController {
         return CGPoint(x: size.width * dx, y: size.height * dy)
     }
     
-    func addTemporaryBehavior(behavior: UIDynamicBehavior){
+    func addTemporaryBehavior(_ behavior: UIDynamicBehavior){
         dynamicAnimator.addBehavior(behavior)
-        dynamicAnimator.performSelector("removeBehavior:", withObject: behavior, afterDelay: 1)
+        dynamicAnimator.perform(#selector(UIDynamicAnimator.removeBehavior(_:)), with: behavior, afterDelay: 1)
     }
     
     
