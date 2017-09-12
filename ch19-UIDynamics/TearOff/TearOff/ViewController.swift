@@ -31,7 +31,7 @@ class ViewController: UIViewController {
         let tearOffBehavior = TearOffBehavior(view: dragView, anchor: dragView.center) { (tornView, newPinView) -> Void in
             tornView.alpha = 1
             self.defaultBehavior.addItem(tornView)
-            let tap = UITapGestureRecognizer(target: self, action: "trash:")
+            let tap = UITapGestureRecognizer(target: self, action: #selector(ViewController.trash(_:)))
             tap.numberOfTapsRequired = 2
             tornView.addGestureRecognizer(tap)
         }
@@ -39,7 +39,7 @@ class ViewController: UIViewController {
         
     }
     
-    func trash(gesture:UITapGestureRecognizer){
+    func trash(_ gesture:UITapGestureRecognizer){
         print("trash")
         let gview = gesture.view!
         let subviews = sliceView(gview, rows: 6, columns: 6)
@@ -50,10 +50,10 @@ class ViewController: UIViewController {
             view.addSubview(subview)
             dBehaviour.addItem(subview)
             
-            let push = UIPushBehavior(items: [subview], mode: .Instantaneous)
-            push.pushDirection = CGVectorMake(CGFloat(rand())/CGFloat(RAND_MAX) - 0.5, CGFloat(rand())/CGFloat(RAND_MAX) - 0.5)
+            let push = UIPushBehavior(items: [subview], mode: .instantaneous)
+            push.pushDirection = CGVector(dx: CGFloat(arc4random())/CGFloat(RAND_MAX) - 0.5, dy: CGFloat(arc4random())/CGFloat(RAND_MAX) - 0.5)
             trashAnimator.addBehavior(push)
-            UIView.animateWithDuration(1, animations: { () -> Void in
+            UIView.animate(withDuration: 1, animations: { () -> Void in
                 subview.alpha = 0
                 }, completion: { (_) -> Void in
                     subview.removeFromSuperview()
@@ -65,24 +65,24 @@ class ViewController: UIViewController {
     }
 
     
-    func sliceView(view:UIView,rows:Int,columns:Int)->[UIView]{
+    func sliceView(_ view:UIView,rows:Int,columns:Int)->[UIView]{
         UIGraphicsBeginImageContext(view.bounds.size)
-        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: false)
-        let image = UIGraphicsGetImageFromCurrentImageContext().CGImage
+        view.drawHierarchy(in: view.bounds, afterScreenUpdates: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()?.cgImage
         UIGraphicsEndImageContext()
         
         var views = [UIView]()
-        let width = CGImageGetWidth(image!)
-        let height = CGImageGetHeight(image!)
+        let width = image!.width
+        let height = image!.height
         for row in 0..<rows{
             for column in 0..<columns{
-                let rect = CGRectMake(CGFloat( column*(width/columns) ),
-                                      CGFloat( row * (height/rows)),
-                                      CGFloat(width/columns),
-                                      CGFloat(height/rows))
-                let subImage = CGImageCreateWithImageInRect(image!, rect)
-                let imageView = UIImageView(image: UIImage(CGImage: subImage!))
-                imageView.frame = CGRectOffset(rect, CGRectGetMinX(view.frame), CGRectGetMinY(view.frame))
+                let rect = CGRect(x: CGFloat( column*(width/columns) ),
+                                      y: CGFloat( row * (height/rows)),
+                                      width: CGFloat(width/columns),
+                                      height: CGFloat(height/rows))
+                let subImage = image!.cropping(to: rect)
+                let imageView = UIImageView(image: UIImage(cgImage: subImage!))
+                imageView.frame = rect.offsetBy(dx: view.frame.minX, dy: view.frame.minY)
                 views.append(imageView)
             }
         }

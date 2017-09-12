@@ -21,12 +21,12 @@ class DefaultBehavior: UIDynamicBehavior {
         self.addChildBehavior(gravityBehavior)
     }
     
-    func addItem(item:UIDynamicItem){
+    func addItem(_ item:UIDynamicItem){
         gravityBehavior.addItem(item)
         collisionBehavior.addItem(item)
     }
     
-    func removeItem(item:UIDynamicItem){
+    func removeItem(_ item:UIDynamicItem){
         gravityBehavior.removeItem(item)
         collisionBehavior.removeItem(item)
     }

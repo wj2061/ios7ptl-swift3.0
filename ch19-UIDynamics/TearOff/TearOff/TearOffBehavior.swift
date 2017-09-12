@@ -11,12 +11,12 @@ import UIKit
 class TearOffBehavior: UIDynamicBehavior {
     var active = true
     
-    init(view:DraggableView,anchor:CGPoint,handler:(tornView:DraggableView,newPinView:DraggableView)->Void){
+    init(view:DraggableView,anchor:CGPoint,handler:@escaping (_ tornView:DraggableView,_ newPinView:DraggableView)->Void){
         super.init()
-        let snapBehavior = UISnapBehavior(item: view, snapToPoint: anchor)
+        let snapBehavior = UISnapBehavior(item: view, snapTo: anchor)
         addChildBehavior(snapBehavior)
         
-        let distance = min(CGRectGetWidth(view.bounds), CGRectGetHeight(view.bounds))
+        let distance = min(view.bounds.width, view.bounds.height)
         
         action = {
             if !self.pointsAreWithinDistance(view.center, p2: anchor, distance: distance){
@@ -26,7 +26,7 @@ class TearOffBehavior: UIDynamicBehavior {
                     let newTearoffBehavior = TearOffBehavior(view: newView, anchor: anchor, handler: handler)
                     newTearoffBehavior.active = false
                     self.dynamicAnimator?.addBehavior(newTearoffBehavior)
-                    handler(tornView: view, newPinView: newView)
+                    handler(view, newView)
                     self.dynamicAnimator?.removeBehavior(self)
                 }
             }else{
@@ -35,7 +35,7 @@ class TearOffBehavior: UIDynamicBehavior {
         }
     }
     
-    func pointsAreWithinDistance(p1:CGPoint,p2:CGPoint,distance:CGFloat)->Bool{
+    func pointsAreWithinDistance(_ p1:CGPoint,p2:CGPoint,distance:CGFloat)->Bool{
         let dx = Float( p1.x - p2.x)
         let dy = Float( p1.y - p2.y)
         let currentDistance = hypotf(dx,dy)

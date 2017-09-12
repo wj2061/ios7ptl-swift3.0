@@ -17,10 +17,10 @@ class DraggableView: UIView,NSCopying {
         dynamicAnimator = animator
         super.init(frame: frame)
         
-        backgroundColor = UIColor.darkGrayColor()
+        backgroundColor = UIColor.darkGray
         layer.borderWidth = 2
         
-        gestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        gestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(DraggableView.handlePan(_:)))
         self.addGestureRecognizer(gestureRecognizer)
     }
 
@@ -28,18 +28,18 @@ class DraggableView: UIView,NSCopying {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func handlePan(gesture: UIPanGestureRecognizer){
+    func handlePan(_ gesture: UIPanGestureRecognizer){
         switch gesture.state{
-        case .Cancelled,  .Ended:
+        case .cancelled,  .ended:
             stopDragging()
         default:
-            let point = gesture.locationInView(superview!)
+            let point = gesture.location(in: superview!)
             dragToPoint(point)
         }
     }
 
-    func copyWithZone(zone: NSZone) -> AnyObject {
-        let newView = DraggableView(frame: CGRectZero, animator: dynamicAnimator)
+    func copy(with zone: NSZone?) -> Any {
+        let newView = DraggableView(frame: CGRect.zero, animator: dynamicAnimator)
         newView.bounds = bounds
         newView.center = center
         newView.transform = transform
@@ -47,11 +47,11 @@ class DraggableView: UIView,NSCopying {
         return newView
     }
 
-    func dragToPoint(point:CGPoint){
+    func dragToPoint(_ point:CGPoint){
         if let behavior = snapBehavior{
             dynamicAnimator.removeBehavior(behavior)
         }
-        snapBehavior = UISnapBehavior(item: self, snapToPoint: point)
+        snapBehavior = UISnapBehavior(item: self, snapTo: point)
         snapBehavior?.damping = 0.25
         dynamicAnimator.addBehavior(snapBehavior!)
     }
