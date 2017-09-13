@@ -16,14 +16,14 @@ class SCTDetailViewController: UIViewController {
         configureView()
     }
     
-    var detailItem:NSDate?{
+    var detailItem:Date?{
         didSet{
             configureView()
         }
     }
     
-    @IBAction func colseButtonTapped(sender: UIButton) {
-        dismissViewControllerAnimated(true , completion: nil)
+    @IBAction func colseButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true , completion: nil)
     }
  
     func configureView(){
