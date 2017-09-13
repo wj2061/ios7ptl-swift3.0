@@ -23,31 +23,31 @@ class SCTPercentDrivenAnimator: UIPercentDrivenInteractiveTransition {
     
     
     lazy var gestureRecogniser:UIPinchGestureRecognizer = {
-        return UIPinchGestureRecognizer(target: self, action: "pinch:")
+        return UIPinchGestureRecognizer(target: self, action: #selector(SCTPercentDrivenAnimator.pinch(_:)))
     }()
     
   
-    func pinch(gesture:UIPinchGestureRecognizer){
+    func pinch(_ gesture:UIPinchGestureRecognizer){
         print("44")
 
         let scale = gesture.scale
         switch gesture.state{
-        case .Began:
+        case .began:
             interactionInProgress = true
             startScale = scale
             presentingVC!.proceedToNextViewController()
-        case .Changed:
+        case .changed:
             let completePercent = 1.0 - (scale/startScale)
-            updateInteractiveTransition(completePercent)
-        case .Ended:
+            update(completePercent)
+        case .ended:
             if gesture.velocity > 0{
-                cancelInteractiveTransition()
+                cancel()
             }else{
-                finishInteractiveTransition()
+                finish()
             }
             interactionInProgress = false
-        case .Cancelled:
-            cancelInteractiveTransition()
+        case .cancelled:
+            cancel()
             interactionInProgress = false
         default:
             break

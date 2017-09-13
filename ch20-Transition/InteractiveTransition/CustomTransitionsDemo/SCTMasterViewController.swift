@@ -10,7 +10,7 @@ import UIKit
 
 class SCTMasterViewController: UITableViewController ,UIViewControllerTransitioningDelegate{
     
-    var objects = [NSDate]()
+    var objects = [Date]()
     var destVC :UIViewController?
     
     let scAnimation = SCAnimation()
@@ -18,13 +18,13 @@ class SCTMasterViewController: UITableViewController ,UIViewControllerTransition
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = editButtonItem()
+        navigationItem.leftBarButtonItem = editButtonItem
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: "insertNewObject")
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(SCTMasterViewController.insertNewObject))
         navigationItem.rightBarButtonItem = addButton
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !view.window!.gestureRecognizers!.contains(scPercent.gestureRecogniser){
             view.window?.addGestureRecognizer(scPercent.gestureRecogniser)
@@ -34,38 +34,38 @@ class SCTMasterViewController: UITableViewController ,UIViewControllerTransition
     
     override func proceedToNextViewController(){
         if destVC == nil{
-             let VC = storyboard!.instantiateViewControllerWithIdentifier("SCTDetailViewController") as! SCTDetailViewController
-            VC.detailItem = NSDate()
+             let VC = storyboard!.instantiateViewController(withIdentifier: "SCTDetailViewController") as! SCTDetailViewController
+            VC.detailItem = Date()
             VC.transitioningDelegate = self
             VC.scPercent = scPercent
             destVC = VC
         }
         print("pro")
-        presentViewController(destVC!, animated: true, completion: nil)
+        present(destVC!, animated: true, completion: nil)
     }
     
     
     func insertNewObject(){
-        objects.insert(NSDate(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        objects.insert(Date(), at: 0)
+        let indexPath = IndexPath(row: 0, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
     }
     
     //MARK:- UIViewControllerTransitioningDelegate
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return scAnimation
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return scAnimation
     }
     
-    func interactionControllerForPresentation(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         print("22")
         return scPercent.interactionInProgress ? scPercent : nil
     }
     
-    func interactionControllerForDismissal(animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         print("33")
 
         return scPercent.interactionInProgress ? scPercent : nil
@@ -74,45 +74,45 @@ class SCTMasterViewController: UITableViewController ,UIViewControllerTransition
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return objects.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let object = objects[indexPath.row]
         cell.textLabel?.text = object.description
         return cell
     }
 
     // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
     // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            objects.removeAtIndex(indexPath.row)
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            objects.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let VC = storyboard!.instantiateViewControllerWithIdentifier("SCTDetailViewController") as! SCTDetailViewController
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let VC = storyboard!.instantiateViewController(withIdentifier: "SCTDetailViewController") as! SCTDetailViewController
         VC.detailItem = objects[indexPath.row]
         VC.transitioningDelegate = self
         self.destVC = VC
         VC.scPercent = scPercent
-        presentViewController(VC, animated: true, completion: nil)
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        present(VC, animated: true, completion: nil)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
   
 

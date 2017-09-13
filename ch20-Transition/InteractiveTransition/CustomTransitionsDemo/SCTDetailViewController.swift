@@ -16,19 +16,19 @@ class SCTDetailViewController: UIViewController {
         configureView()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         scPercent?.presentingVC = self
     }
     
-    var detailItem:NSDate?{
+    var detailItem:Date?{
         didSet{
             configureView()
         }
     }
     
-    @IBAction func colseButtonTapped(sender: UIButton) {
-        dismissViewControllerAnimated(true , completion: nil)
+    @IBAction func colseButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true , completion: nil)
     }
  
     func configureView(){
@@ -38,7 +38,7 @@ class SCTDetailViewController: UIViewController {
     }
     
     override func proceedToNextViewController() {
-        dismissViewControllerAnimated(true , completion: nil)
+        dismiss(animated: true , completion: nil)
     }
     
     var scPercent:SCTPercentDrivenAnimator?
