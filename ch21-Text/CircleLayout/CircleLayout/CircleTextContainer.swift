@@ -9,14 +9,18 @@
 import UIKit
 
 class CircleTextContainer: NSTextContainer {
-    override func lineFragmentRectForProposedRect(proposedRect: CGRect, atIndex characterIndex: Int, writingDirection baseWritingDirection: NSWritingDirection, remainingRect: UnsafeMutablePointer<CGRect>) -> CGRect {
-        let rect = super.lineFragmentRectForProposedRect(proposedRect, atIndex: characterIndex, writingDirection: baseWritingDirection, remainingRect: remainingRect)
+    
+    override func lineFragmentRect(forProposedRect proposedRect: CGRect, at characterIndex: Int, writingDirection baseWritingDirection: NSWritingDirection, remaining remainingRect: UnsafeMutablePointer<CGRect>?) -> CGRect{
+    
+        let rect = super.lineFragmentRect(forProposedRect: proposedRect, at: characterIndex, writingDirection: baseWritingDirection, remaining: remainingRect)
+        
         let radius = fmin(size.width, size.height)/2
         let ypos   = fabs((proposedRect.origin.y+proposedRect.size.height / 2.0)-radius)
         let width  = (ypos < radius) ? 2.0 * sqrt(radius * radius - ypos * ypos) : 0.0
-        let circleRect = CGRectMake(radius - width / 2.0,proposedRect.origin.y,width, proposedRect.size.height)
+        let circleRect = CGRect(x: radius - width / 2.0,y: proposedRect.origin.y,width: width, height: proposedRect.size.height)
         
-        return CGRectIntersection(rect, circleRect)  
+        return rect.intersection(circleRect)
+
     }
 
 }
