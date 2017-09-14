@@ -17,10 +17,10 @@ class ViewController: UIViewController {
         
         let string = "You can display text along a curve, with bold, color, and big text."
         
-        let attriString = NSMutableAttributedString(string: string, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(16)])
-        attriString.addAttributes([NSFontAttributeName:UIFont.boldSystemFontOfSize(16)], range: (string as NSString).rangeOfString("bold"))
-        attriString.addAttributes([NSForegroundColorAttributeName:UIColor.redColor()], range: (string as NSString).rangeOfString("color"))
-        attriString.addAttributes([NSFontAttributeName:UIFont.systemFontOfSize(32)], range: (string as NSString).rangeOfString("big text"))
+        let attriString = NSMutableAttributedString(string: string, attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 16)])
+        attriString.addAttributes([NSFontAttributeName:UIFont.boldSystemFont(ofSize: 16)], range: (string as NSString).range(of: "bold"))
+        attriString.addAttributes([NSForegroundColorAttributeName:UIColor.red], range: (string as NSString).range(of: "color"))
+        attriString.addAttributes([NSFontAttributeName:UIFont.systemFont(ofSize: 32)], range: (string as NSString).range(of: "big text"))
         
         curvyTextView.attributedString = attriString
     }
