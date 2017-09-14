@@ -17,7 +17,7 @@ class LayoutView: UIView ,NSLayoutManagerDelegate{
     let layoutManager  = NSLayoutManager()
     
     override func awakeFromNib() {
-        let size = CGSize(width: CGRectGetWidth(bounds), height: CGRectGetMidY(bounds)*0.75)
+        let size = CGSize(width: bounds.width, height: bounds.midY*0.75)
         textcontainer1.size = size
         textcontainer2.size = size
         
@@ -28,27 +28,27 @@ class LayoutView: UIView ,NSLayoutManagerDelegate{
         textView.textStorage.addLayoutManager(layoutManager)
     }
     
-    func layoutManagerDidInvalidateLayout(sender: NSLayoutManager) {
+    func layoutManagerDidInvalidateLayout(_ sender: NSLayoutManager) {
         setNeedsDisplay()
     }
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        drawText(textcontainer1, point: CGPointZero)
+    override func draw(_ rect: CGRect) {
+        drawText(textcontainer1, point: CGPoint.zero)
         
-        let box2Corner = CGPointMake(CGRectGetMinX(bounds), CGRectGetMidY(bounds))
+        let box2Corner = CGPoint(x: bounds.minX, y: bounds.midY)
         
         drawText(textcontainer2, point: box2Corner)
     }
     
-    private func drawText(textcontainer:NSTextContainer,point:CGPoint){
+    fileprivate func drawText(_ textcontainer:NSTextContainer,point:CGPoint){
         let box = CGRect(origin: point, size: textcontainer.size)
         UIRectFrame(box)
         
-        let range = layoutManager.glyphRangeForTextContainer(textcontainer)
-        layoutManager.drawBackgroundForGlyphRange(range , atPoint: point)
-        layoutManager.drawGlyphsForGlyphRange(range, atPoint: point)
+        let range = layoutManager.glyphRange(for: textcontainer)
+        layoutManager.drawBackground(forGlyphRange: range , at: point)
+        layoutManager.drawGlyphs(forGlyphRange: range, at: point)
     }
 
 }
