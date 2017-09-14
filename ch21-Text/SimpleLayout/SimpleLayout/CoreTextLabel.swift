@@ -18,10 +18,10 @@ class CoreTextLabel: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let transform = CGAffineTransformMakeScale(1, -1)
-        CGAffineTransformTranslate(transform, 0, -self.bounds.size.height)
+        let transform = CGAffineTransform(scaleX: 1, y: -1)
+        transform.translatedBy(x: 0, y: -self.bounds.size.height)
         self.transform = transform
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -30,11 +30,11 @@ class CoreTextLabel: UIView {
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetTextMatrix(context, CGAffineTransformIdentity)
+        context!.textMatrix = CGAffineTransform.identity
         
-        let path = CGPathCreateWithRect(self.bounds, nil)
+        let path = CGPath(rect: self.bounds, transform: nil)
         let framesetter = CTFramesetterCreateWithAttributedString(attributedString)
         let frame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
         CTFrameDraw(frame , context!)
