@@ -26,15 +26,15 @@ class LayoutView: UIView ,NSLayoutManagerDelegate{
     }
     
     //MARK:- NSLayoutManagerDelegate
-    func layoutManagerDidInvalidateLayout(sender: NSLayoutManager) {
+    func layoutManagerDidInvalidateLayout(_ sender: NSLayoutManager) {
         setNeedsDisplay()
     }
     
-    override func drawRect(rect: CGRect) {
-        let range = layoutManager.glyphRangeForTextContainer(textContainer)
-        let point = CGPointZero
-        layoutManager.drawBackgroundForGlyphRange(range, atPoint: point)
-        layoutManager.drawGlyphsForGlyphRange(range , atPoint: point)
+    override func draw(_ rect: CGRect) {
+        let range = layoutManager.glyphRange(for: textContainer)
+        let point = CGPoint.zero
+        layoutManager.drawBackground(forGlyphRange: range, at: point)
+        layoutManager.drawGlyphs(forGlyphRange: range , at: point)
         
     }
 
