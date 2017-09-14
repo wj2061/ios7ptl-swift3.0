@@ -9,10 +9,10 @@
 import UIKit
 
 class PTLScribbleLayoutManager: NSLayoutManager {
-    override func drawGlyphsForGlyphRange(glyphsToShow: NSRange, atPoint origin: CGPoint) {
-        let characterRange = characterRangeForGlyphRange(glyphsToShow, actualGlyphRange: nil)
+    override func drawGlyphs(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
+        let characterRange = self.characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
         
-        textStorage?.enumerateAttribute(PTLDefault.RedactStyleAttributeName, inRange: characterRange, options: [], usingBlock: { (value, attributeCharacterRange, stop) -> Void in
+        textStorage?.enumerateAttribute(PTLDefault.RedactStyleAttributeName, in: characterRange, options: [], using: { (value, attributeCharacterRange, stop) -> Void in
             if let value  = value as? Bool{
                 self.redactCharacterRange(attributeCharacterRange, ifTrue: value, atPoint:origin)
             }
@@ -20,68 +20,68 @@ class PTLScribbleLayoutManager: NSLayoutManager {
     }
     
     
-    func redactCharacterRange(characterRange:NSRange,ifTrue:Bool,atPoint origin:CGPoint){
-        let glyphRange = glyphRangeForCharacterRange(characterRange, actualCharacterRange: nil)
+    func redactCharacterRange(_ characterRange:NSRange,ifTrue:Bool,atPoint origin:CGPoint){
+        let glyphRange = self.glyphRange(forCharacterRange: characterRange, actualCharacterRange: nil)
         if ifTrue{
             let context = UIGraphicsGetCurrentContext()
-            CGContextSaveGState(context)
-            CGContextTranslateCTM(context , origin.x, origin.y)
-            UIColor.blackColor().setStroke()
+            context?.saveGState()
+            context?.translateBy(x: origin.x, y: origin.y)
+            UIColor.black.setStroke()
             
-            let container = textContainerForGlyphAtIndex(glyphRange.location, effectiveRange: nil)
-            enumerateEnclosingRectsForGlyphRange(glyphRange, withinSelectedGlyphRange: NSMakeRange(NSNotFound, 0), inTextContainer: container!, usingBlock: { (rect , stop ) -> Void in
+            let container = textContainer(forGlyphAt: glyphRange.location, effectiveRange: nil)
+            enumerateEnclosingRects(forGlyphRange: glyphRange, withinSelectedGlyphRange: NSMakeRange(NSNotFound, 0), in: container!, using: { (rect , stop ) -> Void in
                 self.drawRedactionInRect(rect)
             })
-            CGContextRestoreGState(context)
+            context?.restoreGState()
         }else{
-            super.drawGlyphsForGlyphRange(glyphRange, atPoint: origin)
+            super.drawGlyphs(forGlyphRange: glyphRange, at: origin)
         }
     }
     
-    func drawRedactionInRect(rect:CGRect){
+    func drawRedactionInRect(_ rect:CGRect){
         let path = UIBezierPath(rect: rect)
-        let minX = CGRectGetMinX(rect)
-        let minY = CGRectGetMinY(rect)
-        let maxX = CGRectGetMaxX(rect)
-        let maxY = CGRectGetMaxY(rect)
-        path.moveToPoint(CGPointMake(minX, minY))
-        path.addLineToPoint(CGPointMake(maxX, maxY))
-        path.moveToPoint(CGPointMake(maxX, minY))
-        path.addLineToPoint(CGPointMake(minX, maxY))
+        let minX = rect.minX
+        let minY = rect.minY
+        let maxX = rect.maxX
+        let maxY = rect.maxY
+        path.move(to: CGPoint(x: minX, y: minY))
+        path.addLine(to: CGPoint(x: maxX, y: maxY))
+        path.move(to: CGPoint(x: maxX, y: minY))
+        path.addLine(to: CGPoint(x: minX, y: maxY))
         path.stroke()
     }
     
-    override func drawBackgroundForGlyphRange(glyphsToShow: NSRange, atPoint origin: CGPoint) {
-        super.drawGlyphsForGlyphRange(glyphsToShow, atPoint: origin)
+    override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
+        super.drawGlyphs(forGlyphRange: glyphsToShow, at: origin)
         
         let context = UIGraphicsGetCurrentContext()
-        let characterRange = characterRangeForGlyphRange(glyphsToShow, actualGlyphRange: nil)
+        let characterRange = self.characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
         
-        textStorage?.enumerateAttribute(PTLDefault.HighlightColorAttributeName, inRange: characterRange, options: [], usingBlock: { (value , highlightedCharacterRange, stop) -> Void in
+        textStorage?.enumerateAttribute(PTLDefault.HighlightColorAttributeName, in: characterRange, options: [], using: { (value , highlightedCharacterRange, stop) -> Void in
             if let color = value as? UIColor{
                 self.highlightCharacterRange(highlightedCharacterRange, color: color, origin: origin, context: context!)
             }
         })
     }
     
-    func highlightCharacterRange(highlightedCharacterRange:NSRange,color:UIColor,origin:CGPoint,context:CGContextRef){
-        CGContextSaveGState(context)
+    func highlightCharacterRange(_ highlightedCharacterRange:NSRange,color:UIColor,origin:CGPoint,context:CGContext){
+        context.saveGState()
         color.setFill()
-        CGContextTranslateCTM(context, origin.x, origin.y)
+        context.translateBy(x: origin.x, y: origin.y)
         
-        let highlightedGlyphRange = self.glyphRangeForCharacterRange(highlightedCharacterRange, actualCharacterRange: nil)
-        let container = self.textContainerForGlyphAtIndex(highlightedGlyphRange.location, effectiveRange: nil)
+        let highlightedGlyphRange = self.glyphRange(forCharacterRange: highlightedCharacterRange, actualCharacterRange: nil)
+        let container = self.textContainer(forGlyphAt: highlightedGlyphRange.location, effectiveRange: nil)
         
-        self.enumerateEnclosingRectsForGlyphRange(highlightedGlyphRange, withinSelectedGlyphRange: NSMakeRange(NSNotFound, 0), inTextContainer: container!) { (rect , stop ) -> Void in
+        self.enumerateEnclosingRects(forGlyphRange: highlightedGlyphRange, withinSelectedGlyphRange: NSMakeRange(NSNotFound, 0), in: container!) { (rect , stop ) -> Void in
             self.drawHighlightInRect(rect)
         }
-        CGContextRestoreGState(context)
+        context.restoreGState()
         
     }
     
-    func drawHighlightInRect(rect :CGRect){
-        let highlightRect = CGRectInset(rect , -3, -3)
+    func drawHighlightInRect(_ rect :CGRect){
+        let highlightRect = rect.insetBy(dx: -3, dy: -3)
         UIRectFill(highlightRect)
-        UIBezierPath(ovalInRect: highlightRect).stroke()
+        UIBezierPath(ovalIn: highlightRect).stroke()
     }
 }

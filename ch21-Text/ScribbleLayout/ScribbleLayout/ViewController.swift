@@ -13,21 +13,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let path = NSBundle.mainBundle().pathForResource("sample.txt", ofType: nil)
-        guard let string = try? String(contentsOfFile: path!, encoding: NSUTF8StringEncoding) else{  return }
+        let path = Bundle.main.path(forResource: "sample.txt", ofType: nil)
+        guard let string = try? String(contentsOfFile: path!, encoding: String.Encoding.utf8) else{  return }
         let attributedString = NSAttributedString(string: string)
         
         let style  = NSMutableParagraphStyle()
-        style.alignment = .Justified
+        style.alignment = .justified
         
         let text = PTLScribbleTextStorage()
         
-        text.tokens = ["France" :[NSForegroundColorAttributeName:UIColor.blueColor()],
-            "England":[NSForegroundColorAttributeName:UIColor.redColor()],
+        text.tokens = ["France" :[NSForegroundColorAttributeName:UIColor.blue],
+            "England":[NSForegroundColorAttributeName:UIColor.red],
             "season" :[PTLDefault.RedactStyleAttributeName:true],
-            "and"    :[PTLDefault.HighlightColorAttributeName:UIColor.yellowColor()],
+            "and"    :[PTLDefault.HighlightColorAttributeName:UIColor.yellow],
             PTLDefault.TokenName: [ NSParagraphStyleAttributeName: style,
-                NSFontAttributeName: UIFont.preferredFontForTextStyle(UIFontTextStyleCaption2)]
+                NSFontAttributeName: UIFont.preferredFont(forTextStyle: UIFontTextStyle.caption2)]
             ]
         
         text.setAttributedString(attributedString)
@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         let layoutManager = PTLScribbleLayoutManager()
         text.addLayoutManager(layoutManager)
         
-        let textViewFrame = CGRectMake(30, 40, 708, 400)
+        let textViewFrame = CGRect(x: 30, y: 40, width: 708, height: 400)
         let textContainer = NSTextContainer(size: textViewFrame.size)
         layoutManager.addTextContainer(textContainer)
         

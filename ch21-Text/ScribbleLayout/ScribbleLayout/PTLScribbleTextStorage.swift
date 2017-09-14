@@ -19,7 +19,7 @@ class PTLScribbleTextStorage: NSTextStorage {
     var backingStore = NSMutableAttributedString()
     var dynamicTextNeedsUpdate = false
     
-    var tokens = [String:AnyObject]()
+    var tokens = [String:Any]()
     
     override var string:String{
         get{
@@ -27,22 +27,22 @@ class PTLScribbleTextStorage: NSTextStorage {
         }
     }
     
-    override func attributesAtIndex(location: Int, effectiveRange range: NSRangePointer) -> [String : AnyObject] {
-        return backingStore.attributesAtIndex(location, effectiveRange: range)
+    override func attributes(at location: Int, effectiveRange range: NSRangePointer?) -> [String : Any] {
+        return backingStore.attributes(at: location, effectiveRange: range)
     }
     
-    override func replaceCharactersInRange(range: NSRange, withString str: String) {
+    override func replaceCharacters(in range: NSRange, with str: String) {
         beginEditing()
-        backingStore.replaceCharactersInRange(range , withString: str)
-        edited([.EditedAttributes,.EditedCharacters], range: range, changeInLength: (str as NSString).length-range.length)
+        backingStore.replaceCharacters(in: range , with: str)
+        edited([.editedAttributes,.editedCharacters], range: range, changeInLength: (str as NSString).length-range.length)
         dynamicTextNeedsUpdate = true
         endEditing()
     }
     
-    override func setAttributes(attrs: [String : AnyObject]?, range: NSRange) {
+    override func setAttributes(_ attrs: [String : Any]?, range: NSRange) {
         beginEditing()
         backingStore.setAttributes(attrs, range: range)
-        edited([.EditedAttributes], range: range, changeInLength: 0)
+        edited([.editedAttributes], range: range, changeInLength: 0)
         endEditing()
     }
     
@@ -54,19 +54,19 @@ class PTLScribbleTextStorage: NSTextStorage {
         super.processEditing()
     }
     
-    func performReplacementsForCharacterChangeInRange(changedRange:NSRange){
+    func performReplacementsForCharacterChangeInRange(_ changedRange:NSRange){
         let string = backingStore.string
         let startLine = NSMakeRange(changedRange.location, 0)
         let endLine =   NSMakeRange(NSMaxRange(changedRange), 0)
-        var extendedRange  = NSUnionRange(changedRange,  (string as NSString).lineRangeForRange(startLine))
-        extendedRange      =  NSUnionRange(extendedRange,  (string as NSString).lineRangeForRange(endLine))
+        var extendedRange  = NSUnionRange(changedRange,  (string as NSString).lineRange(for: startLine))
+        extendedRange      =  NSUnionRange(extendedRange,  (string as NSString).lineRange(for: endLine))
         applyTokenAttributesToRange(extendedRange)
     }
     
-    func applyTokenAttributesToRange(searchRange:NSRange){
+    func applyTokenAttributesToRange(_ searchRange:NSRange){
         let defaultAttributes = tokens[PTLDefault.TokenName]
         let string = backingStore.string
-        (string as NSString).enumerateSubstringsInRange(searchRange, options: .ByWords) { (substring , substringRange, enclosingRange, stop ) -> Void in
+        (string as NSString).enumerateSubstrings(in: searchRange, options: .byWords) { (substring , substringRange, enclosingRange, stop ) -> Void in
             let attributesForToken = self.tokens[substring!] ?? defaultAttributes
             
             if attributesForToken != nil{
