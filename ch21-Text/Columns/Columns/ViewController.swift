@@ -11,16 +11,16 @@ import UIKit
 class ViewController: UIViewController {
     
     var kLipsum:String? =  {
-        let path = NSBundle.mainBundle().pathForResource("Lipsum", ofType: "txt")!
-        let st   = try? String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        let path = Bundle.main.path(forResource: "Lipsum", ofType: "txt")!
+        let st   = try? String(contentsOfFile: path, encoding: String.Encoding.utf8)
         return st
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var alignment = CTTextAlignment.Justified
-        var  setting   = CTParagraphStyleSetting(spec: .Alignment, valueSize: sizeof(CTTextAlignment), value: &alignment)
+        var alignment = CTTextAlignment.justified
+        var  setting   = CTParagraphStyleSetting(spec: .alignment, valueSize: MemoryLayout<CTTextAlignment>.size, value: &alignment)
         let style = CTParagraphStyleCreate(&setting, 1)
         
         let attrString = NSAttributedString(string: kLipsum!, attributes: [kCTParagraphStyleAttributeName as String:style])

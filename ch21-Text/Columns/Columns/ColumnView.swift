@@ -13,65 +13,69 @@ class ColumnView: UIView {
     var mode = 0
     var attributedString:NSAttributedString?
     
-    private func copyColumnRects()->[CGRect]{
-        let bounds = CGRectInset(self.bounds, 20, 20)
+    fileprivate func copyColumnRects()->[CGRect]{
+        let bounds = self.bounds.insetBy(dx: 20, dy: 20)
         
-        var columnRects = Array.init(count: 3, repeatedValue: CGRectZero)
+        var columnRects = Array.init(repeating: CGRect.zero, count: 3)
         
-        let columnWidth = CGRectGetWidth(bounds) / CGFloat( kColumnCount)
+        let columnWidth = bounds.width / CGFloat( kColumnCount)
         
         for i in 0..<kColumnCount{
-            columnRects[i] = CGRectMake(CGFloat(i)*columnWidth + CGRectGetMinX(bounds), CGRectGetMinY(bounds), columnWidth, bounds.height)
-            columnRects[i] = CGRectInset(columnRects[i], 10, 10)
+            columnRects[i] = CGRect(x: CGFloat(i)*columnWidth + bounds.minX, y: bounds.minY, width: columnWidth, height: bounds.height)
+            columnRects[i] = columnRects[i].insetBy(dx: 10, dy: 10)
         }
         return columnRects
     }
     
-    func copyPaths()->[CGPathRef]{
-        var paths = [CGPathRef]()
+    func copyPaths()->[CGPath]{
+        var paths = [CGPath]()
         let columnRects = copyColumnRects()
         switch mode{
         case 0:
             for i in 0..<kColumnCount{
-                let path = CGPathCreateWithRect(columnRects[i], nil)
+                let path = CGPath(rect: columnRects[i], transform: nil)
                 paths.append(path)
             }
         case 1:
-            let path = CGPathCreateMutable()
+            let path = CGMutablePath()
             for i in 0..<kColumnCount{
-                CGPathAddRect(path, nil, columnRects[i])
+                path.addRect(columnRects[i]);
             }
             paths.append(path)
         case 2:
-            var path = CGPathCreateMutable()
-            CGPathMoveToPoint(path, nil, 30, 0)
-            CGPathAddLineToPoint(path, nil, 344, 30)  // Bottom right
+            var path = CGMutablePath()
+        
+            path.move(to: CGPoint(x:30, y:0));
+            path.addLine(to: CGPoint(x: 344, y: 30));// Bottom right
             
-            CGPathAddLineToPoint(path, nil, 344, 400)
-            CGPathAddLineToPoint(path, nil, 200, 400)
-            CGPathAddLineToPoint(path, nil, 200, 800)
-            CGPathAddLineToPoint(path, nil, 344, 800)
+            path.addLine(to: CGPoint(x: 344, y: 400));
+            path.addLine(to: CGPoint(x: 200, y: 400));
+            path.addLine(to: CGPoint(x: 200, y: 800));
+            path.addLine(to: CGPoint(x: 344, y: 800));
             
-            CGPathAddLineToPoint(path, nil, 344, 944) // Top right
-            CGPathAddLineToPoint(path, nil, 30, 944) // Top left
-            CGPathCloseSubpath(path)
+            path.addLine(to: CGPoint(x: 344, y: 944));// Top right
+            path.addLine(to: CGPoint(x: 30, y: 944));// Top left
+            
+            path.closeSubpath()
             paths.append(path)
             
-            path = CGPathCreateMutable()
-            CGPathMoveToPoint(path, nil, 700, 30)// Bottom right
-            CGPathAddLineToPoint(path, nil, 360, 30)  // Bottom left
+            path = CGMutablePath()
             
-            CGPathAddLineToPoint(path, nil, 360, 400)
-            CGPathAddLineToPoint(path, nil, 500, 400)
-            CGPathAddLineToPoint(path, nil, 500, 800)
-            CGPathAddLineToPoint(path, nil, 360, 800)
+            path.move(to: CGPoint(x:700, y:30));
+            path.addLine(to: CGPoint(x: 360, y: 30));
             
-            CGPathAddLineToPoint(path, nil, 360, 944) // Top left
-            CGPathAddLineToPoint(path, nil, 700, 944) // Top right
-            CGPathCloseSubpath(path)
+            path.addLine(to: CGPoint(x: 360, y: 400));
+            path.addLine(to: CGPoint(x: 500, y: 400));
+            path.addLine(to: CGPoint(x: 500, y: 800));
+            path.addLine(to: CGPoint(x: 360, y: 800));
+            
+            path.addLine(to: CGPoint(x: 360, y: 944));// Top left
+            path.addLine(to: CGPoint(x: 700, y: 944));// Top right
+            
+            path.closeSubpath()
             paths.append(path)
         case 3:
-            let path = CGPathCreateWithEllipseInRect(CGRectInset(bounds, 30, 30), nil)
+            let path = CGPath(ellipseIn: bounds.insetBy(dx: 30, dy: 30), transform: nil)
             paths.append(path)
         default:
             break
@@ -82,10 +86,10 @@ class ColumnView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        let  transform = CGAffineTransformMakeScale(1, -1)
-        CGAffineTransformTranslate(transform, 0, -self.bounds.size.height)
+        let  transform = CGAffineTransform(scaleX: 1, y: -1)
+        transform.translatedBy(x: 0, y: -self.bounds.size.height)
         self.transform = transform
-        backgroundColor = UIColor.whiteColor()
+        backgroundColor = UIColor.white
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -95,11 +99,11 @@ class ColumnView: UIView {
 
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         if attributedString == nil {return}
         
         let context = UIGraphicsGetCurrentContext()
-        CGContextSetTextMatrix(context, CGAffineTransformIdentity)
+        context!.textMatrix = CGAffineTransform.identity
         let framesetter = CTFramesetterCreateWithAttributedString(attributedString!)
         let paths = copyPaths()
         var charIndex = 0
@@ -112,7 +116,7 @@ class ColumnView: UIView {
         }
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         mode = (mode + 1)%4
         setNeedsDisplay()
     }
