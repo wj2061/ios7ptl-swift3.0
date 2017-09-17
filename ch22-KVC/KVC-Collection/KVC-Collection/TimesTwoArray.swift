@@ -9,18 +9,18 @@
 import UIKit
 
 class TimesTwoArray: NSObject {
-    private var count = 0
+    fileprivate var count = 0
     
     func countOfNumbers()->Int{
         return count
     }
     
-    func objectInNumbersAtIndex(index:Int)->AnyObject{
-        return index*2
+    func objectInNumbersAtIndex(_ index:Int)->AnyObject{
+        return index*2 as AnyObject
     }
     
     func incrementCount(){
-        count++
+        count += 1
     }
 
 }
