@@ -9,6 +9,8 @@
 import UIKit
 
 class KVCTableViewCell: UITableViewCell {
+    private static var myContext = 0
+    
     var object: NSObject?{
         willSet{
             removeObservation()
@@ -32,7 +34,7 @@ class KVCTableViewCell: UITableViewCell {
     }
     
     func update(){
-        textLabel?.text = isReady() ? object!.valueForKeyPath(property)?.description : ""
+        textLabel?.text = isReady() ? (object!.value(forKeyPath: property) as AnyObject).description : ""
     } 
 
     func removeObservation(){
@@ -43,16 +45,15 @@ class KVCTableViewCell: UITableViewCell {
     
     func addObservation(){
         if isReady(){
-            object?.addObserver(self, forKeyPath:property, options: [], context: UnsafeMutablePointer(Unmanaged.passUnretained(self).toOpaque()))
+            object?.addObserver(self, forKeyPath:property, options: [], context: &KVCTableViewCell.myContext)
         }
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        let ct = Unmanaged<KVCTableViewCell>.fromOpaque(COpaquePointer(context)).takeUnretainedValue()
-        if ct == self{
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if context == &KVCTableViewCell.myContext{
             update()
         }else{
-            super.observeValueForKeyPath(keyPath, ofObject: object , change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object , change: change, context: context)
         }
     }
     
