@@ -18,7 +18,7 @@ class KVCTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -28,17 +28,17 @@ class KVCTableViewCell: UITableViewCell {
         return object != nil && property != ""
     }
     
-    private func update(){
+    fileprivate func update(){
         var  text:String?
         if isReady(){
-            let value = object!.valueForKeyPath(property)
-            text = value?.description
+            let value = object!.value(forKeyPath: property)
+            text = (value as AnyObject).description
         }
         textLabel!.text = text
     }
     
     init(identifier:String){
-        super.init(style: .Default, reuseIdentifier: identifier)
+        super.init(style: .default, reuseIdentifier: identifier)
     }
 
     required init?(coder aDecoder: NSCoder) {
