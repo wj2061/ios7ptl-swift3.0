@@ -22,26 +22,26 @@ class SyncSemaphoreTests: XCTestCase {
     }
     
     func testDownload(){
-        let URL = NSURL(string: "http://iosptl.com")!
+        let URL = Foundation.URL(string: "http://iosptl.com")!
         
-        var location:NSURL?
+        var location:Foundation.URL?
         var error:NSError?
         
-        let semaphore = dispatch_semaphore_create(0)
+        let semaphore = DispatchSemaphore(value: 0)
         
-        NSURLSession.sharedSession().downloadTaskWithURL(URL) { (l, r , e) -> Void in
+        URLSession.shared.downloadTask(with: URL, completionHandler: { (l, r , e) -> Void in
             location = l
-            error = e
-            dispatch_semaphore_signal(semaphore)
-        }.resume()
+            error = e! as NSError
+            semaphore.signal()
+        }) .resume()
         
         let timeoutInSeconds:Double = 2.0
-        let timeout = dispatch_time(DISPATCH_TIME_NOW, Int64(timeoutInSeconds) * Int64(NSEC_PER_SEC))
+        let timeout = DispatchTime.now() + Double(Int64(timeoutInSeconds) * Int64(NSEC_PER_SEC)) / Double(NSEC_PER_SEC)
         
-        let timeoutResult = dispatch_semaphore_wait(semaphore, timeout)
+        let timeoutResult = semaphore.wait(timeout: timeout)
         
-        XCTAssertEqual(timeoutResult, 0, "timeout")
-        XCTAssertNil(error, "Received an error:\(error)")
+        XCTAssertEqual(timeoutResult, .success, "timeout")
+        XCTAssertNil(error, "Received an error:\(String(describing: error))")
         XCTAssertNotNil(location, "Did not get a location")
   
     }
