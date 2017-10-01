@@ -71,7 +71,7 @@ class ViewController: UIViewController {
         view.addGestureRecognizer(g)
     }
 
-    func pan(_ gesture:UIPanGestureRecognizer){
+    @objc func pan(_ gesture:UIPanGestureRecognizer){
         switch gesture.state {
         case .changed :
             let  translation = gesture.translation(in: view)

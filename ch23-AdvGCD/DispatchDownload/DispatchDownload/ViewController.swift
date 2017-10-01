@@ -5,19 +5,19 @@
 //  Created by WJ on 15/12/1.
 //  Copyright © 2015年 wj. All rights reserved.
 //
-
 import UIKit
+
 
 let kHeaderDelimiterString = "\r\n\r\n"
 
 class ViewController: UIViewController {
-    lazy var headerDelimiter = kHeaderDelimiterString.dataUsingEncoding(NSUTF8StringEncoding)!
+    lazy var headerDelimiter = kHeaderDelimiterString.data(using: String.Encoding.utf8)!
     
-    func htons(value: CUnsignedShort) -> CUnsignedShort {
+    func htons(_ value: CUnsignedShort) -> CUnsignedShort {
         return (value << 8) + (value >> 8);
     }
     
-    func connectToHostName(hostName:String,port:Int) -> dispatch_fd_t{
+    func connectToHostName(_ hostName:String,port:Int) -> Int32{
         let s =  socket(PF_INET,SOCK_STREAM,0)
         guard s >= 0 else {   assert(false , "socket failed:\(errno)") }
         
@@ -30,123 +30,129 @@ class ViewController: UIViewController {
             assert(false , "gethostbyname failure:\(errno)")
         }
         
-        bcopy(he.memory.h_addr_list[0], &sa.sin_addr,Int( he.memory.h_length) )
+        bcopy(he?.pointee.h_addr_list[0], &sa.sin_addr,Int( (he?.pointee.h_length)!) )
         
-        let cn = withUnsafePointer(&sa) {
-            connect(s, UnsafePointer($0), socklen_t(sizeofValue(sa)))
+        let cn = withUnsafePointer(to: &sa) {
+            $0.withMemoryRebound(to: sockaddr.self, capacity: 1) {
+                connect(s, UnsafePointer($0), socklen_t(MemoryLayout.size(ofValue: sa)))
+            }
         }
+        
         
         if cn < 0{
             assert(false , "cn<0")
         }
         
-        
-//        var buffer = [CChar](count: 128, repeatedValue: 0)
-//        if connect(s,UnsafeMutablePointer( &sa ), sizeof(sa) ) < 0 {
-//            
-//        }
         return s
     }
     
-    func outputFilePathForPath(path:String)->String{
-        return (NSTemporaryDirectory() as NSString ).stringByAppendingPathComponent((path as NSString).lastPathComponent)
+    func outputFilePathForPath(_ path:String)->String{
+        return (NSTemporaryDirectory() as NSString ).appendingPathComponent((path as NSString).lastPathComponent)
     }
     
-    func writeToChannel(channel:dispatch_io_t,writeData:dispatch_data_t,queue:dispatch_queue_t){
-        dispatch_io_write(channel, 0, writeData, queue) { (done , remainingData, error) -> Void in
+    func writeToChannel(_ channel:DispatchIO,writeData:DispatchData,queue:DispatchQueue){
+        channel.write(offset: 0, data: writeData, queue: queue) { (done , remainingData, error) -> Void in
             assert(error == 0, "File write error:\(error )")
             var unwrittenDataLength = 0
             if remainingData != nil{
-                unwrittenDataLength = dispatch_data_get_size(remainingData)
+                unwrittenDataLength = (remainingData?.count)!
             }
-            print("Wrote \(dispatch_data_get_size(writeData) - unwrittenDataLength) bytes")
+            print("Wrote \(writeData.count - unwrittenDataLength) bytes")
         }
     }
 
-    func handleDoneWithChannels(channels:[dispatch_io_t]){
+    func handleDoneWithChannels(_ channels:[DispatchIO]){
         print("Done Downloading")
         for channel in channels{
-            dispatch_io_close(channel, 0)
+            channel.close(flags: DispatchIO.CloseFlags(rawValue: 0))
         }
     }
     
-    func findHeaderInData(newData:dispatch_data_t,
-                     previousData:dispatch_data_t,
-                     writeChannel:dispatch_io_t,
-                            queue:dispatch_queue_t)->dispatch_data_t?{
-        let  preData = dispatch_data_create_concat(previousData, newData)
-        let  mappedData = dispatch_data_create_map(preData, nil, nil)
-        var  headerData :dispatch_data_t?
-        var  bodyData   :dispatch_data_t?
-        dispatch_data_apply(mappedData) { (region , offset , buffer , size ) -> Bool in
+    func findHeaderInData(_ newData:DispatchData,
+                   previousData:inout DispatchData,
+                     writeChannel:DispatchIO,
+                            queue:DispatchQueue)->DispatchData?{
+
+        let  mappedData = __dispatch_data_create_concat(previousData as __DispatchData, newData as __DispatchData)
+        var  headerData :__DispatchData?
+        var  bodyData   :__DispatchData?
+        
+        
+        __dispatch_data_apply(mappedData) { (region, offset, buffer, size) -> Bool in
             var bf = buffer
             let search = NSData(bytesNoCopy: &bf, length: size, freeWhenDone: false)
-            let  r     = search.rangeOfData(self.headerDelimiter, options: [], range: NSMakeRange(0, search.length))
+            let  r     = search.range(of: self.headerDelimiter, options: [], in: NSMakeRange(0, search.length))
             if r.location != NSNotFound{
-                headerData = dispatch_data_create_subrange(region , 0, r.location)
+                headerData = __dispatch_data_create_subrange(region, 0, r.location)
                 let body_offset = NSMaxRange(r)
                 let body_size   = size - body_offset
-                bodyData        = dispatch_data_create_subrange(region , body_offset, body_size)
+                bodyData        = __dispatch_data_create_subrange(region, body_offset, body_size)
             }
             return false
-       }
+        }
        if bodyData != nil{
-            writeToChannel(writeChannel, writeData: bodyData!, queue: queue)
+            writeToChannel(writeChannel, writeData: bodyData! as DispatchData, queue: queue)
        }
-    return headerData
+    return headerData! as DispatchData
     }
     
-    func printHeader(headerData:dispatch_data_t){
+    func printHeader(_ headerData:DispatchData){
         print("\nHeader:\n\n")
-        dispatch_data_apply(headerData) { (region , offset , buffer , size ) -> Bool in
+        
+        __dispatch_data_apply(headerData as __DispatchData) { (region, offset, buffer, size) -> Bool in
             fwrite(buffer, size, 1, stdout)
             return true
         }
         print("\n\n")
     }
     
-    func readFromChannel(readChannel:dispatch_io_t,writeChannel:dispatch_io_t,queue:dispatch_queue_t){
-        let previousData = dispatch_data_empty
-        var headerData  : dispatch_data_t?
-        dispatch_io_read(readChannel, 0,Int.max, queue) { (serverReadDone, serverReadData, serverReadError) -> Void in
+    func readFromChannel(_ readChannel:DispatchIO,writeChannel:DispatchIO,queue:DispatchQueue){
+        var previousData = DispatchData.empty
+        var headerData  : DispatchData?
+        readChannel.read(offset: 0,length: Int.max, queue: queue) { (serverReadDone, serverReadData, serverReadError) -> Void in
             assert(serverReadError == 0, "Server read error:\(serverReadError)")
             if serverReadData != nil{
                 self.handleDoneWithChannels([writeChannel,readChannel])
             }else{
                 if headerData == nil{
-                    headerData = self.findHeaderInData(serverReadData, previousData: previousData, writeChannel: writeChannel, queue: queue)
+                    headerData = self.findHeaderInData(serverReadData!, previousData: &previousData, writeChannel: writeChannel, queue: queue)
                     if headerData != nil{
                         self.printHeader(headerData!)
                     }
                 }
                 else{
-                    self.writeToChannel(writeChannel, writeData: serverReadData, queue: queue)
+                    self.writeToChannel(writeChannel, writeData: serverReadData!, queue: queue)
                 }
             }
         }
     }
     
-    func requestDataForHostName(hostName:String,path:String)->dispatch_data_t{
+    func requestDataForHostName(_ hostName:String,path:String)->DispatchData{
         let  getString = "GET \(path) HTTP/1.1\r\nHost: \(hostName)\r\n\r\n"
         print("Request:\n\(getString)" )
-        let getData = getString.dataUsingEncoding(NSUTF8StringEncoding)
-        return dispatch_data_create(getData!.bytes, getData!.length, nil, _dispatch_data_destructor_free)
+        let getData = getString.data(using: String.Encoding.utf8)
+        
+        return DispatchData(referencing:getData!)
     }
     
-    func HTTPDownloadContentsFromHostName(hostName:String,port:Int,path:String){
-        let queue = dispatch_get_main_queue()
+    func HTTPDownloadContentsFromHostName(_ hostName:String,port:Int,path:String){
+        let queue = DispatchQueue.main
         let socket = connectToHostName(hostName, port: port)
-        let serverChannel = dispatch_io_create(DISPATCH_IO_STREAM, socket, queue) { (error ) -> Void in
+        let serverChannel = DispatchIO(__type: DispatchIO.StreamType.stream.rawValue, fd: socket, queue: queue) { (error) in
             assert(error == 0, "Failed socket:\(error )")
             print("Closing connection")
             close(socket)
         }
+
         let requestData = requestDataForHostName(hostName, path: path)
         let writePath   = outputFilePathForPath(path)
         print("Writing to \(writePath)")
         
-        let fileChannel = dispatch_io_create_with_path(DISPATCH_IO_STREAM, writePath, O_WRONLY|O_CREAT|O_TRUNC, S_IRWXU, queue, nil)
-        dispatch_io_write(serverChannel, 0, requestData, queue) { (serverWriteDone, serverWriteData, error ) -> Void in
+        
+        let fileChannel = DispatchIO(__type: DispatchIO.StreamType.stream.rawValue, path: writePath, oflag: O_WRONLY|O_CREAT|O_TRUNC, mode: S_IRWXU, queue: queue) {(error) in
+            
+            }
+        serverChannel.write(offset: 0, data: requestData, queue: queue) { (serverWriteDone, serverWriteData, error ) -> Void in
             assert(error == 0, "Failed socket:\(error )")
             if serverWriteDone{
                 self.readFromChannel(serverChannel, writeChannel: fileChannel, queue: queue)
@@ -162,3 +168,29 @@ class ViewController: UIViewController {
     }
 }
 
+
+extension DispatchData {
+    
+    init(referencing data: Data) {
+        guard !data.isEmpty else {
+            self = .empty
+            return
+        }
+        
+        // will perform a copy if needed
+        let nsData = data as NSData
+        
+        if let dispatchData = ((nsData as AnyObject) as? DispatchData) {
+            self = dispatchData
+        } else {
+            self = .empty
+            nsData.enumerateBytes { (bytes, byteRange, _) in
+                let innerData = Unmanaged.passRetained(nsData)
+                let buffer = UnsafeBufferPointer(start: bytes.assumingMemoryBound(to: UInt8.self), count: byteRange.length)
+                let chunk = DispatchData(bytesNoCopy: buffer, deallocator: .custom(nil, innerData.release))
+                append(chunk)
+            }
+        }
+    }
+    
+}
