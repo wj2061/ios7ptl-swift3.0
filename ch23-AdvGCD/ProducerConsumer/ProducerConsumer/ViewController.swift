@@ -12,13 +12,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var inQueueLabel: UILabel!
     @IBOutlet var progressViews: [UIProgressView]!
     
-    lazy var semophore:dispatch_semaphore_t! = dispatch_semaphore_create(self.progressViews.count)
-    let pendingQueue = dispatch_queue_create("ProducerConsumer.pending", DISPATCH_QUEUE_SERIAL)
-    let workQueue    = dispatch_queue_create("ProducerConsumer.work", DISPATCH_QUEUE_CONCURRENT)
+    lazy var semophore:DispatchSemaphore! = DispatchSemaphore(value: self.progressViews.count)
+    let pendingQueue = DispatchQueue(label: "ProducerConsumer.pending", attributes: [])
+    let workQueue    = DispatchQueue(label: "ProducerConsumer.work", attributes: DispatchQueue.Attributes.concurrent)
     var pendingJobCount = 0
 
-    func adjustPendingJobCountBy(value:Int){
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+    func adjustPendingJobCountBy(_ value:Int){
+        DispatchQueue.main.async { () -> Void in
             self.pendingJobCount += value
             self.inQueueLabel.text = "\(self.pendingJobCount)"
         }
@@ -27,49 +27,49 @@ class ViewController: UIViewController {
     func reserveProgressView()->UIProgressView{
         var availableProgressView : UIProgressView!
         
-        dispatch_sync(dispatch_get_main_queue()) { () -> Void in
+        DispatchQueue.main.sync { () -> Void in
             for progressView in self.progressViews{
-                if progressView.hidden == true{
+                if progressView.isHidden == true{
                     availableProgressView = progressView
                     break
                 }
             }
-            availableProgressView.hidden = false
+            availableProgressView.isHidden = false
             availableProgressView.progress = 0
         }
         return availableProgressView
     }
     
-    func releaseProgressView(view:UIProgressView){
-        dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            view.hidden = true
+    func releaseProgressView(_ view:UIProgressView){
+        DispatchQueue.main.async { () -> Void in
+            view.isHidden = true
         }
     }
     
-    @IBAction func runProcess(sender: UIButton) {
+    @IBAction func runProcess(_ sender: UIButton) {
         adjustPendingJobCountBy(1)
         
-        dispatch_async(pendingQueue) { () -> Void in
-            dispatch_semaphore_wait(self.semophore, DISPATCH_TIME_FOREVER)
+        pendingQueue.async { () -> Void in
+            _ =  self.semophore.wait(timeout: DispatchTime.distantFuture)
             
             let availableProgressView = self.reserveProgressView()
             
-            dispatch_async(self.workQueue, { () -> Void in
+            self.workQueue.async(execute: { () -> Void in
                 self.performWorkWithProgressView(availableProgressView)
                 
                 self.releaseProgressView(availableProgressView)
                 
                 self.adjustPendingJobCountBy(-1)
                 
-                dispatch_semaphore_signal(self.semophore)
+                self.semophore.signal()
             })
         }
     }
     
 
-    func performWorkWithProgressView(view:UIProgressView){
+    func performWorkWithProgressView(_ view:UIProgressView){
         for p in 0...100{
-            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.sync(execute: { () -> Void in
                 view.progress = Float(p)/100.0
             })
             usleep(50000)
