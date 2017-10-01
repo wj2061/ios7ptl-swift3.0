@@ -17,23 +17,22 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    @IBAction func go(sender: UIButton) {
-        let source = dispatch_source_create(DISPATCH_SOURCE_TYPE_DATA_ADD
-            , 0, 0, dispatch_get_main_queue())
+    @IBAction func go(_ sender: UIButton) {
+        let source = DispatchSource.makeUserDataAddSource(queue: DispatchQueue.main)
         var totalComplete:UInt = 0
-        dispatch_source_set_event_handler(source) { () -> Void in
-            let value = dispatch_source_get_data(source)
+        source.setEventHandler { () -> Void in
+            let value = source.data
             print(value)
             totalComplete += value
             self.progressView.progress = Float(totalComplete)/100
         }
-        dispatch_resume(source)
+        source.resume()
         
-        let queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
+        let queue = DispatchQueue.global()
         
-        dispatch_async(queue) { () -> Void in
+        queue.async { () -> Void in
             for  _ in 0...100{
-                dispatch_source_merge_data(source, 1)
+                source.add(data: 1)
                 usleep(20000)
             }
         }
