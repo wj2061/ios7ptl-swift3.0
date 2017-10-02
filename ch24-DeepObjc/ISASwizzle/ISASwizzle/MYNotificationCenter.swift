@@ -8,8 +8,8 @@
 
 import Foundation
 
-class MYNotificationCenter:NSNotificationCenter{
-    override func addObserver(observer: AnyObject, selector aSelector: Selector, name aName: String?, object anObject: AnyObject?) {
+class MYNotificationCenter:NotificationCenter{
+    override func addObserver(_ observer: Any, selector aSelector: Selector, name aName: NSNotification.Name?, object anObject: Any?) {
         print("Adding observer:\(observer)")
         super.addObserver(observer, selector: aSelector, name: aName, object: anObject)
     }

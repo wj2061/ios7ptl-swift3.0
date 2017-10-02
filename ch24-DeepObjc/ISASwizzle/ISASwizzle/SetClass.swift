@@ -8,7 +8,7 @@
 
 import Foundation
 extension NSObject{
-    func setClass(aClass:AnyClass){
+    func setClass(_ aClass:AnyClass){
         assert(class_getInstanceSize(aClass) == class_getInstanceSize(object_getClass(self)),"Classes must be the same size to swizzle.")
         object_setClass(self, aClass)
     }

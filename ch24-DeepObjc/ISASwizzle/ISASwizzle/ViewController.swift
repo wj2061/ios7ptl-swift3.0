@@ -9,7 +9,7 @@
 import UIKit
 
 class Observer:NSObject{
-    func somthingHappened(note:NSNotification){
+    func somthingHappened(_ note:Notification){
         print("Something happened")
     }
 }
@@ -20,11 +20,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nc = NSNotificationCenter.defaultCenter()
-        nc.setClass(MYNotificationCenter)
+        let nc = NotificationCenter.default
+        nc.setClass(MYNotificationCenter.self)
         
         let observer = Observer()
-        NSNotificationCenter.defaultCenter().addObserver(observer, selector: "somthingHappened:", name: "SomethingHappenedNotification", object: nil)
+        NotificationCenter.default.addObserver(observer, selector: #selector(Observer.somthingHappened(_:)), name: NSNotification.Name(rawValue: "SomethingHappenedNotification"), object: nil)
     }
 
 }
