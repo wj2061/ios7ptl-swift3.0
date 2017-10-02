@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MSNSNotificationCenter:NSNotificationCenter{
+class MSNSNotificationCenter:NotificationCenter{
    var sOrigAddObserver:IMP?
     
     func MYAddObserver(){
@@ -16,10 +16,8 @@ class MSNSNotificationCenter:NSNotificationCenter{
     }
     
     class func swizzleAddObserver(){
-        NSNotificationCenter.swizzleSelector("kk",newIMP:COpaquePointer())
-//        let origmet = class_getInstanceMethod(self, "MYAddObserver")
-        let origIMP = class_getMethodImplementation(self,  "MYAddObserver")
-        MSNSNotificationCenter.swizzleSelector("addObserver:selector:name:object:", newIMP: origIMP)
+        let origIMP = class_getMethodImplementation(self,  #selector(MSNSNotificationCenter.MYAddObserver))
+        _ = MSNSNotificationCenter.swizzleSelector(#selector(NotificationCenter.addObserver(_:selector:name:object:)), newIMP: origIMP!)
     }
 
 }

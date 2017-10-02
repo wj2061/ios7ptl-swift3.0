@@ -8,12 +8,12 @@
 
 import Foundation
 extension NSObject{
-    class func swizzleSelector(origSelector:Selector,newIMP:IMP)->IMP{
+    class func swizzleSelector(_ origSelector:Selector,newIMP:IMP)->IMP{
         let origMethod = class_getInstanceMethod(self, origSelector)
         let origIMP    = method_getImplementation(origMethod)
         if !class_addMethod(self, origSelector, newIMP, method_getTypeEncoding(origMethod)){
             method_setImplementation(origMethod, newIMP)
         }
-        return origIMP
+        return origIMP!
     }
 }

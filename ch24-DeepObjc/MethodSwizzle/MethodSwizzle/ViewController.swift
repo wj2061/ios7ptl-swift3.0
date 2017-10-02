@@ -9,7 +9,7 @@
 import UIKit
 
 class Observer:NSObject{
-    func somthingHappened(note:NSNotification){
+    func somthingHappened(_ note:Notification){
         print("Something happened")
     }
 }
@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         MSNSNotificationCenter.swizzleAddObserver()
 
         let observar = Observer()
-        MSNSNotificationCenter.defaultCenter().addObserver(observar, selector: "somthingHappened", name: "SomethingHappenedNotification", object: nil)
+        MSNSNotificationCenter.default.addObserver(observar, selector: Selector(("somthingHappened")), name: NSNotification.Name(rawValue: "SomethingHappenedNotification"), object: nil)
     }
 }
 
