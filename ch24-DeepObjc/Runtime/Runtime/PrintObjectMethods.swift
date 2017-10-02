@@ -12,8 +12,8 @@ func PrintObjectMethods(){
     var count:UInt32 = 0
     let methods = class_copyMethodList(NSObject.self , &count)
     for i in 0..<Int( count ){
-        let sel = method_getName(methods[i])
-        let name = String.fromCString(sel_getName(sel) )!
+        let sel = method_getName(methods?[i])
+        let name = String(cString: sel_getName(sel) )
         print(name)
     }
 }

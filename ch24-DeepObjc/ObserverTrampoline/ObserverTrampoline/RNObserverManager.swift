@@ -18,20 +18,20 @@ class RNObserverManager: NSObject {
         self.observers = observers
     }
     
-    func addObserver(observer:NSObject){
-        assert(observer.conformsToProtocol(pt), "Observer must conform to protocol.")
+    func addObserver(_ observer:NSObject){
+        assert(observer.conforms(to: pt), "Observer must conform to protocol.")
         observers.insert(observer)
     }
     
-    func removeObserver(observer:NSObject){
+    func removeObserver(_ observer:NSObject){
         observers.remove(observer)
     }
     
-    override func doesNotRecognizeSelector(aSelector: Selector){
+    override func doesNotRecognizeSelector(_ aSelector: Selector){
         var isRecognized = false
         for observer in observers{
-            if observer.respondsToSelector(aSelector){
-                observer.performSelector(aSelector)
+            if observer.responds(to: aSelector){
+                observer.perform(aSelector)
                 isRecognized = true
             }
         }

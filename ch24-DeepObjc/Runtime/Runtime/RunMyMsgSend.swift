@@ -11,10 +11,10 @@ import Foundation
 typealias MyvoidIMP = @convention(c)(NSObject,Selector)->()
 
 
-func myMsgSend(receiver:NSObject,name:String){
+func myMsgSend(_ receiver:NSObject,name:String){
     let selector = sel_registerName(name)
     let methodIMP = class_getMethodImplementation(receiver.classForCoder, selector)
-    let callBack  =  unsafeBitCast(methodIMP, MyvoidIMP.self)
+    let callBack  =  unsafeBitCast(methodIMP, to: MyvoidIMP.self)
     return callBack(receiver,Selector( name))
 }
 

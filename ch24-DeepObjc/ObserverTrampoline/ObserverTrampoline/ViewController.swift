@@ -13,6 +13,8 @@ import UIKit
 }
 
 class MyClass:NSObject, MyProtocol{
+    
+        
     func doSomething(){
         print("doSomething :\(self)")
     }
@@ -28,7 +30,7 @@ class ViewController: UIViewController {
         
         observerManager = RNObserverManager(pt: MyProtocol.self, observers: observers)
         
-        observerManager?.performSelector("doSomething")
+        _ = observerManager?.perform(#selector(MyProtocol.doSomething))
         
         
 

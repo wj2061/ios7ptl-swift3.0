@@ -14,10 +14,10 @@ let kTotalCount = 100000000
 
 func FastCall(){
     let string = NSMutableString()
-    var totalTime:NSTimeInterval = 0
+    var totalTime:TimeInterval = 0
     
     // With objc_msgSend
-    var start = NSDate()
+    var start = Date()
     for _ in 0..<kTotalCount{
         string.setString("stuff")
     }
@@ -26,10 +26,10 @@ func FastCall(){
     print("w/ objc_msgSend = \(totalTime)")
     
     // Skip objc_msgSend.
-    start = NSDate()
-    let selector = Selector("setString:")
-    let setStringMethod:IMP =  string.methodForSelector("setString:")
-    let callBack  =  unsafeBitCast(setStringMethod, voidIMP.self)
+    start = Date()
+    let selector = #selector(NSMutableString.setString(_:))
+    let setStringMethod:IMP =  string.method(for: #selector(NSMutableString.setString(_:)))
+    let callBack  =  unsafeBitCast(setStringMethod, to: voidIMP.self)
     for _ in 0..<kTotalCount{
        callBack(string,selector,"stuff")
     }
